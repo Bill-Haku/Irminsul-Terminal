@@ -1,0 +1,10 @@
+robot.name: Paimon Bot
+robot.description: A bot from Project Irminsul Terminal
+robot.author: Bill Haku
+robot.inviteLink: https://discord.com/api/oauth2/authorize?client_id=964545612831932507&permissions=8&scope=bot
+robot.about: This is a opensource Genshin bot for Discord.
+sys.label.author: Author
+sys.label.version: Version
+sys.label.serverCount: Server Count
+sys.label.invite: Invite Link
+sys.label.about: About

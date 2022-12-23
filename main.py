@@ -25,7 +25,11 @@ async def on_message(message):
         await message.channel.send("Hello!")
 
     elif message.content.startswith("info"):
-        await message.channel.send(embed=terminal.selfInfo(bot=bot))
+        await message.channel.send(embed=terminal.selfInfo(bot=bot, language="en"))
+    elif message.content.startswith("关于"):
+        await message.channel.send(embed=terminal.selfInfo(bot=bot, language="zh"))
+    elif message.content.startswith("ボット"):
+        await message.channel.send(embed=terminal.selfInfo(bot=bot, language="ja"))
 
 
 print(f"Discord API Version: {discord.__version__}")

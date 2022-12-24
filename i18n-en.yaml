@@ -8,3 +8,7 @@ sys.label.version: Version
 sys.label.serverCount: Server Count
 sys.label.invite: Invite Link
 sys.label.about: About
+
+msg.bindUidSuccess: 'Successfully bind to uid: '
+msg.bindUidFail: 'Failed to bind to uid: '
+msg.error.uidInvalid: UID must be a 9-digit number! (

@@ -107,6 +107,14 @@ async def bindUID(ctx, uid):
     await ctx.send(terminal.bindUID(user=ctx.author, uid=uid) + uid)
 
 
+@bot.command(name="lookup")
+async def lookup(ctx):
+    _log.info(f"Recognized command lookup from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="en")
+    resTitle, resView = terminal.lookUpHandler()
+    await ctx.send(resTitle, view=resView)
+
+
 _log.info(f"Discord API Version: {discord.__version__}")
 bot.run(config["token"], log_handler=logHandler)
 

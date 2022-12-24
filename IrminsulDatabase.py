@@ -32,3 +32,22 @@ def bindUID(user_id, uid):
 
     db.close()
     return res
+
+
+def lookUpUID(user_id):
+    cursor = db.cursor()
+    sql = f"""
+    select * from UID_TABLE
+    where user_id = '{user_id}';"""
+    try:
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        for row in results:
+            uid = row[1]
+            updateTime = row[2]
+        return True, uid, updateTime
+
+    except Exception as e:
+        _log.warning(e)
+        return False, "", ""
+

@@ -12,3 +12,8 @@ sys.label.about: About
 msg.bindUidSuccess: 'Successfully bind to uid: '
 msg.bindUidFail: 'Failed to bind to uid: '
 msg.error.uidInvalid: UID must be a 9-digit number! (
+
+sys.label.lookUp: What do you want to look up?
+sys.label.lookUpUID: My UID
+msg.lookUpUIDSuccess: 'The UID you bound is: '
+msg.lookUpUIDFail: No UID found.

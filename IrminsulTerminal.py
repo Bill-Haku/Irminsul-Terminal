@@ -3,6 +3,8 @@ import os
 import IrminsulDatabase
 import logging
 from botpy.ext.cog_yaml import read
+from discord.ui import *
+from discord import *
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 i18n_en = read(os.path.join(os.path.dirname(__file__), "i18n-en.yaml"))
@@ -51,3 +53,27 @@ class IrminsulTerminal:
             return i18n["msg.bindUidSuccess"]
         else:
             return i18n["msg.bindUidFail"]
+
+    def lookUpHandler(self):
+        i18n = self.get_i18n(self.language)
+
+        view = View()
+        button1 = discord.ui.Button(label=i18n["sys.label.lookUpUID"], style=ButtonStyle.red)
+
+        async def on_button_uid_click(interaction: discord.Interaction):
+            _log.info(f"Look up uid of {interaction.user.id}")
+            res = self.lookUpUID(interaction.user.id)
+            await interaction.response.send_message(f"{res}")
+
+        button1.callback = on_button_uid_click
+        title = i18n["sys.label.lookUp"]
+        view.add_item(button1)
+        return title, view
+
+    def lookUpUID(self, userID):
+        i18n = self.get_i18n(self.language)
+        res, uid, _ = IrminsulDatabase.lookUpUID(user_id=userID)
+        if res:
+            return i18n["msg.lookUpUIDSuccess"] + uid
+        else:
+            return i18n["msg.lookUpUIDFail"]

@@ -7,3 +7,7 @@ on duplicate key update uid = 'test', update_time = now();
 update UID_TABLE
 set update_time = now()
 where user_id = 'test';
+
+# look up uid with user_id
+select * from UID_TABLE
+where user_id = 'user_id';

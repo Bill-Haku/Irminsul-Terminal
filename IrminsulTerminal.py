@@ -94,7 +94,7 @@ class IrminsulTerminal:
 
                 async def on_button_artifacts(interaction: discord.Interaction):
                     _log.info(f"Look up artifact of {interaction.user.id}'s {charID}")
-                    res = f"look up artifacts of {charID}"
+                    res =
                     await interaction.response.send_message(f"{res}")
 
                 buttonArtifacts.callback = on_button_artifacts

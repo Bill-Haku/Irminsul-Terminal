@@ -2,6 +2,7 @@ import discord
 import os
 import IrminsulDatabase
 import logging
+import CharIDDatabase
 from botpy.ext.cog_yaml import read
 from discord.ui import *
 from discord import *
@@ -77,3 +78,30 @@ class IrminsulTerminal:
             return i18n["msg.lookUpUIDSuccess"] + uid
         else:
             return i18n["msg.lookUpUIDFail"]
+
+    def lookUpChar(self, userID, charName):
+        i18n = self.get_i18n(self.language)
+        res, uid, _ = IrminsulDatabase.lookUpUID(user_id=userID)
+        if res:
+            # found bound UID
+            charID = CharIDDatabase.charName2IDConverter(charName)
+            if charID == 0:
+                # name invalid
+                return i18n["msg.error.charNameInvalid"], None
+            else:
+                view = View()
+                buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.red)
+
+                async def on_button_artifacts(interaction: discord.Interaction):
+                    _log.info(f"Look up artifact of {interaction.user.id}'s {charID}")
+                    res = f"look up artifacts of {charID}"
+                    await interaction.response.send_message(f"{res}")
+
+                buttonArtifacts.callback = on_button_artifacts
+                charFullName = CharIDDatabase.charFullName(charID, language=self.language)
+                title = i18n["sys.label.lookUpChar"] + f" {charFullName}({charID})"
+                view.add_item(buttonArtifacts)
+                return title, view
+        else:
+            # no valid bound UID found
+            return i18n["msg.err.noUIDBound"], None

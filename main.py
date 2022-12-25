@@ -21,27 +21,6 @@ async def on_ready():
     _log.info(f"Logged in as {bot.user.name} #{bot.user.id}")
 
 
-# @bot.event
-# async def on_message(message):
-#     if message.author == bot.user:
-#         return
-#
-#     terminal = IrminsulTerminal()
-#     if message.content.startswith("hello"):
-#         _log.info(f"Recognized command hello")
-#         await message.channel.send("Hello!")
-#
-#     elif message.content.startswith("info"):
-#         _log.info(f"Recognized command info from {message.author.name} #{message.author.id}")
-#         await message.channel.send(embed=terminal.selfInfo(bot=bot, language="en"))
-#     elif message.content.startswith("关于"):
-#         _log.info(f"Recognized command info in zh_Hans from {message.author.name} #{message.author.id}")
-#         await message.channel.send(embed=terminal.selfInfo(bot=bot, language="zh"))
-#     elif message.content.startswith("ボット"):
-#         _log.info(f"Recognized command info in ja from {message.author.name} #{message.author.id}")
-#         await message.channel.send(embed=terminal.selfInfo(bot=bot, language="ja"))
-
-
 @bot.command(name="paimon")
 async def paimon(ctx):
     terminal = IrminsulTerminal(language="en")
@@ -112,6 +91,14 @@ async def lookup(ctx):
     _log.info(f"Recognized command lookup from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")
     resTitle, resView = terminal.lookUpHandler()
+    await ctx.send(resTitle, view=resView)
+
+
+@bot.command(name="char")
+async def lookUpChar(ctx, charName):
+    _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="en")
+    resTitle, resView = terminal.lookUpChar(ctx.author.id, charName)
     await ctx.send(resTitle, view=resView)
 
 

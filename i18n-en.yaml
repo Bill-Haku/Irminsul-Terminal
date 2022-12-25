@@ -17,3 +17,8 @@ sys.label.lookUp: What do you want to look up?
 sys.label.lookUpUID: My UID
 msg.lookUpUIDSuccess: 'The UID you bound is: '
 msg.lookUpUIDFail: No UID found.
+
+msg.err.noUIDBound: No UID bound. Bind your game UID with command /bind first.
+msg.error.charNameInvalid: No corresponding character found. Enter the correct full name please.
+sys.label.lookUpArtifacts: Artifacts
+sys.label.lookUpChar: What do you want to look up of

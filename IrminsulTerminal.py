@@ -1,8 +1,12 @@
+import asyncio
+
 import discord
 import os
 import IrminsulDatabase
 import logging
 import CharIDDatabase
+import EnkaAPIManager
+from EnkaDataHandler.Artifacts import *
 from botpy.ext.cog_yaml import read
 from discord.ui import *
 from discord import *
@@ -93,13 +97,41 @@ class IrminsulTerminal:
                 buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.red)
 
                 async def on_button_artifacts(interaction: discord.Interaction):
+                    await interaction.response.defer()
                     _log.info(f"Look up artifact of {interaction.user.id}'s {charID}")
-                    res =
-                    await interaction.response.send_message(f"{res}")
+                    # get the user's all data
+                    enkaData = EnkaAPIManager.getEnkaAPIResult(uid)
+                    # check if character in avatarInfoList
+                    avatarInfoList = enkaData["avatarInfoList"]
+                    inAvatarInfoList = False
+                    for avatar in avatarInfoList:
+                        if avatar["avatarId"] == charID:
+                            inAvatarInfoList = True
+                            charData = avatar
+                            break
+                    if not inAvatarInfoList:
+                        # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        return
+
+                    resEmbeds = getArtifactsDatas(charData, i18n=i18n, language=self.language)
+                    await asyncio.sleep(delay=1)
+                    try:
+                        # await interaction.response.send_message(embeds=resEmbeds)
+                        await interaction.followup.send(embeds=resEmbeds)
+                    # except HTTPException as httpe:
+                    #     _log.error(httpe)
+                    #     await interaction.response.send_message("http exception")
+                    # except InteractionResponded as ire:
+                    #     _log.error(ire)
+                    #     await interaction.response.send_message("interaction responded")
+                    except Exception as e:
+                        _log.error(e)
+                        await interaction.followup.send(e)
 
                 buttonArtifacts.callback = on_button_artifacts
                 charFullName = CharIDDatabase.charFullName(charID, language=self.language)
-                title = i18n["sys.label.lookUpChar"] + f" {charFullName}({charID})"
+                title = i18n["sys.label.lookUpChar"] + f" {charFullName} ({charID})"
                 view.add_item(buttonArtifacts)
                 return title, view
         else:

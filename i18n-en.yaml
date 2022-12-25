@@ -22,3 +22,7 @@ msg.err.noUIDBound: No UID bound. Bind your game UID with command /bind first.
 msg.error.charNameInvalid: No corresponding character found. Enter the correct full name please.
 sys.label.lookUpArtifacts: Artifacts
 sys.label.lookUpChar: What do you want to look up of
+msg.error.avatarNotInList: The character is not in your show case.
+
+feat.artifacts: Character Artifacts
+feat.artifacts.description: Artifacts of

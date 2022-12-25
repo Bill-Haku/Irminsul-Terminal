@@ -147,3 +147,4 @@ config.yaml
 
 #lib
 MySQLdb/
+userEnkaData/

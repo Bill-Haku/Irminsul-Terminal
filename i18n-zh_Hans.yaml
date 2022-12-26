@@ -8,3 +8,21 @@ sys.label.version: 版本号
 sys.label.serverCount: 使用中的服务器数量
 sys.label.invite: 邀请链接
 sys.label.about: 关于
+
+msg.bindUidSuccess: '成功绑定到UID：'
+msg.bindUidFail: '绑定UID失败：'
+msg.error.uidInvalid: UID必须是一个9位数字！ (
+
+sys.label.lookUp: 您想要查询什么？
+sys.label.lookUpUID: 我的UID
+msg.lookUpUIDSuccess: '您绑定的UID是: '
+msg.lookUpUIDFail: 未找到绑定的UID
+
+msg.err.noUIDBound: 未绑定UID。请先使用 /绑定 命令绑定您的UID
+msg.error.charNameInvalid: 未找到对应的角色。请输入角色的正确全名
+sys.label.lookUpArtifacts: 圣遗物
+sys.label.lookUpChar: 您想要查询什么？ 角色：
+msg.error.avatarNotInList: 您要查找的角色不再您的游戏的角色展示列表中
+
+feat.artifacts: 角色圣遗物查询
+feat.artifacts.description: 角色：

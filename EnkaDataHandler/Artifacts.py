@@ -17,6 +17,6 @@ def getArtifactsDatas(charData, i18n, language):
             embed.set_image(url=f"https://enka.network/ui/{equip['flat']['icon']}.png")
             for substats in equip["flat"]["reliquarySubstats"]:
                 embed.add_field(name=CharIDDatabase.textMapHash2Text(substats["appendPropId"], language),
-                                value=substats["statValue"])
+                                value=substats["statValue"], inline=False)
             embeds.append(embed)
     return embeds

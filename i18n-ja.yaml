@@ -8,3 +8,21 @@ sys.label.version: バージョン
 sys.label.serverCount: 利用中サーバー数
 sys.label.invite: 招待リンク
 sys.label.about: ボットについて
+
+msg.bindUidSuccess: 'UIDをバインド完了: '
+msg.bindUidFail: 'UIDをバインド失敗: '
+msg.error.uidInvalid: UIDは9桁の数字である必要があります！ (
+
+sys.label.lookUp: 何を調べますか？
+sys.label.lookUpUID: 私のUID
+msg.lookUpUIDSuccess: 'バインドしたUIDは：'
+msg.lookUpUIDFail: バインドしたUIDは見つかれません
+
+msg.err.noUIDBound: UIDがバインドされていません。まず、/バインド コマンドでゲームUIDをバインドしてください。
+msg.error.charNameInvalid: 対応する文字が見当たりません。正しいフルネームを入力してください。
+sys.label.lookUpArtifacts: 聖遺物
+sys.label.lookUpChar: 何を調べたいですか？ キャラ：
+msg.error.avatarNotInList: キャラクターはショーケースの中に入っていません。
+
+feat.artifacts: キャラの聖遺物
+feat.artifacts.description: キャラ名：

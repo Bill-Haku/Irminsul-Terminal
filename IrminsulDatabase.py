@@ -30,7 +30,6 @@ def bindUID(user_id, uid):
         res = False
         _log.error(f"DB: Bind {user_id} to {uid} FAILED with {e}")
 
-    db.close()
     return res
 
 
@@ -48,6 +47,6 @@ def lookUpUID(user_id):
         return True, uid, updateTime
 
     except Exception as e:
-        _log.warning(e)
+        _log.warning(e.with_traceback())
         return False, "", ""
 

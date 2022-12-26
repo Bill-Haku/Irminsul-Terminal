@@ -86,6 +86,20 @@ async def bindUID(ctx, uid):
     await ctx.send(terminal.bindUID(user=ctx.author, uid=uid) + uid)
 
 
+@bot.command(name="绑定")
+async def bindUID(ctx, uid):
+    _log.info(f"Recognized command bind {uid} from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="zh")
+    await ctx.send(terminal.bindUID(user=ctx.author, uid=uid) + uid)
+
+
+@bot.command(name="バインド")
+async def bindUID(ctx, uid):
+    _log.info(f"Recognized command bind {uid} from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="ja")
+    await ctx.send(terminal.bindUID(user=ctx.author, uid=uid) + uid)
+
+
 @bot.command(name="lookup")
 async def lookup(ctx):
     _log.info(f"Recognized command lookup from {ctx.author.name} #{ctx.author.id}")
@@ -94,10 +108,42 @@ async def lookup(ctx):
     await ctx.send(resTitle, view=resView)
 
 
+@bot.command(name="検索")
+async def lookup(ctx):
+    _log.info(f"Recognized command lookup from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="ja")
+    resTitle, resView = terminal.lookUpHandler()
+    await ctx.send(resTitle, view=resView)
+
+
+@bot.command(name="查询")
+async def lookup(ctx):
+    _log.info(f"Recognized command lookup from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="zh")
+    resTitle, resView = terminal.lookUpHandler()
+    await ctx.send(resTitle, view=resView)
+
+
 @bot.command(name="char")
 async def lookUpChar(ctx, charName):
     _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")
+    resTitle, resView = terminal.lookUpChar(ctx.author.id, charName)
+    await ctx.send(resTitle, view=resView)
+
+
+@bot.command(name="角色")
+async def lookUpChar(ctx, charName):
+    _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="zh")
+    resTitle, resView = terminal.lookUpChar(ctx.author.id, charName)
+    await ctx.send(resTitle, view=resView)
+
+
+@bot.command(name="キャラ")
+async def lookUpChar(ctx, charName):
+    _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="ja")
     resTitle, resView = terminal.lookUpChar(ctx.author.id, charName)
     await ctx.send(resTitle, view=resView)
 

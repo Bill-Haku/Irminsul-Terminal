@@ -26,3 +26,12 @@ msg.error.avatarNotInList: The character is not in your show case.
 
 feat.artifacts: Character Artifacts
 feat.artifacts.description: Artifacts of
+
+sys.label.lookUpBoard: General Stats
+feat.label.hp: HP (Base HP)
+feat.label.atk: ATK (Base ATK)
+feat.label.def: DEF (Base DEF)
+feat.label.er: Energy Recharge
+feat.label.em: Elemental Mastery
+feat.label.cr: Crit Rate
+feat.label.cd: Crit DMG

@@ -20,3 +20,34 @@ def getArtifactsDatas(charData, i18n, language):
                                 value=substats["statValue"], inline=False)
             embeds.append(embed)
     return embeds
+
+
+def getStatsBoardDatas(charData, i18n, language):
+    embed = discord.Embed(title=f"{CharIDDatabase.charFullName(charData['avatarId'], language=language)}",
+                          description=f"Lv. {charData['propMap']['4001']['val']}",
+                          colour=0xeee657)
+    fightPopMap = charData["fightPropMap"]
+
+    # HP
+    embed.add_field(name=i18n["feat.label.hp"],
+                    value=f"{round(fightPopMap['2000'], 2)} ({round(fightPopMap['1'])})")
+    # ATK
+    embed.add_field(name=i18n["feat.label.atk"],
+                    value=f"{round(fightPopMap['2001'], 2)} ({round(fightPopMap['4'])})")
+    # DEF
+    embed.add_field(name=i18n["feat.label.def"],
+                    value=f"{round(fightPopMap['2002'], 2)} ({round(fightPopMap['7'])})")
+    # ER
+    embed.add_field(name=i18n["feat.label.er"],
+                    value=f"{round(fightPopMap['23'] * 100, 2)}%")
+    # EM
+    embed.add_field(name=i18n["feat.label.em"],
+                    value=f"{round(fightPopMap['28'], 2)}")
+    # Crit Rate
+    embed.add_field(name=i18n["feat.label.cr"],
+                    value=f"{round(fightPopMap['20'] * 100, 2)}%")
+    # Crit DMG
+    embed.add_field(name=i18n["feat.label.cd"],
+                    value=f"{round(fightPopMap['22'] * 100, 2)}%")
+
+    return embed

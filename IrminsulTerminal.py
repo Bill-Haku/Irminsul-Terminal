@@ -94,7 +94,8 @@ class IrminsulTerminal:
                 return i18n["msg.error.charNameInvalid"], None
             else:
                 view = View()
-                buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.red)
+                buttonBoard = discord.ui.Button(label=i18n["sys.label.lookUpBoard"], style=ButtonStyle.red)
+                buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.green)
 
                 async def on_button_artifacts(interaction: discord.Interaction):
                     await interaction.response.defer()
@@ -119,12 +120,40 @@ class IrminsulTerminal:
                     try:
                         await interaction.followup.send(embeds=resEmbeds)
                     except Exception as e:
-                        _log.error(e)
+                        _log.error(e.with_traceback())
                         await interaction.followup.send(e)
 
+                async def on_button_Board(interaction: discord.Interaction):
+                    await interaction.response.defer()
+                    _log.info(f"Look up stats board of {interaction.user.id}'s {charID}")
+                    # get the user's all data
+                    enkaData = EnkaAPIManager.getEnkaAPIResult(uid)
+                    # check if character in avatarInfoList
+                    avatarInfoList = enkaData["avatarInfoList"]
+                    inAvatarInfoList = False
+                    for avatar in avatarInfoList:
+                        if avatar["avatarId"] == charID:
+                            inAvatarInfoList = True
+                            charData = avatar
+                            break
+                    if not inAvatarInfoList:
+                        # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        return
+
+                    resEmbed = getStatsBoardDatas(charData, i18n, self.language)
+                    await asyncio.sleep(delay=1)
+                    try:
+                        await interaction.followup.send(embed=resEmbed)
+                    except Exception as e:
+                        _log.error(e.with_traceback())
+                        await interaction.followup.send(e)
+
+                buttonBoard.callback = on_button_Board
                 buttonArtifacts.callback = on_button_artifacts
                 charFullName = CharIDDatabase.charFullName(charID, language=self.language)
                 title = i18n["sys.label.lookUpChar"] + f" {charFullName} ({charID})"
+                view.add_item(buttonBoard)
                 view.add_item(buttonArtifacts)
                 return title, view
         else:

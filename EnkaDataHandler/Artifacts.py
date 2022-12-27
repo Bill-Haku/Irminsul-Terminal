@@ -49,5 +49,34 @@ def getStatsBoardDatas(charData, i18n, language):
     # Crit DMG
     embed.add_field(name=i18n["feat.label.cd"],
                     value=f"{round(fightPopMap['22'] * 100, 2)}%")
+    # Elemental DMG Bonus
+    if fightPopMap["40"] != 0:
+        embed.add_field(name=i18n["feat.label.pyrodb"],
+                        value=f"{round(fightPopMap['40'] * 100, 2)}%")
+    if fightPopMap["41"] != 0:
+        embed.add_field(name=i18n["feat.label.electrodb"],
+                        value=f"{round(fightPopMap['41'] * 100, 2)}%")
+    if fightPopMap["42"] != 0:
+        embed.add_field(name=i18n["feat.label.hydrodb"],
+                        value=f"{round(fightPopMap['42'] * 100, 2)}%")
+    if fightPopMap["43"] != 0:
+        embed.add_field(name=i18n["feat.label.dendrodb"],
+                        value=f"{round(fightPopMap['43'] * 100, 2)}%")
+    if fightPopMap["44"] != 0:
+        embed.add_field(name=i18n["feat.label.anemodb"],
+                        value=f"{round(fightPopMap['44'] * 100, 2)}%")
+    if fightPopMap["45"] != 0:
+        embed.add_field(name=i18n["feat.label.geodb"],
+                        value=f"{round(fightPopMap['45'] * 100, 2)}%")
+    if fightPopMap["46"] != 0:
+        embed.add_field(name=i18n["feat.label.cryodb"],
+                        value=f"{round(fightPopMap['46'] * 100, 2)}%")
+    if fightPopMap["30"] != 0:
+        embed.add_field(name=i18n["feat.label.phydb"],
+                        value=f"{round(fightPopMap['30'] * 100, 2)}%")
+    # HB
+    if fightPopMap["26"] > 0:
+        embed.add_field(name=i18n["feat.label.hb"],
+                        value=f"{round(fightPopMap['26'] * 100, 2)}%")
 
     return embed

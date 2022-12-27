@@ -35,3 +35,12 @@ feat.label.er: Energy Recharge
 feat.label.em: Elemental Mastery
 feat.label.cr: Crit Rate
 feat.label.cd: Crit DMG
+feat.label.pyrodb: Pryo DMG Bonus
+feat.label.electrodb: Electro DMG Bonus
+feat.label.hydrodb: Hydro DMG Bonus
+feat.label.dendrodb: Dendro DMG Bonus
+feat.label.anemodb: Anemo DMG Bonus
+feat.label.geodb: Geo DMG Bonus
+feat.label.cryodb: Cryo DMG Bonus
+feat.label.phydb: Physic DMG Bonus
+feat.label.hb: Healing Bonus

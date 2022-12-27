@@ -117,14 +117,7 @@ class IrminsulTerminal:
                     resEmbeds = getArtifactsDatas(charData, i18n=i18n, language=self.language)
                     await asyncio.sleep(delay=1)
                     try:
-                        # await interaction.response.send_message(embeds=resEmbeds)
                         await interaction.followup.send(embeds=resEmbeds)
-                    # except HTTPException as httpe:
-                    #     _log.error(httpe)
-                    #     await interaction.response.send_message("http exception")
-                    # except InteractionResponded as ire:
-                    #     _log.error(ire)
-                    #     await interaction.response.send_message("interaction responded")
                     except Exception as e:
                         _log.error(e)
                         await interaction.followup.send(e)

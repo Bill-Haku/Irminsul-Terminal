@@ -26,3 +26,21 @@ msg.error.avatarNotInList: 您要查找的角色不再您的游戏的角色展�
 
 feat.artifacts: 角色圣遗物查询
 feat.artifacts.description: 角色：
+
+sys.label.lookUpBoard: 角色面板
+feat.label.hp: 生命值（基础生命值）
+feat.label.atk: 攻击力（基础攻击力）
+feat.label.def: 防御力（基础防御力）
+feat.label.er: 元素充能效率
+feat.label.em: 元素精通
+feat.label.cr: 暴击率
+feat.label.cd: 暴击伤害
+feat.label.pyrodb: 火元素伤害加成
+feat.label.electrodb: 雷元素伤害加成
+feat.label.hydrodb: 水元素伤害加成
+feat.label.dendrodb: 草元素伤害加成
+feat.label.anemodb: 风元素伤害加成
+feat.label.geodb: 岩元素伤害加成
+feat.label.cryodb: 冰元素伤害加成
+feat.label.phydb: 物理伤害加成
+feat.label.hb: 治疗加成

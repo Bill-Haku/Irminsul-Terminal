@@ -26,3 +26,21 @@ msg.error.avatarNotInList: キャラクターはショーケースの中に入�
 
 feat.artifacts: キャラの聖遺物
 feat.artifacts.description: キャラ名：
+
+sys.label.lookUpBoard: キャラのステータス
+feat.label.hp: HP（ベース HP）
+feat.label.atk: ATK（ベース ATK）
+feat.label.def: DEF（ベース DEF）
+feat.label.er: 元素チャージ効率
+feat.label.em: 元素熟知
+feat.label.cr: 会心率
+feat.label.cd: 会心ダメージ
+feat.label.pyrodb: 火元素ダメージ
+feat.label.electrodb: 雷元素ダメージ
+feat.label.hydrodb: 水元素ダメージ
+feat.label.dendrodb: 草元素ダメージ
+feat.label.anemodb: 風元素ダメージ
+feat.label.geodb: 岩元素ダメージ
+feat.label.cryodb: 氷元素ダメージ
+feat.label.phydb: 物理ダメージ
+feat.label.hb: 与える治療効果

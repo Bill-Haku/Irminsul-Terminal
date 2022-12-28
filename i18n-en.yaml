@@ -44,3 +44,8 @@ feat.label.geodb: Geo DMG Bonus
 feat.label.cryodb: Cryo DMG Bonus
 feat.label.phydb: Physic DMG Bonus
 feat.label.hb: Healing Bonus
+
+sys.label.cal: DMG Calculator
+feat.cal.label.hutao.1: Charged Attack DMG with Vaporizing after Skill E
+feat.cal.label.note: Note
+feat.cal.hutao.note: "Enemy: Hilichurl (Lv.90). \nWeapon Effect is not considered. \n4-pieces effect of Artifacts except Crimson Witch of Flames or Shimenawa's Reminiscence is not considered."

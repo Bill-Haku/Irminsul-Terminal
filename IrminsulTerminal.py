@@ -7,6 +7,7 @@ import logging
 import CharIDDatabase
 import EnkaAPIManager
 from EnkaDataHandler.Artifacts import *
+from EnkaDataHandler.Calculator import *
 from botpy.ext.cog_yaml import read
 from discord.ui import *
 from discord import *
@@ -96,6 +97,7 @@ class IrminsulTerminal:
                 view = View()
                 buttonBoard = discord.ui.Button(label=i18n["sys.label.lookUpBoard"], style=ButtonStyle.red)
                 buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.green)
+                buttonCalculator = discord.ui.Button(label=i18n["sys.label.cal"], style=ButtonStyle.gray)
 
                 async def on_button_artifacts(interaction: discord.Interaction):
                     await interaction.response.defer()
@@ -149,12 +151,42 @@ class IrminsulTerminal:
                         _log.error(e.with_traceback())
                         await interaction.followup.send(e)
 
+                async def on_button_cal(interaction: discord.Interaction):
+                    await interaction.response.defer()
+                    _log.info(f"Calculator of {interaction.user.id}'s {charID}")
+                    # get the user's all data
+                    enkaData = EnkaAPIManager.getEnkaAPIResult(uid)
+                    # check if character in avatarInfoList
+                    avatarInfoList = enkaData["avatarInfoList"]
+                    inAvatarInfoList = False
+                    for avatar in avatarInfoList:
+                        if avatar["avatarId"] == charID:
+                            inAvatarInfoList = True
+                            charData = avatar
+                            break
+                    if not inAvatarInfoList:
+                        # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        return
+                    resEmbed = calculatorHandler(charid=charID, charData=charData, i18n=i18n, language=self.language)
+                    await asyncio.sleep(delay=1)
+                    try:
+                        await interaction.followup.send(embed=resEmbed)
+                    except Exception as e:
+                        _log.error(e.with_traceback())
+                        await interaction.followup.send(e)
+
+
                 buttonBoard.callback = on_button_Board
                 buttonArtifacts.callback = on_button_artifacts
+                buttonCalculator.callback = on_button_cal
+
                 charFullName = CharIDDatabase.charFullName(charID, language=self.language)
                 title = i18n["sys.label.lookUpChar"] + f" {charFullName} ({charID})"
                 view.add_item(buttonBoard)
                 view.add_item(buttonArtifacts)
+                if charID in calAvailableCharIdList:
+                    view.add_item(buttonCalculator)
                 return title, view
         else:
             # no valid bound UID found

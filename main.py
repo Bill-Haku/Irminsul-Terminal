@@ -148,6 +148,14 @@ async def lookUpChar(ctx, charName):
     await ctx.send(resTitle, view=resView)
 
 
+@bot.command(name="createvc")
+async def createVoiceChannel(ctx, name):
+    _log.info(f"Recognized command createvc from {ctx.author.name} #{ctx.author.id}")
+    terminal = IrminsulTerminal(language="en")
+    res, msg = await terminal.createVoiceChannel(ctx, name)
+    await ctx.send(msg)
+
+
 _log.info(f"Discord API Version: {discord.__version__}")
 bot.run(config["token"], log_handler=logHandler)
 

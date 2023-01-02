@@ -191,3 +191,24 @@ class IrminsulTerminal:
         else:
             # no valid bound UID found
             return i18n["msg.err.noUIDBound"], None
+
+    async def createVoiceChannel(self, ctx, name):
+        i18n = self.get_i18n(self.language)
+        try:
+            channel = await ctx.guild.create_voice_channel(name=name)
+            res = True
+            msg = f"\"{channel.name}\" f{i18n['feat.createvc.success']}"
+        except Forbidden as forbidden:
+            _log.error(f"Create voice channel fail because of Forbidden")
+            res = False
+            msg = i18n["feat.createvc.fail"] + "Forbidden: No permission"
+        except HTTPException:
+            _log.error(f"Create voice channel fail because of HTTPException")
+            res = False
+            msg = i18n["feat.createvc.fail"] + "HTTP Error"
+        except TypeError:
+            _log.error(f"Create voice channel fail because of TypeError")
+            res = False
+            msg = i18n["feat.createvc.fail"] + "Type Error"
+        return res, msg
+

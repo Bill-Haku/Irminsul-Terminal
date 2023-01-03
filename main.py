@@ -164,19 +164,21 @@ async def on_voice_state_update(member, before, after):
     if before.channel is not None and after.channel is None:
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
-        channel = discord.utils.get(member.guild.channels, name=channelName)
-        if type(channel) != discord.VoiceChannel or channel is None:
-            _log.error(f"Channel {channelName} is not found!")
-            return
-        try:
-            await channel.delete()
-            _log.info(f"Delete voice channel {channelName} success!")
-        except Forbidden as forbidden:
-            _log.error(f"Delete voice channel fail because of Forbidden")
-        except HTTPException:
-            _log.error(f"Delete voice channel fail because of HTTPException")
-        except TypeError:
-            _log.error(f"Delete voice channel fail because of TypeError")
+        if len(before.channel.members) == 0:
+            _log.info(f"{channelName} member is 0, delete it")
+            channel = discord.utils.get(member.guild.channels, name=channelName)
+            if type(channel) != discord.VoiceChannel or channel is None:
+                _log.error(f"Channel {channelName} is not found!")
+                return
+            try:
+                await channel.delete()
+                _log.info(f"Delete voice channel {channelName} success!")
+            except Forbidden as forbidden:
+                _log.error(f"Delete voice channel fail because of Forbidden")
+            except HTTPException:
+                _log.error(f"Delete voice channel fail because of HTTPException")
+            except TypeError:
+                _log.error(f"Delete voice channel fail because of TypeError")
 
 
 _log.info(f"Discord API Version: {discord.__version__}")

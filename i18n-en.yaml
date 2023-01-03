@@ -53,3 +53,4 @@ feat.cal.hutao.note: "Enemy: Hilichurl (Lv.90). \nWeapon Effect is not considere
 sys.label.createVC: "Enter the name of the voice channel: "
 feat.createvc.success: Voice Channel Create Success
 feat.createvc.fail: "Voice Channel Create Fail: "
+feat.createvc.tips: "Attention: The Voice Channel will be deleted after everyone exits the channel."

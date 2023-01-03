@@ -197,7 +197,7 @@ class IrminsulTerminal:
         try:
             channel = await ctx.guild.create_voice_channel(name=name)
             res = True
-            msg = f"\"{channel.name}\" f{i18n['feat.createvc.success']}"
+            msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:
             _log.error(f"Create voice channel fail because of Forbidden")
             res = False

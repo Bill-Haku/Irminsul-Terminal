@@ -192,8 +192,9 @@ class IrminsulTerminal:
             # no valid bound UID found
             return i18n["msg.err.noUIDBound"], None
 
-    async def createVoiceChannel(self, ctx, name):
+    async def createVoiceChannel(self, ctx, name, botName):
         i18n = self.get_i18n(self.language)
+        name = f"[{botName}]{name}"
         try:
             channel = await ctx.guild.create_voice_channel(name=name)
             res = True

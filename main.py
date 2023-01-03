@@ -152,7 +152,7 @@ async def lookUpChar(ctx, charName):
 async def createVoiceChannel(ctx, name):
     _log.info(f"Recognized command createvc from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")
-    res, msg = await terminal.createVoiceChannel(ctx, name)
+    res, msg = await terminal.createVoiceChannel(ctx, name, bot.user.name)
     await ctx.send(msg)
 
 
@@ -164,6 +164,11 @@ async def on_voice_state_update(member, before, after):
     if before.channel is not None and after.channel is None:
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
+        channelPrefix = f"[{bot.user.name}]"
+        print(len(channelPrefix))
+        if not channelName[0:len(channelPrefix)] == channelPrefix:
+            _log.info(f"This is not a channel created by bot. Ignore it.")
+            return
         if len(before.channel.members) == 0:
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)

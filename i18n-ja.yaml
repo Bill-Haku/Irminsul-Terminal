@@ -57,4 +57,5 @@ feat.createvc.success: の通話部屋を作成したよ！
 feat.createvc.fail: "通話部屋作成失敗："
 feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過したら自動で削除されるよ！気をつけてねー！"
 sys.label.createVC.bitRate: "音質（ビットレート）："
-feat.createvc.fail.bitRate: ビットレート無効！
+feat.createvc.fail.bitRate: 入力無効！
+sys.label.createVC.userLimit: "参加人数制限：（0=無制限）"

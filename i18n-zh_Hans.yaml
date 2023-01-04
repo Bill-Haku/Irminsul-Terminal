@@ -52,4 +52,5 @@ feat.createvc.success: 语音频道创建成功
 feat.createvc.fail: "语音频道创建失败："
 feat.createvc.tips: "注意：语音频道将会在所有人退出后自动删除"
 sys.label.createVC.bitRate: "音质（比特率）："
-feat.createvc.fail.bitRate: 比特率不合法！
+feat.createvc.fail.bitRate: 输入不合法！
+sys.label.createVC.userLimit: "参加人数限制：（0=无限制）"

@@ -56,5 +56,6 @@ sys.label.createVC.button: Create Voice Channel
 feat.createvc.success: Voice Channel Create Success
 feat.createvc.fail: "Voice Channel Create Fail: "
 feat.createvc.tips: "Attention: The Voice Channel will be deleted after everyone exits the channel."
-sys.label.createVC.bitRate: "Bit Rate"
-feat.createvc.fail.bitRate: Audio Bit Rate Invalid!
+sys.label.createVC.bitRate: "Bit Rate: "
+feat.createvc.fail.bitRate: Input Invalid!
+sys.label.createVC.userLimit: "User Limit: (0 means no limit)"

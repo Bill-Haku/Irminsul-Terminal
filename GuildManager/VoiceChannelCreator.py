@@ -16,16 +16,20 @@ class VoiceChannelCreator(Modal):
         self.i18n = i18n
         textInput = discord.ui.TextInput(label=i18n["sys.label.createVC.text"])
         bitRateInput = discord.ui.TextInput(label=i18n["sys.label.createVC.bitRate"], default="64000", placeholder="8000~96000/384000")
+        userLimitInput = discord.ui.TextInput(label=i18n["sys.label.createVC.userLimit"], default="0")
         self.add_item(textInput)
         self.add_item(bitRateInput)
+        self.add_item(userLimitInput)
         self.botName = botName
 
     async def on_submit(self, interaction: discord.Interaction, /) -> None:
         i18n = self.i18n
         name = self.children[0].value
         bitRateStr = self.children[1].value
+        userLimitStr = self.children[2].value
         try:
             bitRate = int(bitRateStr)
+            userLimit = int(userLimitStr)
         except Exception as e:
             msg = i18n["feat.createvc.fail.bitRate"]
             _log.warning(msg)
@@ -37,7 +41,10 @@ class VoiceChannelCreator(Modal):
             name = f"[{botName}]{name}"
         _log.info(f"{interaction.user.name}#{interaction.user.id}: Create Voice Channel {name}...")
         try:
-            channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
+            if userLimit <= 0:
+                channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
+            else:
+                channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category, user_limit=userLimit)
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:

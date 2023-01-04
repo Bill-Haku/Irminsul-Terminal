@@ -46,11 +46,11 @@ class VoiceChannelCreator(Modal):
 
 class VoiceChannelCreatorModalView(discord.ui.View):
     def __init__(self, i18n, botName) -> None:
-        super(VoiceChannelCreatorModalView, self).__init__()
+        super(VoiceChannelCreatorModalView, self).__init__(timeout=None)
         self.i18n = i18n
         self.botName = botName
 
-    @discord.ui.button(label="Create Voice Channel")
+    @discord.ui.button(label="Create Voice Channel", style=discord.ButtonStyle.green, custom_id="VCCreatorView:Button")
     async def open_modal(self, interaction: discord.Interaction, button: discord.Button):
         modal = VoiceChannelCreator(i18n=self.i18n, botName=self.botName)
         await interaction.response.send_modal(modal)

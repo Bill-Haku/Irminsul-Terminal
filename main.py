@@ -8,18 +8,38 @@ from discord.ui import *
 from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 
-config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
-# bot = discord.Client(intents=discord.Intents.all())
-bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
+
 _log = logging.getLogger('discord')
 logHandler = logging.FileHandler(filename='irminsul.log', encoding='utf-8', mode='w')
 _log.addHandler(logHandler)
 
 
-@bot.event
-async def on_ready():
-    _log.info("Bot is ready.")
-    _log.info(f"Logged in as {bot.user.name} #{bot.user.id}")
+class IrminsulTerminalBot(commands.Bot):
+    def __init__(self):
+        intents = discord.Intents.all()
+        intents.message_content = True
+        super().__init__(command_prefix=commands.when_mentioned_or('/'), intents=intents)
+
+    async def setup_hook(self) -> None:
+        terminal = IrminsulTerminal(language="en")
+        botName = self.user.name
+        self.add_view(VoiceChannelCreatorModalView(i18n=terminal.get_i18n("en"), botName=botName))
+        # self.add_view(VoiceChannelCreatorModalView(i18n=terminal.get_i18n("ja"), botName=botName))
+
+    async def on_ready(self):
+        _log.info("Bot is ready.")
+        _log.info(f"Logged in as {self.user.name} #{self.user.id}")
+
+
+config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
+bot = IrminsulTerminalBot()
+# bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
+
+
+# @bot.event
+# async def on_ready():
+#     _log.info("Bot is ready.")
+#     _log.info(f"Logged in as {bot.user.name} #{bot.user.id}")
 
 
 @bot.command(name="paimon")
@@ -150,6 +170,7 @@ async def lookUpChar(ctx, charName):
 
 
 @bot.command(name="createvc")
+@commands.is_owner()
 async def createVoiceChannel(ctx, name=""):
     _log.info(f"Recognized command createvc from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")

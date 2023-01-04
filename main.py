@@ -190,11 +190,16 @@ async def on_voice_state_update(member, before, after):
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
         channelPrefix = f"[{bot.user.name}]"
-        if not channelName[0:len(channelPrefix)] == channelPrefix:
-            _log.info(f"This is not a channel created by bot. Ignore it.")
-            return
+        if config["createChannelWithPrefix"]:
+            if not channelName[0:len(channelPrefix)] == channelPrefix:
+                _log.info(f"This is not a channel created by bot. Ignore it.")
+                return
         if len(before.channel.members) == 0:
-            # _log.info(f"{channelName} member is 0, wait 30s")
+            _log.info(f"{channelName} member is 0, wait 30s")
+            await asyncio.sleep(30)
+            if not len(before.channel.members) == 0:
+                _log.info(f"{channelName} member is not 0, stop it")
+                return
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)
             if type(channel) != discord.VoiceChannel or channel is None:

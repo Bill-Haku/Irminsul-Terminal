@@ -2,6 +2,7 @@ import discord
 import os
 import logging
 from botpy.ext.cog_yaml import read
+import nacl
 from discord.ext import commands
 from discord import *
 from discord.ui import *
@@ -21,9 +22,8 @@ class IrminsulTerminalBot(commands.Bot):
         super().__init__(command_prefix=commands.when_mentioned_or('/'), intents=intents)
 
     async def setup_hook(self) -> None:
-        terminal = IrminsulTerminal(language="en")
         botName = self.user.name
-        self.add_view(VoiceChannelCreatorModalView(i18n=terminal.get_i18n("en"), botName=botName))
+        self.add_view(VoiceChannelCreatorModalView(botName=botName))
         # self.add_view(VoiceChannelCreatorModalView(i18n=terminal.get_i18n("ja"), botName=botName))
 
     async def on_ready(self):
@@ -176,7 +176,7 @@ async def createVoiceChannel(ctx, name=""):
     terminal = IrminsulTerminal(language="en")
     # res, msg = await terminal.createVoiceChannel(ctx, name, bot.user.name)
     # await ctx.send(msg)
-    responseView = VoiceChannelCreatorModalView(terminal.get_i18n(language="en"), bot.user.name)
+    responseView = VoiceChannelCreatorModalView(bot.user.name)
     await ctx.send(view=responseView)
 
 

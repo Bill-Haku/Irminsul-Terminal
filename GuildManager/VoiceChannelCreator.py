@@ -2,6 +2,7 @@ import discord
 import logging
 from discord.ui import Modal, TextInput
 from discord import *
+from IrminsulTerminal import i18n_en, i18n_ja, i18n_zh
 
 
 _log = logging.getLogger('discord')
@@ -14,18 +15,28 @@ class VoiceChannelCreator(Modal):
         super().__init__(title=i18n["sys.label.createVC"])
         self.i18n = i18n
         textInput = discord.ui.TextInput(label=i18n["sys.label.createVC.text"])
+        bitRateInput = discord.ui.TextInput(label=i18n["sys.label.createVC.bitRate"], default="64000", placeholder="8000~96000")
         self.add_item(textInput)
+        self.add_item(bitRateInput)
         self.botName = botName
 
     async def on_submit(self, interaction: discord.Interaction, /) -> None:
-        name = self.children[0].value
-        botName = self.botName
         i18n = self.i18n
+        name = self.children[0].value
+        bitRateStr = self.children[1].value
+        try:
+            bitRate = int(bitRateStr)
+        except Exception as e:
+            msg = i18n["feat.createvc.fail.bitRate"]
+            _log.warning(msg)
+            await interaction.response.send_message(msg)
+            return
+        botName = self.botName
         ctx = interaction
         name = f"[{botName}]{name}"
         _log.info(f"Create Voice Channel {name}...")
         try:
-            channel = await ctx.guild.create_voice_channel(name=name)
+            channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate)
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:
@@ -45,12 +56,11 @@ class VoiceChannelCreator(Modal):
 
 
 class VoiceChannelCreatorModalView(discord.ui.View):
-    def __init__(self, i18n, botName) -> None:
+    def __init__(self, botName) -> None:
         super(VoiceChannelCreatorModalView, self).__init__(timeout=None)
-        self.i18n = i18n
         self.botName = botName
 
-    @discord.ui.button(label="Create Voice Channel", style=discord.ButtonStyle.green, custom_id="VCCreatorView:Button")
+    @discord.ui.button(label=i18n_en["sys.label.createVC.button"], style=discord.ButtonStyle.green, custom_id="VCCreatorView:Button_en")
     async def open_modal(self, interaction: discord.Interaction, button: discord.Button):
-        modal = VoiceChannelCreator(i18n=self.i18n, botName=self.botName)
+        modal = VoiceChannelCreator(i18n=i18n_en, botName=self.botName)
         await interaction.response.send_modal(modal)

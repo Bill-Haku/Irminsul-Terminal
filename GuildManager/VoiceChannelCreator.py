@@ -2,7 +2,7 @@ import discord
 import logging
 from discord.ui import Modal, TextInput
 from discord import *
-from IrminsulTerminal import i18n_en, i18n_ja, i18n_zh
+from IrminsulTerminal import i18n_en, i18n_ja, i18n_zh, config
 
 
 _log = logging.getLogger('discord')
@@ -33,7 +33,8 @@ class VoiceChannelCreator(Modal):
             return
         botName = self.botName
         ctx = interaction
-        name = f"[{botName}]{name}"
+        if config["createChannelWithPrefix"]:
+            name = f"[{botName}]{name}"
         _log.info(f"Create Voice Channel {name}...")
         try:
             channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)

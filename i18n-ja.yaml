@@ -53,8 +53,8 @@ feat.cal.hutao.note: "Enemy: Hilichurl (Lv.90). \nWeapon Effect is not considere
 sys.label.createVC: "通話部屋を作成"
 sys.label.createVC.text: "部屋の名前"
 sys.label.createVC.button: 通話部屋を作成する！
-feat.createvc.success: 通話部屋作成完了！
+feat.createvc.success: の通話部屋を作成したよ！
 feat.createvc.fail: "通話部屋作成失敗："
-feat.createvc.tips: "注意: 通話部屋は、全員が退室すると自動的に削除されます。"
+feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過したら自動で削除されるよ！気をつけてねー！"
 sys.label.createVC.bitRate: "音質（ビットレート）："
 feat.createvc.fail.bitRate: ビットレート無効！

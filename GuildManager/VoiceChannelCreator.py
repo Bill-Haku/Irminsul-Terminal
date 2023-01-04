@@ -35,11 +35,11 @@ class VoiceChannelCreator(Modal):
         ctx = interaction
         if config["createChannelWithPrefix"]:
             name = f"[{botName}]{name}"
-        _log.info(f"Create Voice Channel {name}...")
+        _log.info(f"{interaction.user.name}#{interaction.user.id}: Create Voice Channel {name}...")
         try:
             channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
             res = True
-            msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n{i18n['feat.createvc.tips']}"
+            msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:
             _log.error(f"Create voice channel fail because of Forbidden")
             res = False
@@ -52,7 +52,10 @@ class VoiceChannelCreator(Modal):
             _log.error(f"Create voice channel fail because of TypeError")
             res = False
             msg = i18n["feat.createvc.fail"] + "Type Error"
-        _log.info(msg)
+        if res:
+            _log.info(f"Create {name} success")
+        else:
+            _log.info(msg)
         await interaction.response.send_message(msg, ephemeral=True)
 
 

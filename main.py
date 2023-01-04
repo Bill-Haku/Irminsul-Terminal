@@ -4,6 +4,7 @@ import logging
 from botpy.ext.cog_yaml import read
 import nacl
 import time
+import datetime
 from discord.ext import commands
 from discord import *
 from discord.ui import *
@@ -30,6 +31,26 @@ class IrminsulTerminalBot(commands.Bot):
     async def on_ready(self):
         _log.info("Bot is ready.")
         _log.info(f"Logged in as {self.user.name} #{self.user.id}")
+        if config["autoDeleteEmptyVoiceChannel"]:
+            while True:
+                await asyncio.sleep(60)
+                for channel in self.get_all_channels():
+                    if type(channel) == discord.VoiceChannel:
+                        if len(channel.members) == 0:
+                            _log.info(f"Find channel {channel.name} member is 0")
+                            now = datetime.datetime.now().astimezone()
+                            if (now - channel.created_at).seconds > 60:
+                                try:
+                                    await channel.delete()
+                                    _log.info(f"Delete voice channel {channel.name} success!")
+                                except Forbidden as forbidden:
+                                    _log.error(f"Delete voice channel fail because of Forbidden")
+                                except HTTPException:
+                                    _log.error(f"Delete voice channel fail because of HTTPException")
+                                except TypeError:
+                                    _log.error(f"Delete voice channel fail because of TypeError")
+                            else:
+                                _log.info(f"{channel.name} created in 60s, ignore it")
 
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))

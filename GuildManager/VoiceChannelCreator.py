@@ -16,7 +16,7 @@ class VoiceChannelCreator(Modal):
         self.i18n = i18n
         textInput = discord.ui.TextInput(label=i18n["sys.label.createVC.text"])
         bitRateInput = discord.ui.TextInput(label=i18n["sys.label.createVC.bitRate"], default="64000", placeholder="8000~96000/384000")
-        userLimitInput = discord.ui.TextInput(label=i18n["sys.label.createVC.userLimit"], default="0")
+        userLimitInput = discord.ui.TextInput(label=i18n["sys.label.createVC.userLimit"], default="0", placeholder="0~99")
         self.add_item(textInput)
         self.add_item(bitRateInput)
         self.add_item(userLimitInput)

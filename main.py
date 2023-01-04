@@ -3,6 +3,7 @@ import os
 import logging
 from botpy.ext.cog_yaml import read
 import nacl
+import time
 from discord.ext import commands
 from discord import *
 from discord.ui import *
@@ -193,6 +194,7 @@ async def on_voice_state_update(member, before, after):
             _log.info(f"This is not a channel created by bot. Ignore it.")
             return
         if len(before.channel.members) == 0:
+            # _log.info(f"{channelName} member is 0, wait 30s")
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)
             if type(channel) != discord.VoiceChannel or channel is None:

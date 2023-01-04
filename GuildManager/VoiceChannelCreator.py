@@ -15,7 +15,7 @@ class VoiceChannelCreator(Modal):
         super().__init__(title=i18n["sys.label.createVC"])
         self.i18n = i18n
         textInput = discord.ui.TextInput(label=i18n["sys.label.createVC.text"])
-        bitRateInput = discord.ui.TextInput(label=i18n["sys.label.createVC.bitRate"], default="64000", placeholder="8000~96000")
+        bitRateInput = discord.ui.TextInput(label=i18n["sys.label.createVC.bitRate"], default="64000", placeholder="8000~96000/384000")
         self.add_item(textInput)
         self.add_item(bitRateInput)
         self.botName = botName
@@ -36,7 +36,7 @@ class VoiceChannelCreator(Modal):
         name = f"[{botName}]{name}"
         _log.info(f"Create Voice Channel {name}...")
         try:
-            channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate)
+            channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:
@@ -52,7 +52,7 @@ class VoiceChannelCreator(Modal):
             res = False
             msg = i18n["feat.createvc.fail"] + "Type Error"
         _log.info(msg)
-        await interaction.response.send_message(msg)
+        await interaction.response.send_message(msg, ephemeral=True)
 
 
 class VoiceChannelCreatorModalView(discord.ui.View):

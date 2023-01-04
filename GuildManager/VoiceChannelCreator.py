@@ -60,7 +60,20 @@ class VoiceChannelCreatorModalView(discord.ui.View):
         super(VoiceChannelCreatorModalView, self).__init__(timeout=None)
         self.botName = botName
 
-    @discord.ui.button(label=i18n_en["sys.label.createVC.button"], style=discord.ButtonStyle.green, custom_id="VCCreatorView:Button_en")
+    @discord.ui.button(label=i18n_en["sys.label.createVC.button"], style=discord.ButtonStyle.gray,
+                       custom_id="VCCreatorView:Button_en")
     async def open_modal(self, interaction: discord.Interaction, button: discord.Button):
         modal = VoiceChannelCreator(i18n=i18n_en, botName=self.botName)
+        await interaction.response.send_modal(modal)
+
+    @discord.ui.button(label=i18n_ja["sys.label.createVC.button"], style=discord.ButtonStyle.green,
+                       custom_id="VCCreatorView:Button_ja")
+    async def open_modal2(self, interaction: discord.Interaction, button: discord.Button):
+        modal = VoiceChannelCreator(i18n=i18n_ja, botName=self.botName)
+        await interaction.response.send_modal(modal)
+
+    @discord.ui.button(label=i18n_zh["sys.label.createVC.button"], style=discord.ButtonStyle.red,
+                       custom_id="VCCreatorView:Button_zh")
+    async def open_modal3(self, interaction: discord.Interaction, button: discord.Button):
+        modal = VoiceChannelCreator(i18n=i18n_zh, botName=self.botName)
         await interaction.response.send_modal(modal)

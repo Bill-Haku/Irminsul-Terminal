@@ -44,3 +44,12 @@ feat.label.geodb: 岩元素伤害加成
 feat.label.cryodb: 冰元素伤害加成
 feat.label.phydb: 物理伤害加成
 feat.label.hb: 治疗加成
+
+sys.label.createVC: "创建语音频道"
+sys.label.createVC.text: "频道名称："
+sys.label.createVC.button: 创建临时语音频道
+feat.createvc.success: 语音频道创建成功
+feat.createvc.fail: "语音频道创建失败："
+feat.createvc.tips: "注意：语音频道将会在所有人退出后自动删除"
+sys.label.createVC.bitRate: "音质（比特率）："
+feat.createvc.fail.bitRate: 比特率不合法！

@@ -6,6 +6,7 @@ from discord.ext import commands
 from discord import *
 from discord.ui import *
 from IrminsulTerminal import *
+from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 # bot = discord.Client(intents=discord.Intents.all())
@@ -149,11 +150,13 @@ async def lookUpChar(ctx, charName):
 
 
 @bot.command(name="createvc")
-async def createVoiceChannel(ctx, name):
+async def createVoiceChannel(ctx, name=""):
     _log.info(f"Recognized command createvc from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")
-    res, msg = await terminal.createVoiceChannel(ctx, name, bot.user.name)
-    await ctx.send(msg)
+    # res, msg = await terminal.createVoiceChannel(ctx, name, bot.user.name)
+    # await ctx.send(msg)
+    responseView = VoiceChannelCreatorModalView(terminal.get_i18n(language="en"), bot.user.name)
+    await ctx.send(view=responseView)
 
 
 # delete voice channel when member is all gone
@@ -165,7 +168,6 @@ async def on_voice_state_update(member, before, after):
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
         channelPrefix = f"[{bot.user.name}]"
-        print(len(channelPrefix))
         if not channelName[0:len(channelPrefix)] == channelPrefix:
             _log.info(f"This is not a channel created by bot. Ignore it.")
             return

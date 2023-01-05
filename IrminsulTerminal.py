@@ -48,9 +48,10 @@ class IrminsulTerminal:
         return embed
 
     def bindUID(self, user, uid):
+        # uid = str(uid)
         i18n = self.get_i18n(self.language)
 
-        if not uid.isdigit() or len(str(uid)) != 9:
+        if not str(uid).isdigit() or len(str(uid)) != 9:
             _log.warning(f"Found UID {uid} is not valid.")
             return i18n["msg.error.uidInvalid"]
 

@@ -1,0 +1,65 @@
+{
+  "commands": [
+    {
+      "name": "bind",
+      "type": 1,
+      "description": "Bind you Discord account with your Genshin UID",
+      "description_localizations": {
+        "zh-CN": "将您的Discord帐号与原神的UID绑定",
+        "ja": "あなたの原神のUIDとDiscordのアカウントをバインドする"
+      },
+      "options": [
+        {
+          "name": "uid",
+          "description": "UID of your Genshin Impact Account",
+          "type": 4,
+          "min_value": 100000000,
+          "max_value": 999999999,
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "lookup",
+      "description": "Look up something about your account",
+      "description_localizations": {
+        "zh-CN": "查询有关您的帐号的信息",
+        "ja": "あなたのアカウントについて情報を検索する"
+      }
+    },
+    {
+      "name": "setlanguage",
+      "description": "Set your own bot answer language",
+      "description_localizations": {
+        "zh-CN": "设置您的机器人回答语言",
+        "ja": "あなたのボット返事言語を設定する"
+      },
+      "options": [
+        {
+          "name": "language",
+          "description": "Your Language",
+          "description_localizations": {
+            "zh-CN": "您的语言",
+            "ja": "あなたの言語"
+          },
+          "type": 3,
+          "required": true,
+          "choices": [
+            {
+              "name": "English",
+              "value": "en"
+            },
+            {
+              "name": "简体中文",
+              "value": "zh"
+            },
+            {
+              "name": "日本語",
+              "value": "ja"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

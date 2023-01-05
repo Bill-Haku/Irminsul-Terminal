@@ -55,13 +55,6 @@ class IrminsulTerminalBot(commands.Bot):
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 bot = IrminsulTerminalBot()
-# bot = commands.Bot(command_prefix='/', intents=discord.Intents.all())
-
-
-# @bot.event
-# async def on_ready():
-#     _log.info("Bot is ready.")
-#     _log.info(f"Logged in as {bot.user.name} #{bot.user.id}")
 
 
 @bot.command(name="paimon")
@@ -107,26 +100,18 @@ async def menuTest(ctx):
     await ctx.send("Menu test", view=view)
 
 
-@bot.command(name="input")
-async def inputTest(ctx):
-    _log.info(f"Recognized command inputTest from {ctx.author.name} #{ctx.author.id}")
-    view = View()
-    input = TextInput(label="UID", min_length=9, max_length=9)
-
-    async def on_input(interaction: discord.Interaction):
-        _log.info(f"{interaction.id} inputted")
-        await interaction.response.send_message(f"{interaction.message} inputted")
-
-    input.callback = on_input
-    view.add_item(input)
-    await ctx.send("Input test", view=view)
-
-
 @bot.command(name="bind")
 async def bindUID(ctx, uid):
     _log.info(f"Recognized command bind {uid} from {ctx.author.name} #{ctx.author.id}")
     terminal = IrminsulTerminal(language="en")
     await ctx.send(terminal.bindUID(user=ctx.author, uid=uid) + uid)
+
+
+@bot.tree.command(name="bind")
+async def bindUIDCmd(interaction: discord.Interaction, uid: str) -> None:
+    _log.info(f"Recognized command bind {uid} from {interaction.user.name} #{interaction.user.id}")
+    terminal = IrminsulTerminal(language="en")
+    await interaction.response.send_message(terminal.bindUID(user=interaction.user, uid=uid) + str(uid))
 
 
 @bot.command(name="绑定")
@@ -149,6 +134,14 @@ async def lookup(ctx):
     terminal = IrminsulTerminal(language="en")
     resTitle, resView = terminal.lookUpHandler()
     await ctx.send(resTitle, view=resView)
+
+
+@bot.tree.command(name="lookup")
+async def lookUpCmd(interaction: discord.Interaction) -> None:
+    _log.info(f"Recognized command lookup from {interaction.user.name} #{interaction.user.id}")
+    terminal = IrminsulTerminal(language="en")
+    resTitle, resView = terminal.lookUpHandler()
+    await interaction.response.send_message(resTitle, view=resView)
 
 
 @bot.command(name="検索")

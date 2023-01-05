@@ -51,11 +51,11 @@ feat.cal.label.note: ノート
 feat.cal.hutao.note: "Enemy: Hilichurl (Lv.90). \nWeapon Effect is not considered. \n4-pieces effect of Artifacts except Crimson Witch of Flames or Shimenawa's Reminiscence is not considered."
 
 sys.label.createVC: "通話部屋を作成"
-sys.label.createVC.text: "部屋の名前"
+sys.label.createVC.text: "部屋の名前を書いてねー："
 sys.label.createVC.button: 通話部屋を作成する！
 feat.createvc.success: の通話部屋を作成したよ！
 feat.createvc.fail: "通話部屋作成失敗："
 feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過したら自動で削除されるよ！気をつけてねー！"
 sys.label.createVC.bitRate: "音質（ビットレート）："
 feat.createvc.fail.bitRate: 入力無効！
-sys.label.createVC.userLimit: "参加人数制限：（0=無制限）"
+sys.label.createVC.userLimit: "参加人数制限：（0は無制限だよー！）"

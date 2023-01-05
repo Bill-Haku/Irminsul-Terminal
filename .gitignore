@@ -148,3 +148,6 @@ config.yaml
 #lib
 MySQLdb/
 userEnkaData/
+
+
+deploy.sh

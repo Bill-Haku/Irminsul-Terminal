@@ -29,7 +29,27 @@ def bindUID(user_id, uid):
         db.rollback()
         res = False
         _log.error(f"DB: Bind {user_id} to {uid} FAILED with {e}")
+    return res
 
+
+def setLanguage(user_id, language):
+    cursor = db.cursor()
+    sql = f"""
+    update UID_TABLE
+    set language = '{language}'
+    where user_id = '{user_id}';"""
+    checkUIDExist, _, _ = lookUpUID(user_id)
+    if not checkUIDExist:
+        return False
+    try:
+        cursor.execute(sql)
+        db.commit()
+        res = True
+        _log.info(f"DB: Set {user_id} language to {language} SUCCESS")
+    except Exception as e:
+        db.rollback()
+        res = False
+        _log.error(f"DB: Set {user_id} language to {language} FAILED with {e}")
     return res
 
 
@@ -47,6 +67,6 @@ def lookUpUID(user_id):
         return True, uid, updateTime
 
     except Exception as e:
-        _log.warning(e.with_traceback())
+        _log.warning(e)
         return False, "", ""
 

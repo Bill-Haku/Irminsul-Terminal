@@ -54,3 +54,6 @@ feat.createvc.tips: "注意：语音频道将会在所有人退出后自动删�
 sys.label.createVC.bitRate: "音质（比特率）："
 feat.createvc.fail.bitRate: 输入不合法！
 sys.label.createVC.userLimit: "参加人数限制：（0=无限制）"
+
+msg.setLanguageSuccess: 语言设置成功！
+msg.setLanguageFail: 语言设置失败！可能因为未先绑定原神的UID。

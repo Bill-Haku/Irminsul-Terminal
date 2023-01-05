@@ -160,6 +160,14 @@ async def lookup(ctx):
     await ctx.send(resTitle, view=resView)
 
 
+@bot.tree.command(name="setlanguage")
+async def setLanguage(interaction: discord.Interaction, language: str) -> None:
+    _log.info(f"Recognized command setlanguage from {interaction.user.name} #{interaction.user.id}")
+    terminal = IrminsulTerminal(language=language)
+    res = terminal.setLanguage(user=interaction.user, language=language)
+    await interaction.response.send_message(res)
+
+
 @bot.command(name="char")
 async def lookUpChar(ctx, charName):
     _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")

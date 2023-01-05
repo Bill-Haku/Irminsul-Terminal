@@ -59,3 +59,6 @@ feat.createvc.tips: "Attention: The Voice Channel will be deleted after everyone
 sys.label.createVC.bitRate: "Bit Rate: "
 feat.createvc.fail.bitRate: Input Invalid!
 sys.label.createVC.userLimit: "User Limit: (0 means no limit)"
+
+msg.setLanguageSuccess: Set Language Success
+msg.setLanguageFail: Set language fail, maybe because your Genshin UID is not bound.

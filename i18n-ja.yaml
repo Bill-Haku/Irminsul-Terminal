@@ -59,3 +59,6 @@ feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過�
 sys.label.createVC.bitRate: "音質（ビットレート）："
 feat.createvc.fail.bitRate: 入力無効！
 sys.label.createVC.userLimit: "参加人数制限：（0は無制限だよー！）"
+
+msg.setLanguageSuccess: 言語を設定しました！
+msg.setLanguageFail: 設定失敗した！原神のUIDはまだバインドしませんの原因かもしれない

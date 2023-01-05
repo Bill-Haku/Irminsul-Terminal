@@ -48,7 +48,6 @@ class IrminsulTerminal:
         return embed
 
     def bindUID(self, user, uid):
-        # uid = str(uid)
         i18n = self.get_i18n(self.language)
 
         if not str(uid).isdigit() or len(str(uid)) != 9:
@@ -60,6 +59,14 @@ class IrminsulTerminal:
             return i18n["msg.bindUidSuccess"]
         else:
             return i18n["msg.bindUidFail"]
+
+    def setLanguage(self, user, language):
+        i18n = self.get_i18n(self.language)
+        res = IrminsulDatabase.setLanguage(user_id=user.id, language=language)
+        if res:
+            return i18n["msg.setLanguageSuccess"]
+        else:
+            return i18n["msg.setLanguageFail"]
 
     def lookUpHandler(self):
         i18n = self.get_i18n(self.language)

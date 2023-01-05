@@ -40,8 +40,10 @@ class IrminsulTerminalBot(commands.Bot):
                             _log.info(f"Find channel {channel.name} member is 0")
                             now = datetime.datetime.now().astimezone()
                             if (now - channel.created_at).seconds > 60:
+                                textChannel = discord.utils.get(channel.guild.channels, name=f"👂{channel.name}")
                                 try:
                                     await channel.delete()
+                                    await textChannel.delete()
                                     _log.info(f"Delete voice channel {channel.name} success!")
                                 except Forbidden as forbidden:
                                     _log.error(f"Delete voice channel fail because of Forbidden")
@@ -224,11 +226,13 @@ async def on_voice_state_update(member, before, after):
                 return
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)
+            textChannel = discord.utils.get(member.guild.channels, name=f"👂{channelName}")
             if type(channel) != discord.VoiceChannel or channel is None:
                 _log.error(f"Channel {channelName} is not found!")
                 return
             try:
                 await channel.delete()
+                await textChannel.delete()
                 _log.info(f"Delete voice channel {channelName} success!")
             except Forbidden as forbidden:
                 _log.error(f"Delete voice channel fail because of Forbidden")

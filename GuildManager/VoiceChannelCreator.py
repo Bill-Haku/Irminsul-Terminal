@@ -45,6 +45,7 @@ class VoiceChannelCreator(Modal):
                 channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
             else:
                 channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category, user_limit=userLimit)
+            textChannel = await ctx.guild.create_text_channel(name=f"👂{name}", category=interaction.channel.category)
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:

@@ -70,3 +70,19 @@ def lookUpUID(user_id):
         _log.warning(e)
         return False, "", ""
 
+
+def lookUpLanguage(user_id):
+    cursor = db.cursor()
+    sql = f"""
+    select * from UID_TABLE
+    where user_id = '{user_id}';"""
+    try:
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        for row in results:
+            language = row[3]
+        return True, language
+
+    except Exception as e:
+        _log.warning(e)
+        return False, ""

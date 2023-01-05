@@ -8,6 +8,8 @@ import datetime
 from discord.ext import commands
 from discord import *
 from discord.ui import *
+
+import IrminsulDatabase
 from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 
@@ -112,7 +114,8 @@ async def bindUID(ctx, uid):
 @bot.tree.command(name="bind")
 async def bindUIDCmd(interaction: discord.Interaction, uid: str) -> None:
     _log.info(f"Recognized command bind {uid} from {interaction.user.name} #{interaction.user.id}")
-    terminal = IrminsulTerminal(language="en")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
     await interaction.response.send_message(terminal.bindUID(user=interaction.user, uid=uid) + str(uid))
 
 
@@ -141,7 +144,8 @@ async def lookup(ctx):
 @bot.tree.command(name="lookup")
 async def lookUpCmd(interaction: discord.Interaction) -> None:
     _log.info(f"Recognized command lookup from {interaction.user.name} #{interaction.user.id}")
-    terminal = IrminsulTerminal(language="en")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
     resTitle, resView = terminal.lookUpHandler()
     await interaction.response.send_message(resTitle, view=resView)
 

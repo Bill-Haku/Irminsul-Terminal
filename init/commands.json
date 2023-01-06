@@ -60,6 +60,23 @@
           ]
         }
       ]
+    },
+    {
+      "name": "character",
+      "type": 1,
+      "description": "Look up data of your character in the game.",
+      "description_localizations": {
+        "zh-CN": "查询您的游戏内的角色的信息",
+        "ja": "あなたのゲーム内のキャラの情報を検索する"
+      },
+      "options": [
+        {
+          "name": "name",
+          "description": "Name of the character",
+          "type": 3,
+          "required": true
+        }
+      ]
     }
   ]
 }

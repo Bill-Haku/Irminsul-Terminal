@@ -182,6 +182,19 @@ async def lookUpChar(ctx, charName):
     await ctx.send(resTitle, view=resView)
 
 
+@bot.tree.command(name="character")
+async def lookUpCharCmd(interaction: discord.Interaction, name: str):
+    _log.info(f"Recognized command look up from {interaction.user.name} #{interaction.user.id}")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
+    resTitle, resView = terminal.lookUpChar(interaction.user.id, name)
+    await interaction.response.send_message(resTitle, view=resView)
+
+
+# todo: update translated character list
+# todo: update enka data, opensource readme, user guide
+
+
 @bot.command(name="角色")
 async def lookUpChar(ctx, charName):
     _log.info(f"Recognized command look up from {ctx.author.name} #{ctx.author.id}")

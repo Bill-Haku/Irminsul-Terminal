@@ -199,7 +199,7 @@ async def updateEnkaData(interaction: discord.Interaction):
     res = terminal.updateEnkaData(userID=interaction.user.id)
     await interaction.followup.send(res)
 
-# todo: update enka data, opensource readme, user guide
+# todo: user guide
 
 
 @bot.command(name="角色")

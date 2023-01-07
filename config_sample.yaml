@@ -1,0 +1,14 @@
+#Bot Config
+token:
+appid:
+version: 1.2.0
+
+#Databse Config
+host:
+user:
+password:
+database: Irminsul
+
+#Bot Settings
+createChannelWithPrefix: false
+autoDeleteEmptyVoiceChannel: true

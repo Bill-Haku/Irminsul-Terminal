@@ -62,3 +62,6 @@ sys.label.createVC.userLimit: "参加人数制限：（0は無制限だよー！
 
 msg.setLanguageSuccess: 言語を設定しました！
 msg.setLanguageFail: 設定失敗した！原神のUIDはまだバインドしませんの原因かもしれない
+msg.error.enkaUpdateTooFast: 更新が速すぎる
+msg.error.enkaUpdateFail: 更新が失敗した。あとでもう一度試してみてください
+msg.updateEnkaDataSuccess: 情報を更新完了！

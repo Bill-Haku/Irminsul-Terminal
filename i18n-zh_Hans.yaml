@@ -57,3 +57,6 @@ sys.label.createVC.userLimit: "参加人数限制：（0=无限制）"
 
 msg.setLanguageSuccess: 语言设置成功！
 msg.setLanguageFail: 语言设置失败！可能因为未先绑定原神的UID。
+msg.error.enkaUpdateTooFast: 更新请求过快！
+msg.error.enkaUpdateFail: 更新失败。请稍候再试
+msg.updateEnkaDataSuccess: 更新成功！

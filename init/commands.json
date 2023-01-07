@@ -77,6 +77,15 @@
           "required": true
         }
       ]
+    },
+    {
+      "name": "sync",
+      "type": 1,
+      "description": "Update and sync your character info from Enka.Network",
+      "description_localizations": {
+        "zh-CN": "更新同步您的角色信息",
+        "ja": "あなたのキャラ情報を更新して同期する"
+      }
     }
   ]
 }

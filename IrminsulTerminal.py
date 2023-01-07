@@ -92,6 +92,19 @@ class IrminsulTerminal:
         else:
             return i18n["msg.lookUpUIDFail"]
 
+    def updateEnkaData(self, userID):
+        i18n = self.get_i18n(self.language)
+        res, uid, updateTime = IrminsulDatabase.lookUpUID(user_id=userID)
+        if res:
+            success, msg = EnkaAPIManager.updateDataFromEnka(userId=userID, uid=uid, updateTime=updateTime, i18n=i18n)
+            if success:
+                return i18n["msg.updateEnkaDataSuccess"]
+            else:
+                return msg
+        else:
+            # no valid bound UID found
+            return i18n["msg.err.noUIDBound"]
+
     def lookUpChar(self, userID, charName):
         i18n = self.get_i18n(self.language)
         res, uid, _ = IrminsulDatabase.lookUpUID(user_id=userID)

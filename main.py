@@ -28,7 +28,6 @@ class IrminsulTerminalBot(commands.Bot):
     async def setup_hook(self) -> None:
         botName = self.user.name
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
-        # self.add_view(VoiceChannelCreatorModalView(i18n=terminal.get_i18n("ja"), botName=botName))
 
     async def on_ready(self):
         _log.info("Bot is ready.")
@@ -184,14 +183,22 @@ async def lookUpChar(ctx, charName):
 
 @bot.tree.command(name="character")
 async def lookUpCharCmd(interaction: discord.Interaction, name: str):
-    _log.info(f"Recognized command look up from {interaction.user.name} #{interaction.user.id}")
+    _log.info(f"Recognized command character from {interaction.user.name} #{interaction.user.id}")
     _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
     terminal = IrminsulTerminal(language=language)
     resTitle, resView = terminal.lookUpChar(interaction.user.id, name)
     await interaction.response.send_message(resTitle, view=resView)
 
 
-# todo: update translated character list
+@bot.tree.command(name="sync")
+async def updateEnkaData(interaction: discord.Interaction):
+    _log.info(f"Recognized command update from {interaction.user.name} #{interaction.user.id}")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
+    await interaction.response.defer()
+    res = terminal.updateEnkaData(userID=interaction.user.id)
+    await interaction.followup.send(res)
+
 # todo: update enka data, opensource readme, user guide
 
 

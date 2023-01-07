@@ -1,8 +1,10 @@
+import datetime
 import json
 import requests
 import os
 import logging
 
+import IrminsulDatabase
 
 _log = logging.getLogger('discord')
 logHandler = logging.FileHandler(filename='irminsul.log', encoding='utf-8', mode='w')
@@ -33,3 +35,20 @@ def getDataFromEnka(uid):
     with open(filename, "w") as obj:
         json.dump(result, obj)
     return result
+
+
+def updateDataFromEnka(userId, uid, updateTime, i18n):
+    now = datetime.datetime.now().astimezone()
+    updateTime = updateTime.astimezone()
+    timeDelta = now - updateTime
+    if timeDelta.seconds <= 120:
+        return False, i18n["msg.error.enkaUpdateTooFast"]
+    enkaData = getDataFromEnka(uid)
+    if enkaData is not None and enkaData["playerInfo"] is not None:
+        res = IrminsulDatabase.setUpdateTime(user_id=userId, updateTime=now)
+        if res:
+            return True, ""
+        else:
+            return False, i18n["msg.error.enkaUpdateFail"]
+    else:
+        return False, i18n["msg.error.enkaUpdateFail"]

@@ -1,6 +1,9 @@
+import datetime
+
 import pymysql
 import os
 import logging
+import time
 from botpy.ext.cog_yaml import read
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
@@ -50,6 +53,28 @@ def setLanguage(user_id, language):
         db.rollback()
         res = False
         _log.error(f"DB: Set {user_id} language to {language} FAILED with {e}")
+    return res
+
+
+def setUpdateTime(user_id, updateTime: datetime.datetime):
+    cursor = db.cursor()
+    updateTime.strftime('%Y-%m-%d %H:%M:%S')
+    sql = f"""
+    update UID_TABLE
+    set update_time = '{updateTime}'
+    where user_id = '{user_id}';"""
+    checkUIDExist, _, _ = lookUpUID(user_id)
+    if not checkUIDExist:
+        return False
+    try:
+        cursor.execute(sql)
+        db.commit()
+        res = True
+        _log.info(f"DB: Set {user_id} updateTime SUCCESS")
+    except Exception as e:
+        db.rollback()
+        res = False
+        _log.error(f"DB: Set {user_id} updateTime FAILED with {e}")
     return res
 
 

@@ -37,15 +37,29 @@ class VoiceChannelCreator(Modal):
             return
         botName = self.botName
         ctx = interaction
+        channelRoleName = f"[{botName}]{name}"
         if config["createChannelWithPrefix"]:
             name = f"[{botName}]{name}"
         _log.info(f"{interaction.user.name}#{interaction.user.id}: Create Voice Channel {name}...")
+        overwrites = {
+            ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False),
+            ctx.guild.me: discord.PermissionOverwrite(read_messages=True)
+        }
         try:
             if userLimit <= 0:
-                channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category)
+                channel = await ctx.guild.create_voice_channel(name=name,
+                                                               bitrate=bitRate,
+                                                               category=interaction.channel.category)
             else:
-                channel = await ctx.guild.create_voice_channel(name=name, bitrate=bitRate, category=interaction.channel.category, user_limit=userLimit)
-            textChannel = await ctx.guild.create_text_channel(name=f"👂{name}", category=interaction.channel.category)
+                channel = await ctx.guild.create_voice_channel(name=name,
+                                                               bitrate=bitRate,
+                                                               category=interaction.channel.category,
+                                                               user_limit=userLimit)
+            textChannel = await ctx.guild.create_text_channel(name=f"👂{name}",
+                                                              category=interaction.channel.category,
+                                                              overwrites=overwrites)
+            channelRole = await ctx.guild.create_role(name=channelRoleName)
+            await textChannel.set_permissions(channelRole, read_messages=True)
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n\n{i18n['feat.createvc.tips']}"
         except Forbidden as forbidden:

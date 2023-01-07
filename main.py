@@ -234,9 +234,17 @@ async def createVoiceChannel(ctx, name=""):
 async def on_voice_state_update(member, before, after):
     if before.channel is None and after.channel is not None:
         _log.info(f"{member.name} entered channel {after.channel.name}")
+        channelRoleName = f"[{bot.user.name}]{after.channel.name}"
+        channelRole = discord.utils.get(member.guild.roles, name=channelRoleName)
+        await member.add_roles(channelRole)
+        _log.info(f"Set role {channelRole.name} for {member.name} SUCCESS")
     if before.channel is not None and after.channel is None:
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
+        channelRoleName = f"[{bot.user.name}]{channelName}"
+        channelRole = discord.utils.get(member.guild.roles, name=channelRoleName)
+        await member.remove_roles(channelRole)
+        _log.info(f"Remove role {channelRole.name} for {member.name} SUCCESS")
         channelPrefix = f"[{bot.user.name}]"
         if config["createChannelWithPrefix"]:
             if not channelName[0:len(channelPrefix)] == channelPrefix:
@@ -255,12 +263,13 @@ async def on_voice_state_update(member, before, after):
                 _log.error(f"Channel {channelName} is not found!")
                 return
             try:
+                await channelRole.delete()
                 await channel.delete()
                 await textChannel.delete()
                 _log.info(f"Delete voice channel {channelName} success!")
             except Forbidden as forbidden:
                 _log.error(f"Delete voice channel fail because of Forbidden")
-            except HTTPException:
+            except HTTPException as he:
                 _log.error(f"Delete voice channel fail because of HTTPException")
             except TypeError:
                 _log.error(f"Delete voice channel fail because of TypeError")

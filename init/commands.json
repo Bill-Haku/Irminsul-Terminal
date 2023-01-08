@@ -86,6 +86,24 @@
         "zh-CN": "更新同步您的角色信息",
         "ja": "あなたのキャラ情報を更新して同期する"
       }
+    },
+    {
+      "name": "help",
+      "type": 1,
+      "description": "Send our user manual if you need help.",
+      "description_localizations": {
+        "zh-CN": "点击发送使用指南",
+        "ja": "ユーザーマニュアルを送る"
+      }
+    },
+    {
+      "name": "about",
+      "type": 1,
+      "description": "About this bot",
+      "description_localizations": {
+        "zh-CN": "关于本机器人",
+        "ja": "このボットについて"
+      }
     }
   ]
 }

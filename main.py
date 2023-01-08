@@ -67,6 +67,14 @@ async def paimon(ctx):
     await ctx.send(embed=terminal.selfInfo(bot=bot))
 
 
+@bot.tree.command(name="about")
+async def aboutCmd(interaction: discord.Interaction):
+    _log.info(f"Recognized command about from {interaction.user.name} #{interaction.user.id}")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
+    await interaction.response.send_message(embed=terminal.selfInfo(bot=bot))
+
+
 @bot.command(name="关于")
 async def paimon(ctx):
     terminal = IrminsulTerminal(language="zh")
@@ -199,7 +207,7 @@ async def updateEnkaData(interaction: discord.Interaction):
     res = terminal.updateEnkaData(userID=interaction.user.id)
     await interaction.followup.send(res)
 
-# todo: user guide
+# help command & about command
 
 
 @bot.command(name="角色")

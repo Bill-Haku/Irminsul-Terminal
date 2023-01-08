@@ -11,13 +11,12 @@ _log = logging.getLogger('discord')
 logHandler = logging.FileHandler(filename='irminsul.log', encoding='utf-8', mode='w')
 _log.addHandler(logHandler)
 
-db = pymysql.connect(host=config["host"],
-                     user=config["user"],
-                     password=config["password"],
-                     database=config["database"])
-
 
 def bindUID(user_id, uid):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
     cursor = db.cursor()
     sql = f"""
     insert into UID_TABLE(user_id, uid, update_time)
@@ -29,13 +28,22 @@ def bindUID(user_id, uid):
         res = True
         _log.info(f"DB: Bind {user_id} to {uid} SUCCESS")
     except Exception as e:
-        db.rollback()
-        res = False
         _log.error(f"DB: Bind {user_id} to {uid} FAILED with {e}")
+        try:
+            db.rollback()
+            res = False
+        except Exception as ee:
+            _log.error(f"DB: Rollback error: {ee}")
+            res = False
+    db.close()
     return res
 
 
 def setLanguage(user_id, language):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
     cursor = db.cursor()
     sql = f"""
     update UID_TABLE
@@ -53,10 +61,15 @@ def setLanguage(user_id, language):
         db.rollback()
         res = False
         _log.error(f"DB: Set {user_id} language to {language} FAILED with {e}")
+    db.close()
     return res
 
 
 def setUpdateTime(user_id, updateTime: datetime.datetime):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
     cursor = db.cursor()
     updateTime.strftime('%Y-%m-%d %H:%M:%S')
     sql = f"""
@@ -75,10 +88,15 @@ def setUpdateTime(user_id, updateTime: datetime.datetime):
         db.rollback()
         res = False
         _log.error(f"DB: Set {user_id} updateTime FAILED with {e}")
+    db.close()
     return res
 
 
 def lookUpUID(user_id):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
     cursor = db.cursor()
     sql = f"""
     select * from UID_TABLE
@@ -94,9 +112,15 @@ def lookUpUID(user_id):
     except Exception as e:
         _log.warning(e)
         return False, "", ""
+    finally:
+        db.close()
 
 
 def lookUpLanguage(user_id):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
     cursor = db.cursor()
     sql = f"""
     select * from UID_TABLE
@@ -111,3 +135,5 @@ def lookUpLanguage(user_id):
     except Exception as e:
         _log.warning(e)
         return False, ""
+    finally:
+        db.close()

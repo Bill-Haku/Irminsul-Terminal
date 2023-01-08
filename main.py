@@ -30,7 +30,7 @@ class IrminsulTerminalBot(commands.Bot):
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
 
     async def on_ready(self):
-        _log.info("Bot is ready.")
+        _log.info(f"Bot is ready. Version: {config['version']}")
         _log.info(f"Logged in as {self.user.name} #{self.user.id}")
         if config["autoDeleteEmptyVoiceChannel"]:
             while True:

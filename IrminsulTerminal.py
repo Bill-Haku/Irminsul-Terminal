@@ -54,7 +54,6 @@ class IrminsulTerminal:
         view.add_item(button)
         return view
 
-
     def bindUID(self, user, uid):
         i18n = self.get_i18n(self.language)
 

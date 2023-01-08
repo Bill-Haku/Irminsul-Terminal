@@ -39,7 +39,7 @@ class IrminsulTerminal:
     def selfInfo(self, bot):
         i18n = self.get_i18n(self.language)
 
-        embed = discord.Embed(title=i18n["robot.name"], description=i18n["robot.description"], color=0xeee657)
+        embed = discord.Embed(title=bot.user.name, description=i18n["robot.description"], color=0xeee657)
         embed.add_field(name=i18n["sys.label.author"], value=i18n["robot.author"])
         embed.add_field(name=i18n["sys.label.version"], value=config["version"])
         embed.add_field(name=i18n["sys.label.serverCount"], value=f"{len(bot.guilds)}")

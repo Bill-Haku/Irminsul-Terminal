@@ -208,7 +208,6 @@ async def updateEnkaData(interaction: discord.Interaction):
     await interaction.followup.send(res)
 
 
-# help command & about command
 @bot.tree.command(name="help")
 async def helpCmd(interaction: discord.Interaction):
     _log.info(f"Recognized command help from {interaction.user.name} #{interaction.user.id}")

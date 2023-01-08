@@ -2,7 +2,7 @@ robot.name: Paimon Bot
 robot.description: 来自「世界树终端计划」的机器人
 robot.author: Bill Haku
 robot.inviteLink: https://discord.com/api/oauth2/authorize?client_id=964545612831932507&permissions=8&scope=bot
-robot.about: 这是一个开源的原神Discord机器人。
+robot.about: 这是一个开源的原神Discord机器人。 [GitHub链接](https://github.com/Bill-Haku/Irminsul-Terminal)
 sys.label.author: 作者
 sys.label.version: 版本号
 sys.label.serverCount: 使用中的服务器数量

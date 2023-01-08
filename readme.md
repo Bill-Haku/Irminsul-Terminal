@@ -23,7 +23,11 @@ See more in the [App Store](https://apps.apple.com/app/id1635319193).
 
 ## Functions
 
-> For further details, see `./docs`.
+> For further details, see `./docs`. Or you can read our user manuals:
+> 
+> - [English Version](http://ophelper.top/irminsul_terminal/user_manual_en)
+> - [Japanese Version](http://ophelper.top/irminsul_terminal/user_manual_ja)
+> - [Simplified Chinese Version](http://ophelper.top/irminsul_terminal/user_manual_zh)
 
 - `/bind`: Bind your Discord Account ID with your Genshin UID.
 - `/setlanguage`: Set the language the robot reply you when the user call a command.
@@ -39,7 +43,15 @@ Administrations can create a readonly channel and use `/createvc` to init it. Ot
 
 ## Add it in your own Discord server
 
-### Invite the bot running on my own server
+You have 3 ways to use this bot.
+
+### Join My Server or My Friend たお's Server or any Other Server
+
+Click [here](https://discord.gg/XyFAGduTcM) to join my server (JA/EN/ZH available).
+
+Click [here](https://discord.gg/hutaotaotao) to join たお's server(JA mostly).
+
+### Invite the bot running on my own server to your own server
 
 > **Attention: I DO NOT ensure any stability or security on my server.**
 

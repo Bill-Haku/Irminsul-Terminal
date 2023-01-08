@@ -1,4 +1,4 @@
-# Irminsul Terminal Discord Botのユーザーマニュアル
+# 世界樹端末（Irminsul Terminal） Discord Botのユーザーマニュアル
 
 これは、このDiscordボットのすべての一般的なユーザーのためのユーザーマニュアルです。各コマンドの意味や使い方を知ることができます。
 どのように使用するのかがわかります。

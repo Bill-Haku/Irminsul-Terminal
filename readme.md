@@ -45,13 +45,13 @@ Administrations can create a readonly channel and use `/createvc` to init it. Ot
 
 You have 3 ways to use this bot.
 
-### Join My Server or My Friend たお's Server or any Other Server
+### Join My Discord Server or My Friend たお's　Discord Server or any Other Discord Server with This Bot
 
 Click [here](https://discord.gg/XyFAGduTcM) to join my server (JA/EN/ZH available).
 
 Click [here](https://discord.gg/hutaotaotao) to join たお's server(JA mostly).
 
-### Invite the bot running on my own server to your own server
+### Invite the bot running on my own server to your own　Discord server
 
 > **Attention: I DO NOT ensure any stability or security on my server.**
 
@@ -61,7 +61,7 @@ Just click this [link](https://discord.com/api/oauth2/authorize?client_id=964545
 
 > It is recommended for you to deploy it on your own server if you can.
 
-See in below: [How to deploy and make contributions](##Deploy and Make Contributions).
+See in below: [How to deploy and make contributions](#Deploy and Make Contributions).
 
 ## Deploy and Make Contributions
 
@@ -90,7 +90,7 @@ You can finish configurations based on it.
 pip install -r requirements.txt
 ```
 
-### Create Tables in the Databse
+### Create Tables in the Database
 
 You can simply run the provided `./database/create.sql` in your database server.
 

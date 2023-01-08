@@ -46,9 +46,9 @@ feat.label.phydb: 物理ダメージ
 feat.label.hb: 与える治療効果
 
 sys.label.cal: ダメージ計算器
-feat.cal.label.hutao.1: Charged Attack DMG with Vaporizing after Skill E
+feat.cal.label.hutao.1: スキルを使用し、重撃で蒸発ダメージの場合
 feat.cal.label.note: ノート
-feat.cal.hutao.note: "Enemy: Hilichurl (Lv.90). \nWeapon Effect is not considered. \n4-pieces effect of Artifacts except Crimson Witch of Flames or Shimenawa's Reminiscence is not considered."
+feat.cal.hutao.note: "敵: ヒルチャール (Lv.90). \n武器効果は考慮されません。 \n4火魔女と4しめ縄以外の聖遺物効果が考慮されません。"
 
 sys.label.createVC: "通話部屋を作成"
 sys.label.createVC.text: "部屋の名前を書いてねー："

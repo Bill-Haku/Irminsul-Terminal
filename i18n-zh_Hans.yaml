@@ -45,6 +45,11 @@ feat.label.cryodb: 冰元素伤害加成
 feat.label.phydb: 物理伤害加成
 feat.label.hb: 治疗加成
 
+sys.label.cal: 伤害计算器
+feat.cal.label.hutao.1: 开E后重击蒸发
+feat.cal.label.note: 备注
+feat.cal.hutao.note: "敌人：90级丘丘人\n未考虑武器效果\n未考虑4魔女和4追忆以外的其他圣遗物的效果"
+
 sys.label.createVC: "创建语音频道"
 sys.label.createVC.text: "频道名称："
 sys.label.createVC.button: 创建临时语音频道
@@ -60,3 +65,5 @@ msg.setLanguageFail: 语言设置失败！可能因为未先绑定原神的UID�
 msg.error.enkaUpdateTooFast: 更新请求过快！
 msg.error.enkaUpdateFail: 更新失败。请稍候再试
 msg.updateEnkaDataSuccess: 更新成功！
+sys.label.manual: 使用指南
+sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_zh

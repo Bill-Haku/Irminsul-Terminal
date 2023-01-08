@@ -47,6 +47,14 @@ class IrminsulTerminal:
         embed.add_field(name=i18n["sys.label.about"], value=i18n["robot.about"])
         return embed
 
+    def sendManual(self):
+        i18n = self.get_i18n(self.language)
+        button = discord.ui.Button(label=i18n["sys.label.manual"], url=i18n["sys.label.manual.url"])
+        view = View()
+        view.add_item(button)
+        return view
+
+
     def bindUID(self, user, uid):
         i18n = self.get_i18n(self.language)
 

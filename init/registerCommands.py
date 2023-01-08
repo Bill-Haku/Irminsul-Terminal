@@ -17,9 +17,11 @@ with open(fileName) as commandsJsonFile:
         "Authorization": f"Bot {config['token']}"
     }
 
+    i = 0
     for command in commands["commands"]:
         r = requests.post(url, headers=headers, json=command)
         print(r.json())
-        time.sleep(0.5)
+        i += 1
+        time.sleep(0.5 + i)
 
 

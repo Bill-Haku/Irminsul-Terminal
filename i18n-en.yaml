@@ -65,3 +65,5 @@ msg.setLanguageFail: Set language fail, maybe because your Genshin UID is not bo
 msg.error.enkaUpdateTooFast: Update too fast!
 msg.error.enkaUpdateFail: Update data failed. Try again later.
 msg.updateEnkaDataSuccess: Update data success!
+sys.label.manual: User Manual
+sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_en

@@ -65,3 +65,5 @@ msg.setLanguageFail: 設定失敗した！原神のUIDはまだバインドし�
 msg.error.enkaUpdateTooFast: 更新が速すぎる
 msg.error.enkaUpdateFail: 更新が失敗した。あとでもう一度試してみてください
 msg.updateEnkaDataSuccess: 情報を更新完了！
+sys.label.manual: ユーザーマニュアル
+sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_ja

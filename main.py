@@ -207,7 +207,15 @@ async def updateEnkaData(interaction: discord.Interaction):
     res = terminal.updateEnkaData(userID=interaction.user.id)
     await interaction.followup.send(res)
 
+
 # help command & about command
+@bot.tree.command(name="help")
+async def helpCmd(interaction: discord.Interaction):
+    _log.info(f"Recognized command help from {interaction.user.name} #{interaction.user.id}")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
+    resView = terminal.sendManual()
+    await interaction.response.send_message(view=resView)
 
 
 @bot.command(name="角色")

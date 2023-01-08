@@ -45,13 +45,13 @@ Administrations can create a readonly channel and use `/createvc` to init it. Ot
 
 You have 3 ways to use this bot.
 
-### Join My Discord Server or My Friend たお's　Discord Server or any Other Discord Server with This Bot
+### Join My Discord Server or My Friend たお's Discord Server or any Other Discord Server with This Bot
 
 Click [here](https://discord.gg/XyFAGduTcM) to join my server (JA/EN/ZH available).
 
 Click [here](https://discord.gg/hutaotaotao) to join たお's server(JA mostly).
 
-### Invite the bot running on my own server to your own　Discord server
+### Invite the bot running on my own server to your own Discord server
 
 > **Attention: I DO NOT ensure any stability or security on my server.**
 

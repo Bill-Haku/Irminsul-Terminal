@@ -41,7 +41,7 @@ See more in the [App Store](https://apps.apple.com/app/id1635319193).
 Also, server administrators can use it to allow members in your server to create voice channels by themselves.
 Administrations can create a readonly channel and use `/createvc` to init it. Other members can use the bot here.
 
-## Add it in your own Discord server
+## How to use this bot?
 
 You have 3 ways to use this bot.
 

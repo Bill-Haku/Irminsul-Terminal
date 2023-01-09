@@ -18,7 +18,7 @@ sys.label.lookUpUID: 私のUID
 msg.lookUpUIDSuccess: 'バインドしたUIDは：'
 msg.lookUpUIDFail: バインドしたUIDは見つかれません
 
-msg.err.noUIDBound: UIDがバインドされていません。まず、/バインド コマンドでゲームUIDをバインドしてください。
+msg.err.noUIDBound: UIDがバインドされていません。まず、/bind コマンドでゲームUIDをバインドしてください。
 msg.error.charNameInvalid: 対応する文字が見当たりません。正しいフルネームを入力してください。
 sys.label.lookUpArtifacts: 聖遺物
 sys.label.lookUpChar: 何を調べたいですか？ キャラ：

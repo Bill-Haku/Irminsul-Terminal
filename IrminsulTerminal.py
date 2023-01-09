@@ -43,7 +43,7 @@ class IrminsulTerminal:
         embed.add_field(name=i18n["sys.label.author"], value=i18n["robot.author"])
         embed.add_field(name=i18n["sys.label.version"], value=config["version"])
         embed.add_field(name=i18n["sys.label.serverCount"], value=f"{len(bot.guilds)}")
-        embed.add_field(name=i18n["sys.label.invite"], value=i18n["robot.inviteLink"])
+        # embed.add_field(name=i18n["sys.label.invite"], value=i18n["robot.inviteLink"])
         embed.add_field(name=i18n["sys.label.about"], value=i18n["robot.about"])
         return embed
 

@@ -18,7 +18,7 @@ sys.label.lookUpUID: 我的UID
 msg.lookUpUIDSuccess: '您绑定的UID是: '
 msg.lookUpUIDFail: 未找到绑定的UID
 
-msg.err.noUIDBound: 未绑定UID。请先使用 /绑定 命令绑定您的UID
+msg.err.noUIDBound: 未绑定UID。请先使用 /bind 命令绑定您的UID
 msg.error.charNameInvalid: 未找到对应的角色。请输入角色的正确全名
 sys.label.lookUpArtifacts: 圣遗物
 sys.label.lookUpChar: 您想要查询什么？ 角色：

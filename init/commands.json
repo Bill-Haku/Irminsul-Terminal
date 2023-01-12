@@ -104,6 +104,15 @@
         "zh-CN": "关于本机器人",
         "ja": "このボットについて"
       }
+    },
+    {
+      "name": "delrecord",
+      "type": 1,
+      "description": "Delete your UID record in the bot.",
+      "description_localizations": {
+        "zh-CN": "删除已绑定的UID记录",
+        "ja": "登録済みのUIDを削除する"
+      }
     }
   ]
 }

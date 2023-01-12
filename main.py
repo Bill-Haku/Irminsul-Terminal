@@ -31,7 +31,6 @@ class IrminsulTerminalBot(commands.Bot):
         botName = self.user.name
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
         self.add_view(FirstStepManagerModalView(botName=botName))
-        self.add_view(CharInfoModalView(botName=botName))
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -125,6 +124,15 @@ async def helpCmd(interaction: discord.Interaction):
     await interaction.response.send_message(view=resView)
 
 
+@bot.tree.command(name="delrecord")
+async def delRecordCmd(interaction: discord.Interaction):
+    _log.info(f"Recognized command delrecord from {interaction.user.name} #{interaction.user.id}")
+    _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
+    terminal = IrminsulTerminal(language=language)
+    result = terminal.delUserRecord(userID=interaction.user.id)
+    await interaction.response.send_message(result)
+
+
 @bot.command(name="createvc")
 @commands.is_owner()
 async def createVoiceChannel(ctx, name=""):
@@ -143,13 +151,6 @@ async def sendFeatureButtons(ctx):
     responseView = FirstStepManagerModalView(bot.user.name)
     await ctx.send(view=responseView)
 
-
-@bot.command(name="charbutton")
-@commands.is_owner()
-async def sendCharInfoButton(ctx, name=""):
-    _log.info(f"Recognized command sendCharInfoButton from {ctx.author.name} #{ctx.author.id}")
-    responseView = CharInfoModalView(bot.user.name)
-    await ctx.send(view=responseView)
 
 # delete voice channel when member is all gone
 @bot.event

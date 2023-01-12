@@ -42,7 +42,8 @@ class IrminsulTerminal:
         embed = discord.Embed(title=bot.user.name, description=i18n["robot.description"], color=0xeee657)
         embed.add_field(name=i18n["sys.label.author"], value=i18n["robot.author"])
         embed.add_field(name=i18n["sys.label.version"], value=config["version"])
-        embed.add_field(name=i18n["sys.label.serverCount"], value=f"{len(bot.guilds)}")
+        embed.add_field(name=i18n["sys.label.manual"], value=f"[{i18n['sys.label.manual']}]({i18n['sys.label.manual.url']})")
+        # embed.add_field(name=i18n["sys.label.serverCount"], value=f"{len(bot.guilds)}")
         # embed.add_field(name=i18n["sys.label.invite"], value=i18n["robot.inviteLink"])
         embed.add_field(name=i18n["sys.label.about"], value=i18n["robot.about"])
         return embed

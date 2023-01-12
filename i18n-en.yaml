@@ -67,3 +67,7 @@ msg.error.enkaUpdateFail: Update data failed. Try again later.
 msg.updateEnkaDataSuccess: Update data success!
 sys.label.manual: User Manual
 sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_en
+
+sys.label.binduid.button: Bind UID
+msg.tips.afterbinduid: Your language is set to Japanese. You can use command /setlanguage to change it.
+sys.label.uid: UID (9-digit number)

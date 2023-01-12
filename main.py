@@ -12,6 +12,7 @@ from discord.ui import *
 import IrminsulDatabase
 from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
+from GuildManager.FirstStepManager import FirstStepManagerModalView
 
 
 _log = logging.getLogger('discord')
@@ -28,6 +29,7 @@ class IrminsulTerminalBot(commands.Bot):
     async def setup_hook(self) -> None:
         botName = self.user.name
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
+        self.add_view(FirstStepManagerModalView(botName=botName))
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -243,6 +245,13 @@ async def createVoiceChannel(ctx, name=""):
     responseView = VoiceChannelCreatorModalView(bot.user.name)
     await ctx.send(view=responseView)
 
+
+@bot.command(name="binduid")
+@commands.is_owner()
+async def createVoiceChannel(ctx, name=""):
+    _log.info(f"Recognized command binduid from {ctx.author.name} #{ctx.author.id}")
+    responseView = FirstStepManagerModalView(bot.user.name)
+    await ctx.send(view=responseView)
 
 # delete voice channel when member is all gone
 @bot.event

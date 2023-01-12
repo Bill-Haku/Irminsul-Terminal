@@ -11,7 +11,7 @@ sys.label.about: ボットについて
 
 msg.bindUidSuccess: 'UIDをバインド完了: '
 msg.bindUidFail: 'UIDをバインド失敗: '
-msg.error.uidInvalid: UIDは9桁の数字である必要があります！ (
+msg.error.uidInvalid: UIDは9桁の数字である必要があります！
 
 sys.label.lookUp: 何を調べますか？
 sys.label.lookUpUID: 私のUID
@@ -67,3 +67,7 @@ msg.error.enkaUpdateFail: 更新が失敗した。あとでもう一度試して
 msg.updateEnkaDataSuccess: 情報を更新完了！
 sys.label.manual: ユーザーマニュアル
 sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_ja
+
+sys.label.binduid.button: UIDをバインドする
+msg.tips.afterbinduid: あなたの言語は日本語に設定しました。コマンド /setlanguage を使うと変更できる。
+sys.label.uid: UID (9桁の数字)

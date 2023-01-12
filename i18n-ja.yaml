@@ -68,6 +68,8 @@ msg.updateEnkaDataSuccess: 情報を更新完了！
 sys.label.manual: ユーザーマニュアル
 sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_ja
 
-sys.label.binduid.button: UIDをバインドする
+sys.label.binduid.button: UIDを登録する！
 msg.tips.afterbinduid: あなたの言語は日本語に設定しました。コマンド /setlanguage を使うと変更できる。
 sys.label.uid: UID (9桁の数字)
+sys.label.charinfo.button: キャラを調べる！
+sys.label.charname: キャラ名

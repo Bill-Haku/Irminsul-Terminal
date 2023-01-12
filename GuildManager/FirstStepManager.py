@@ -3,6 +3,7 @@ import logging
 from discord.ui import Modal, TextInput
 from discord import *
 from IrminsulTerminal import i18n_en, i18n_ja, i18n_zh, config, IrminsulTerminal
+from GuildManager.CharacterInfoButton import CharacterInfoManager
 
 
 _log = logging.getLogger('discord')
@@ -38,6 +39,17 @@ class FirstStepManagerModalView(discord.ui.View):
 
     @discord.ui.button(label=i18n_ja["sys.label.binduid.button"], style=discord.ButtonStyle.gray,
                        custom_id="BindUID:Button")
-    async def open_modal(self, interaction: discord.Interaction, button: discord.Button):
+    async def open_bind_modal(self, interaction: discord.Interaction, button: discord.Button):
         modal = BindUIDManager(i18n=i18n_ja, botName=self.botName)
         await interaction.response.send_modal(modal)
+
+    @discord.ui.button(label=i18n_ja["sys.label.charinfo.button"], style=discord.ButtonStyle.gray,
+                       custom_id="CharInfo:Button")
+    async def open_charinfo_modal(self, interaction: discord.Interaction, button: discord.Button):
+        modal = CharacterInfoManager(i18n=i18n_ja, botName=self.botName)
+        await interaction.response.send_modal(modal)
+
+    @discord.ui.button(label=i18n_ja["sys.label.sync.button"], style=discord.ButtonStyle.gray,
+                       custom_id="SyncInfo:Button")
+    async def open_charinfo_modal(self, interaction: discord.Interaction, button: discord.Button):
+        return

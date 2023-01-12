@@ -13,6 +13,7 @@ import IrminsulDatabase
 from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 from GuildManager.FirstStepManager import FirstStepManagerModalView
+from GuildManager.CharacterInfoButton import CharInfoModalView
 
 
 _log = logging.getLogger('discord')
@@ -30,6 +31,7 @@ class IrminsulTerminalBot(commands.Bot):
         botName = self.user.name
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
         self.add_view(FirstStepManagerModalView(botName=botName))
+        self.add_view(CharInfoModalView(botName=botName))
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -246,11 +248,19 @@ async def createVoiceChannel(ctx, name=""):
     await ctx.send(view=responseView)
 
 
-@bot.command(name="binduid")
+@bot.command(name="featbuttons")
 @commands.is_owner()
-async def createVoiceChannel(ctx, name=""):
-    _log.info(f"Recognized command binduid from {ctx.author.name} #{ctx.author.id}")
+async def sendFeatureButtons(ctx):
+    _log.info(f"Recognized command sendFeatureButtons from {ctx.author.name} #{ctx.author.id}")
     responseView = FirstStepManagerModalView(bot.user.name)
+    await ctx.send(view=responseView)
+
+
+@bot.command(name="charbutton")
+@commands.is_owner()
+async def sendCharInfoButton(ctx, name=""):
+    _log.info(f"Recognized command sendCharInfoButton from {ctx.author.name} #{ctx.author.id}")
+    responseView = CharInfoModalView(bot.user.name)
     await ctx.send(view=responseView)
 
 # delete voice channel when member is all gone

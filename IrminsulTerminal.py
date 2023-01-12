@@ -113,7 +113,7 @@ class IrminsulTerminal:
             # no valid bound UID found
             return i18n["msg.err.noUIDBound"]
 
-    def lookUpChar(self, userID, charName):
+    def lookUpChar(self, userID, charName, isPrivate=False):
         i18n = self.get_i18n(self.language)
         res, uid, _ = IrminsulDatabase.lookUpUID(user_id=userID)
         if res:
@@ -143,16 +143,16 @@ class IrminsulTerminal:
                             break
                     if not inAvatarInfoList:
                         # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
-                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"], ephemeral=isPrivate)
                         return
 
                     resEmbeds = getArtifactsDatas(charData, i18n=i18n, language=self.language)
                     await asyncio.sleep(delay=1)
                     try:
-                        await interaction.followup.send(embeds=resEmbeds)
+                        await interaction.followup.send(embeds=resEmbeds, ephemeral=isPrivate)
                     except Exception as e:
                         _log.error(e.with_traceback())
-                        await interaction.followup.send(e)
+                        await interaction.followup.send(e, ephemeral=isPrivate)
 
                 async def on_button_Board(interaction: discord.Interaction):
                     await interaction.response.defer()
@@ -175,10 +175,10 @@ class IrminsulTerminal:
                     resEmbed = getStatsBoardDatas(charData, i18n, self.language)
                     await asyncio.sleep(delay=1)
                     try:
-                        await interaction.followup.send(embed=resEmbed)
+                        await interaction.followup.send(embed=resEmbed, ephemeral=isPrivate)
                     except Exception as e:
                         _log.error(e.with_traceback())
-                        await interaction.followup.send(e)
+                        await interaction.followup.send(e, ephemeral=isPrivate)
 
                 async def on_button_cal(interaction: discord.Interaction):
                     await interaction.response.defer()
@@ -200,10 +200,10 @@ class IrminsulTerminal:
                     resEmbed = calculatorHandler(charid=charID, charData=charData, i18n=i18n, language=self.language)
                     await asyncio.sleep(delay=1)
                     try:
-                        await interaction.followup.send(embed=resEmbed)
+                        await interaction.followup.send(embed=resEmbed, ephemeral=isPrivate)
                     except Exception as e:
                         _log.error(e.with_traceback())
-                        await interaction.followup.send(e)
+                        await interaction.followup.send(e, ephemeral=isPrivate)
 
 
                 buttonBoard.callback = on_button_Board

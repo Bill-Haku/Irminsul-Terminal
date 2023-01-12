@@ -58,7 +58,7 @@ class IrminsulTerminal:
     def bindUID(self, user, uid):
         i18n = self.get_i18n(self.language)
 
-        if not str(uid).isdigit() or len(str(uid)) != 9 or uid <= 100000000:
+        if not str(uid).isdigit() or len(str(uid)) != 9 or int(uid) <= 100000000:
             _log.warning(f"Found UID {uid} is not valid.")
             return i18n["msg.error.uidInvalid"]
 

@@ -177,7 +177,7 @@ class IrminsulTerminal:
                             break
                     if not inAvatarInfoList:
                         # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
-                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"], ephemeral=isPrivate)
                         return
 
                     resEmbed = getStatsBoardDatas(charData, i18n, self.language)
@@ -203,7 +203,7 @@ class IrminsulTerminal:
                             break
                     if not inAvatarInfoList:
                         # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
-                        await interaction.followup.send(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"], ephemeral=isPrivate)
                         return
                     resEmbed = calculatorHandler(charid=charID, charData=charData, i18n=i18n, language=self.language)
                     await asyncio.sleep(delay=1)

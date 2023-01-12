@@ -44,7 +44,13 @@ def updateDataFromEnka(userId, uid, updateTime, i18n):
     if timeDelta.seconds <= 120:
         return False, i18n["msg.error.enkaUpdateTooFast"]
     enkaData = getDataFromEnka(uid)
-    if enkaData is not None and enkaData["playerInfo"] is not None:
+    playerInfo = None
+    try:
+        playerInfo = enkaData["playerInfo"]
+    except KeyError:
+        return False, i18n["msg.error.enkaUpdateFail"]
+
+    if enkaData is not None and playerInfo is not None:
         res = IrminsulDatabase.setUpdateTime(user_id=userId, updateTime=now)
         if res:
             return True, ""

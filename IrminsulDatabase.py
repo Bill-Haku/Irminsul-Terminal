@@ -137,3 +137,25 @@ def lookUpLanguage(user_id):
         return False, ""
     finally:
         db.close()
+
+
+def delUser(user_id):
+    db = pymysql.connect(host=config["host"],
+                         user=config["user"],
+                         password=config["password"],
+                         database=config["database"])
+    cursor = db.cursor()
+    sql = f"""
+    delete from UID_TABLE
+    where user_id = '{user_id}';"""
+    try:
+        cursor.execute(sql)
+        db.commit()
+        _log.info(f"del record of {user_id}")
+        return True
+    except Exception as e:
+        _log.warning(e)
+        db.rollback()
+        return False
+    finally:
+        db.close()

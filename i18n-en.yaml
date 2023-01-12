@@ -74,3 +74,6 @@ sys.label.uid: UID (9-digit number)
 sys.label.charinfo.button: Enter Character Name
 sys.label.charname: Character Name
 sys.label.sync.button: Sync Data
+sys.label.deluid.button: Delete My UID Record
+msg.deluser.success: Delete UID Success!
+msg.deluser.fail: Delete UID Failed!

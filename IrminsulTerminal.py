@@ -100,6 +100,14 @@ class IrminsulTerminal:
         else:
             return i18n["msg.lookUpUIDFail"]
 
+    def delUserRecord(self, userID):
+        i18n = self.get_i18n(self.language)
+        res = IrminsulDatabase.delUser(user_id=userID)
+        if res:
+            return i18n["msg.deluser.success"]
+        else:
+            return i18n["msg.deluser.fail"]
+
     def updateEnkaData(self, userID):
         i18n = self.get_i18n(self.language)
         res, uid, updateTime = IrminsulDatabase.lookUpUID(user_id=userID)

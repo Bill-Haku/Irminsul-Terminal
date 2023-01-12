@@ -73,3 +73,7 @@ msg.tips.afterbinduid: Your language is set to Japanese. You can use command /se
 sys.label.uid: UID (9-digit number)
 sys.label.charinfo.button: Enter Character Name
 sys.label.charname: Character Name
+sys.label.sync.button: Sync Data
+sys.label.deluid.button: Delete My UID Record
+msg.deluser.success: 删除UID成功
+msg.deluser.fail: 删除UID失败

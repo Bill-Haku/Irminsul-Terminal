@@ -19,7 +19,7 @@ msg.lookUpUIDSuccess: 'バインドしたUIDは：'
 msg.lookUpUIDFail: バインドしたUIDは見つかれません
 
 msg.err.noUIDBound: UIDがバインドされていません。まず、/bind コマンドでゲームUIDをバインドしてください。
-msg.error.charNameInvalid: 対応する文字が見当たりません。正しいフルネームを入力してください。
+msg.error.charNameInvalid: 対応するキャラが見当たりません。正しいフルネームを入力してください。
 sys.label.lookUpArtifacts: 聖遺物
 sys.label.lookUpChar: 何を調べたいですか？ キャラ：
 msg.error.avatarNotInList: キャラクターはショーケースの中に入っていません。
@@ -73,3 +73,7 @@ msg.tips.afterbinduid: あなたの言語は日本語に設定しました。コ
 sys.label.uid: UID (9桁の数字)
 sys.label.charinfo.button: キャラを調べる！
 sys.label.charname: キャラ名
+sys.label.sync.button: データを同期する！
+sys.label.deluid.button: 登録済みのUIDを削除する！
+msg.deluser.success: UIDを削除した！
+msg.deluser.fail: UIDの削除に失敗しました！

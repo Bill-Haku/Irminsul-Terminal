@@ -52,6 +52,14 @@ class FirstStepManagerModalView(discord.ui.View):
     @discord.ui.button(label=i18n_ja["sys.label.sync.button"], style=discord.ButtonStyle.gray,
                        custom_id="SyncInfo:Button")
     async def sync_enka_data(self, interaction: discord.Interaction, button: discord.Button):
+        await interaction.response.defer()
         terminal = IrminsulTerminal(language="ja")
         res = terminal.updateEnkaData(userID=interaction.user.id)
+        await interaction.followup.send(res, ephemeral=True)
+
+    @discord.ui.button(label=i18n_ja["sys.label.deluid.button"], style=discord.ButtonStyle.red,
+                       custom_id="DelUID:Button")
+    async def del_uid(self, interaction: discord.Interaction, button: discord.Button):
+        terminal = IrminsulTerminal(language="ja")
+        res = terminal.delUserRecord(userID=interaction.user.id)
         await interaction.response.send_message(res, ephemeral=True)

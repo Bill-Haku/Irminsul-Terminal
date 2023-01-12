@@ -51,5 +51,7 @@ class FirstStepManagerModalView(discord.ui.View):
 
     @discord.ui.button(label=i18n_ja["sys.label.sync.button"], style=discord.ButtonStyle.gray,
                        custom_id="SyncInfo:Button")
-    async def open_charinfo_modal(self, interaction: discord.Interaction, button: discord.Button):
-        return
+    async def sync_enka_data(self, interaction: discord.Interaction, button: discord.Button):
+        terminal = IrminsulTerminal(language="ja")
+        res = terminal.updateEnkaData(userID=interaction.user.id)
+        await interaction.response.send_message(res, ephemeral=True)

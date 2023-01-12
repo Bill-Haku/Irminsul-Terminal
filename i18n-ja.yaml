@@ -2,27 +2,27 @@ robot.name: パイモン
 robot.description: 世界樹端末プロジェクトからのボット
 robot.author: Bill Haku
 robot.inviteLink: https://discord.com/api/oauth2/authorize?client_id=964545612831932507&permissions=8&scope=bot
-robot.about: これはDiscordのオープンソースの原神ボットです。 [GitHub リンク](https://github.com/Bill-Haku/Irminsul-Terminal)
+robot.about: Discordのオープンソースの原神ボットです。 [GitHub リンク](https://github.com/Bill-Haku/Irminsul-Terminal)
 sys.label.author: 開発者
 sys.label.version: バージョン
 sys.label.serverCount: 利用中サーバー数
 sys.label.invite: 招待リンク
 sys.label.about: ボットについて
 
-msg.bindUidSuccess: 'UIDをバインド完了: '
-msg.bindUidFail: 'UIDをバインド失敗: '
-msg.error.uidInvalid: UIDは9桁の数字である必要があります！
+msg.bindUidSuccess: 'UIDを登録完了！: '
+msg.bindUidFail: 'UIDの登録に失敗しちゃった！: '
+msg.error.uidInvalid: UIDは9桁の数字じゃないとダメだよ！
 
-sys.label.lookUp: 何を調べますか？
-sys.label.lookUpUID: 私のUID
-msg.lookUpUIDSuccess: 'バインドしたUIDは：'
-msg.lookUpUIDFail: バインドしたUIDは見つかれません
+sys.label.lookUp: 何を調べるー？
+sys.label.lookUpUID: あなたのUID
+msg.lookUpUIDSuccess: '登録したUIDは：'
+msg.lookUpUIDFail: 登録したUIDが見つからないよー
 
-msg.err.noUIDBound: UIDがバインドされていません。まず、/bind コマンドでゲームUIDをバインドしてください。
-msg.error.charNameInvalid: 対応するキャラが見当たりません。正しいフルネームを入力してください。
+msg.err.noUIDBound: UIDが登録されてないよー！まず、UIDを登録！からUIDを登録しよう！！！！
+msg.error.charNameInvalid: 対応するキャラが見当たらないよー。正しいフルネームで入力してねー！
 sys.label.lookUpArtifacts: 聖遺物
-sys.label.lookUpChar: 何を調べたいですか？ キャラ：
-msg.error.avatarNotInList: キャラクターはショーケースの中に入っていません。
+sys.label.lookUpChar: 何を調べるー？：
+msg.error.avatarNotInList: キャラクターがプロフィールに設定されてないよー！
 
 feat.artifacts: キャラの聖遺物
 feat.artifacts.description: キャラ名：
@@ -50,30 +50,30 @@ feat.cal.label.hutao.1: スキルを使用し、重撃で蒸発ダメージの�
 feat.cal.label.note: ノート
 feat.cal.hutao.note: "敵: ヒルチャール (Lv.90). \n武器効果は考慮されません。 \n4火魔女と4しめ縄以外の聖遺物効果が考慮されません。"
 
-sys.label.createVC: "通話部屋を作成"
-sys.label.createVC.text: "部屋の名前を書いてねー："
+sys.label.createVC: "通話部屋を作成！"
+sys.label.createVC.text: "部屋の名前を書いてねー！："
 sys.label.createVC.button: 通話部屋を作成する！
 feat.createvc.success: の通話部屋を作成したよ！
-feat.createvc.fail: "通話部屋作成失敗："
+feat.createvc.fail: "通話部屋の作成に失敗しちゃったよー："
 feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過したら自動で削除されるよ！気をつけてねー！"
 sys.label.createVC.bitRate: "音質（ビットレート）："
 feat.createvc.fail.bitRate: 入力無効！
 sys.label.createVC.userLimit: "参加人数制限：（0は無制限だよー！）"
 
-msg.setLanguageSuccess: 言語を設定しました！
-msg.setLanguageFail: 設定失敗した！原神のUIDはまだバインドしませんの原因かもしれない
-msg.error.enkaUpdateTooFast: 更新が速すぎる
-msg.error.enkaUpdateFail: 更新が失敗した。あとでもう一度試してみてください
-msg.updateEnkaDataSuccess: 情報を更新完了！
-sys.label.manual: ユーザーマニュアル
+msg.setLanguageSuccess: 言語を設定したよ！
+msg.setLanguageFail: 設定に失敗しちゃった！原神のUIDを登録してないのが原因かも！登録してみてね！
+msg.error.enkaUpdateTooFast: 更新が速すぎるよー！
+msg.error.enkaUpdateFail: 更新失敗しちゃった。あとでもう一度試してみてねー！
+msg.updateEnkaDataSuccess: 情報の更新完了！
+sys.label.manual: ユーザーマニュアル！
 sys.label.manual.url: http://ophelper.top/irminsul_terminal/user_manual_ja
 
 sys.label.binduid.button: UIDを登録する！
-msg.tips.afterbinduid: あなたの言語は日本語に設定しました。コマンド /setlanguage を使うと変更できる。
+msg.tips.afterbinduid: 言語を日本語に設定したよ！コマンド /setlanguage を使うと他の言語に変更できるよー！
 sys.label.uid: UID (9桁の数字)
 sys.label.charinfo.button: キャラを調べる！
 sys.label.charname: キャラ名
 sys.label.sync.button: データを同期する！
 sys.label.deluid.button: 登録済みのUIDを削除する！
-msg.deluser.success: UIDを削除した！
-msg.deluser.fail: UIDの削除に失敗しました！
+msg.deluser.success: 登録済みのUIDを削除したよ！
+msg.deluser.fail: UIDの削除に失敗しちゃった！あとでもう一度試してみて！

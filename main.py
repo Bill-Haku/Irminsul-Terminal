@@ -45,7 +45,10 @@ class IrminsulTerminalBot(commands.Bot):
                             now = datetime.datetime.now().astimezone()
                             if (now - channel.created_at).seconds > 60:
                                 textChannel = discord.utils.get(channel.guild.channels, name=f"👂{channel.name}")
+                                channelRoleName = f"[{bot.user.name}]{channel.name}"
+                                channelRole = discord.utils.get(channel.guild.roles, name=channelRoleName)
                                 try:
+                                    await channelRole.delete()
                                     await channel.delete()
                                     await textChannel.delete()
                                     _log.info(f"Delete voice channel {channel.name} success!")

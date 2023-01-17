@@ -104,8 +104,9 @@ async def lookUpCharCmd(interaction: discord.Interaction, name: str):
     _log.info(f"Recognized command character from {interaction.user.name} #{interaction.user.id}")
     _, language = IrminsulDatabase.lookUpLanguage(user_id=interaction.user.id)
     terminal = IrminsulTerminal(language=language)
+    await interaction.response.defer()
     resTitle, resView = terminal.lookUpChar(interaction.user.id, name)
-    await interaction.response.send_message(resTitle, view=resView)
+    await interaction.followup.send(resTitle, view=resView)
 
 
 @bot.tree.command(name="sync")

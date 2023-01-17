@@ -41,7 +41,7 @@ class IrminsulTerminalBot(commands.Bot):
                 for channel in self.get_all_channels():
                     if type(channel) == discord.VoiceChannel:
                         if len(channel.members) == 0:
-                            _log.info(f"Find channel {channel.name} member is 0")
+                            _log.info(f"Find channel {channel.name} in {channel.guild.name} member is 0")
                             now = datetime.datetime.now().astimezone()
                             if (now - channel.created_at).seconds > 60:
                                 textChannel = discord.utils.get(channel.guild.channels, name=f"👂{channel.name}")
@@ -49,8 +49,8 @@ class IrminsulTerminalBot(commands.Bot):
                                 channelRole = discord.utils.get(channel.guild.roles, name=channelRoleName)
                                 try:
                                     await channelRole.delete()
-                                    await channel.delete()
                                     await textChannel.delete()
+                                    await channel.delete()
                                     _log.info(f"Delete voice channel {channel.name} success!")
                                 except Forbidden as forbidden:
                                     _log.error(f"Delete voice channel fail because of Forbidden")
@@ -58,6 +58,8 @@ class IrminsulTerminalBot(commands.Bot):
                                     _log.error(f"Delete voice channel fail because of HTTPException")
                                 except TypeError:
                                     _log.error(f"Delete voice channel fail because of TypeError")
+                                except AttributeError:
+                                    _log.error(f"Delete voice channel fail because of Attribute")
                             else:
                                 _log.info(f"{channel.name} created in 60s, ignore it")
 

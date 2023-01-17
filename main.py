@@ -37,13 +37,12 @@ class IrminsulTerminalBot(commands.Bot):
         _log.info(f"Logged in as {self.user.name} #{self.user.id}")
         if config["autoDeleteEmptyVoiceChannel"]:
             while True:
-                await asyncio.sleep(60)
                 for channel in self.get_all_channels():
-                    if channel.guild.id not in config["enabledVCAdministratorGuilds"]:
-                        _log.info(f"Ignore 0-member channel {channel.name}")
-                        pass
                     if type(channel) == discord.VoiceChannel:
                         if len(channel.members) == 0:
+                            if channel.guild.id not in config["enabledVCAdministratorGuilds"]:
+                                # _log.info(f"Ignore 0-member channel {channel.name}")
+                                continue
                             _log.info(f"Find channel {channel.name} in {channel.guild.name} member is 0")
                             now = datetime.datetime.now().astimezone()
                             if (now - channel.created_at).seconds > 60:
@@ -56,15 +55,16 @@ class IrminsulTerminalBot(commands.Bot):
                                     await channel.delete()
                                     _log.info(f"Delete voice channel {channel.name} success!")
                                 except Forbidden as forbidden:
-                                    _log.error(f"Delete voice channel fail because of Forbidden")
+                                    _log.error(f"Delete voice channel {channel.name} fail because of Forbidden")
                                 except HTTPException:
-                                    _log.error(f"Delete voice channel fail because of HTTPException")
+                                    _log.error(f"Delete voice channel {channel.name} fail because of HTTPException")
                                 except TypeError:
-                                    _log.error(f"Delete voice channel fail because of TypeError")
+                                    _log.error(f"Delete voice channel {channel.name} fail because of TypeError")
                                 except AttributeError:
-                                    _log.error(f"Delete voice channel fail because of Attribute")
+                                    _log.error(f"Delete voice channel {channel.name} fail because of Attribute")
                             else:
                                 _log.info(f"{channel.name} created in 60s, ignore it")
+                await asyncio.sleep(60)
 
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))

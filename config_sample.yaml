@@ -12,3 +12,5 @@ database: Irminsul
 #Bot Settings
 createChannelWithPrefix: false
 autoDeleteEmptyVoiceChannel: true
+enabledVCAdministratorGuilds:
+  - 100000000 # your guild id here

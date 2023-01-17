@@ -39,6 +39,9 @@ class IrminsulTerminalBot(commands.Bot):
             while True:
                 await asyncio.sleep(60)
                 for channel in self.get_all_channels():
+                    if channel.guild.id not in config["enabledVCAdministratorGuilds"]:
+                        _log.info(f"Ignore 0-member channel {channel.name}")
+                        pass
                     if type(channel) == discord.VoiceChannel:
                         if len(channel.members) == 0:
                             _log.info(f"Find channel {channel.name} in {channel.guild.name} member is 0")
@@ -161,6 +164,9 @@ async def sendFeatureButtons(ctx):
 # delete voice channel when member is all gone
 @bot.event
 async def on_voice_state_update(member, before, after):
+    if member.guild.id not in config["enabledVCAdministratorGuilds"]:
+        _log.info(f"Ignore 0-member channel {member.channel.name}")
+        return
     if before.channel is None and after.channel is not None:
         _log.info(f"{member.name} entered channel {after.channel.name}")
         channelRoleName = f"[{bot.user.name}]{after.channel.name}"

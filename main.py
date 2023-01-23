@@ -8,6 +8,7 @@ import datetime
 from discord.ext import commands
 from discord import *
 from discord.ui import *
+import json
 
 import IrminsulDatabase
 from IrminsulTerminal import *
@@ -46,8 +47,15 @@ class IrminsulTerminalBot(commands.Bot):
                             _log.info(f"Find channel {channel.name} in {channel.guild.name} member is 0")
                             now = datetime.datetime.now().astimezone()
                             if (now - channel.created_at).seconds > 60:
-                                textChannel = discord.utils.get(channel.guild.channels, name=f"👂{channel.name}")
-                                channelRoleName = f"[{bot.user.name}]{channel.name}"
+                                vcDataFile = f"./cache/vc{channel.id}.json"
+                                tcname = f"👂{channel.name}"
+                                rname = f"[{bot.user.name}]{channel.name}"
+                                with open(vcDataFile, "r") as df:
+                                    data = json.load(df)
+                                    tcname = data["tcname"]
+                                    rname = data["rname"]
+                                textChannel = discord.utils.get(channel.guild.channels, name=tcname)
+                                channelRoleName = rname
                                 channelRole = discord.utils.get(channel.guild.roles, name=channelRoleName)
                                 try:
                                     await channelRole.delete()
@@ -168,15 +176,29 @@ async def on_voice_state_update(member, before, after):
         _log.info(f"Ignore 0-member channel {member.channel.name}")
         return
     if before.channel is None and after.channel is not None:
+        vcDataFile = f"./cache/vc{after.channel.id}.json"
+        tcname = f"👂{after.channel.name}"
+        rname = f"[{bot.user.name}]{after.channel.name}"
+        with open(vcDataFile, "r") as df:
+            data = json.load(df)
+            tcname = data["tcname"]
+            rname = data["rname"]
         _log.info(f"{member.name} entered channel {after.channel.name}")
-        channelRoleName = f"[{bot.user.name}]{after.channel.name}"
+        channelRoleName = rname
         channelRole = discord.utils.get(member.guild.roles, name=channelRoleName)
         await member.add_roles(channelRole)
         _log.info(f"Set role {channelRole.name} for {member.name} SUCCESS")
     if before.channel is not None and after.channel is None:
+        vcDataFile = f"./cache/vc{before.channel.id}.json"
+        tcname = f"👂{before.channel.name}"
+        rname = f"[{bot.user.name}]{before.channel.name}"
+        with open(vcDataFile, "r") as df:
+            data = json.load(df)
+            tcname = data["tcname"]
+            rname = data["rname"]
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
-        channelRoleName = f"[{bot.user.name}]{channelName}"
+        channelRoleName = rname
         channelRole = discord.utils.get(member.guild.roles, name=channelRoleName)
         await member.remove_roles(channelRole)
         _log.info(f"Remove role {channelRole.name} for {member.name} SUCCESS")
@@ -193,7 +215,7 @@ async def on_voice_state_update(member, before, after):
                 return
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)
-            textChannel = discord.utils.get(member.guild.channels, name=f"👂{channelName}")
+            textChannel = discord.utils.get(member.guild.channels, name=tcname)
             if type(channel) != discord.VoiceChannel or channel is None:
                 _log.error(f"Channel {channelName} is not found!")
                 return

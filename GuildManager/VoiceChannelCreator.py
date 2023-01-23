@@ -3,6 +3,7 @@ import logging
 from discord.ui import Modal, TextInput
 from discord import *
 from IrminsulTerminal import i18n_en, i18n_ja, i18n_zh, config
+import json, os
 
 
 _log = logging.getLogger('discord')
@@ -41,27 +42,56 @@ class VoiceChannelCreator(Modal):
         if config["createChannelWithPrefix"]:
             name = f"[{botName}]{name}"
         _log.info(f"{interaction.user.name}#{interaction.user.id}: Create Voice Channel {name}...")
-        overwrites = {
+        vcPermissionOverwrites = {
+            interaction.user: discord.PermissionOverwrite(manage_channels=True)
+        }
+        textChannelPermissionOverwrites = {
             ctx.guild.default_role: discord.PermissionOverwrite(read_messages=False),
-            ctx.guild.me: discord.PermissionOverwrite(read_messages=True)
+            interaction.user: discord.PermissionOverwrite(read_messages=True, manage_channels=True)
         }
         try:
             if userLimit <= 0:
                 channel = await ctx.guild.create_voice_channel(name=name,
                                                                bitrate=bitRate,
-                                                               category=interaction.channel.category)
+                                                               category=interaction.channel.category,
+                                                               overwrites=vcPermissionOverwrites)
             else:
                 channel = await ctx.guild.create_voice_channel(name=name,
                                                                bitrate=bitRate,
                                                                category=interaction.channel.category,
-                                                               user_limit=userLimit)
+                                                               user_limit=userLimit,
+                                                               overwrites=vcPermissionOverwrites)
             textChannel = await ctx.guild.create_text_channel(name=f"👂{name}",
                                                               category=interaction.channel.category,
-                                                              overwrites=overwrites)
+                                                              overwrites=textChannelPermissionOverwrites)
             channelRole = await ctx.guild.create_role(name=channelRoleName)
+            _log.info(f"create channel and textchannel {name} success")
             await textChannel.set_permissions(channelRole, read_messages=True)
+            # await channel.set_permissions(channelRole, manage_channels=True)
+            _log.info(f"set permission success for role {channelRoleName} success")
+            await interaction.user.add_roles(channelRole)
+            _log.info(f"add roles for {interaction.user.name} success")
             res = True
             msg = f"\"{channel.name}\" {i18n['feat.createvc.success']}\n\n{i18n['feat.createvc.tips']}"
+
+            vcid = channel.id
+            tcid = textChannel.id
+            roleId = channelRole.id
+            data = {
+                "vcid": vcid,
+                "tcid": tcid,
+                "rid": roleId,
+                "name": name,
+                "tcname": f"👂{name}",
+                "rname": channelRoleName
+            }
+            # check file path exists
+            if not os.path.exists("cache"):
+                os.makedirs("cache")
+            filename = f"./cache/vc{vcid}.json"
+            with open(filename, "w") as f:
+                json.dump(data, f)
+                _log.info(f"save json data {filename} success")
         except Forbidden as forbidden:
             _log.error(f"Create voice channel fail because of Forbidden")
             res = False

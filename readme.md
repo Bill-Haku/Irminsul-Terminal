@@ -43,7 +43,6 @@ Administrations can create a readonly channel and use `/createvc` to init it. Ot
 
 ### Todos
 
-- Allow editing voice channel name by using json files to store vc id, tc id & role id.
 - Co-op raise
 
 ## How to use this bot?

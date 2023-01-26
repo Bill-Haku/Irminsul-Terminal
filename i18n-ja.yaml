@@ -77,3 +77,22 @@ sys.label.sync.button: データを同期する！
 sys.label.deluid.button: 登録済みのUIDを削除する！
 msg.deluser.success: 登録済みのUIDを削除したよ！
 msg.deluser.fail: UIDの削除に失敗しちゃった！あとでもう一度試してみて！
+
+tao.role.genshin.add: 原神のチャンネルを表示
+tao.role.genshin.del: 原神のチャンネルを非表示
+tao.role.gossip.add: 雑談&ゲームチャンネルを表示
+tao.role.gossip.del: 雑談&ゲームチャンネルを非表示
+tao.role.description: "表示したいチャンネルがあったら選んでほしぞ！表示されるようになるからな!!!\n緑のボタンをタッチでそのチャンネルが表示されるぞ！！\n赤いボタンは非表示になるぞー！！"
+msg.success: 設定成功した！
+msg.fail: 設定失敗した！
+tao.link.button.1: 世界ランク
+tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907
+tao.link.button.2: 原神サーバー
+tao.link.button.2.url: https://discord.com/channels/963772478109397012/965544318192484392
+tao.link.button.3: マルチ通知設定
+tao.link.button.3.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.link.button.4: ネタバレ設定
+tao.link.button.4.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.link.button.5: 推し設定
+tao.link.button.5.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.role.link.description: 原神のチャンネルの他の設定だよー！

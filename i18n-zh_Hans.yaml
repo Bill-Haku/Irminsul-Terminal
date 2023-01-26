@@ -77,3 +77,22 @@ sys.label.sync.button: Sync Data
 sys.label.deluid.button: Delete My UID Record
 msg.deluser.success: 删除UID成功
 msg.deluser.fail: 删除UID失败
+
+tao.role.genshin.add: Show Genshin Channels
+tao.role.genshin.del: Hide Genshin Channels
+tao.role.gossip.add: Show Gossip and Game Channels
+tao.role.gossip.del: Hide Gossip and Game Channels
+tao.role.description: Add roles
+msg.success: Success
+msg.fail: Fail
+tao.link.button.1: 世界ランク
+tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907
+tao.link.button.2: 原神サーバー
+tao.link.button.2.url: https://discord.com/channels/963772478109397012/965544318192484392
+tao.link.button.3: マルチ通知設定
+tao.link.button.3.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.link.button.4: ネタバレ設定
+tao.link.button.4.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.link.button.5: 推し設定
+tao.link.button.5.url: https://discord.com/channels/963772478109397012/972538693636227112
+tao.role.link.description: Role settings Links

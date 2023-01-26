@@ -15,6 +15,7 @@ from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 from GuildManager.FirstStepManager import FirstStepManagerModalView
 from GuildManager.CharacterInfoButton import CharInfoModalView
+from GuildManager.GuildRoleManager import TaoRoleManagerModalView, TaoRoleLinkModalView
 
 
 _log = logging.getLogger('discord')
@@ -32,6 +33,7 @@ class IrminsulTerminalBot(commands.Bot):
         botName = self.user.name
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
         self.add_view(FirstStepManagerModalView(botName=botName))
+        self.add_view(TaoRoleManagerModalView(botName=botName))
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -50,11 +52,14 @@ class IrminsulTerminalBot(commands.Bot):
                                 vcDataFile = f"./cache/vc{channel.id}.json"
                                 tcname = f"👂{channel.name}"
                                 rname = f"[{bot.user.name}]{channel.name}"
-                                with open(vcDataFile, "r") as df:
-                                    data = json.load(df)
-                                    tcname = data["tcname"]
-                                    rname = data["rname"]
-                                    tcid = data["tcid"]
+                                try:
+                                    with open(vcDataFile, "r") as df:
+                                        data = json.load(df)
+                                        tcname = data["tcname"]
+                                        rname = data["rname"]
+                                        tcid = data["tcid"]
+                                except FileNotFoundError as e:
+                                    continue
                                 # textChannel = discord.utils.get(channel.guild.channels, name=tcname)
                                 textChannel = discord.utils.get(channel.guild.channels, id=tcid)
                                 channelRoleName = rname
@@ -169,6 +174,32 @@ async def sendFeatureButtons(ctx):
     _log.info(f"Recognized command sendFeatureButtons from {ctx.author.name} #{ctx.author.id}")
     responseView = FirstStepManagerModalView(bot.user.name)
     await ctx.send(view=responseView)
+
+
+@bot.command(name="rmanager")
+@commands.is_owner()
+async def sendRoleManagerButtons(ctx, guild="tao"):
+    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        embed = discord.Embed(description=i18n_ja["tao.role.description"], type="gifv", colour=0xcd5c5c)
+        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034384610844491827/hu-tao-genshin-impact.gif")
+        responseView = TaoRoleManagerModalView(bot.user.name)
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
+
+
+@bot.command(name="rlinks")
+@commands.is_owner()
+async def sendRoleLinkButtons(ctx, guild="tao"):
+    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        embed = discord.Embed(description=i18n_ja["tao.role.link.description"], type="gifv", colour=0xcd5c5c)
+        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034407318663737354/hutao-c1.gif")
+        responseView = TaoRoleLinkModalView()
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
 
 
 # delete voice channel when member is all gone

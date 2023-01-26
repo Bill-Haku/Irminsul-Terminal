@@ -83,7 +83,12 @@ tao.role.genshin.del: 原神のチャンネルを非表示
 tao.role.gossip.add: 雑談&ゲームチャンネルを表示
 tao.role.gossip.del: 雑談&ゲームチャンネルを非表示
 tao.role.description: "表示したいチャンネルがあったら選んでほしぞ！表示されるようになるからな!!!\n緑のボタンをタッチでそのチャンネルが表示されるぞ！！\n赤いボタンは非表示になるぞー！！"
-msg.success: 設定成功した！
+msg.success.1: 原神のチャンネルが表示されたぞ！！！
+msg.success.2: 原神のチャンネルが非表示になったぞ！！！
+msg.success.3: 雑談とゲームのチャンネルが表示されたぞ！！！
+msg.success.4: 雑談とゲームのチャンネルが非表示になったぞ！！！
+msg.success.5: たお👻🍑の通知をオンにしたぞ！！！！
+msg.success.6: たお👻🍑の通知をオフにしたぞ！！！！😭
 msg.fail: 設定失敗した！
 tao.link.button.1: 世界ランク
 tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907

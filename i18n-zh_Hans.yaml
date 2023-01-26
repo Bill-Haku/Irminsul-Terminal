@@ -83,7 +83,12 @@ tao.role.genshin.del: Hide Genshin Channels
 tao.role.gossip.add: Show Gossip and Game Channels
 tao.role.gossip.del: Hide Gossip and Game Channels
 tao.role.description: Add roles
-msg.success: Success
+msg.success.1: 原神のチャンネルが表示されたぞ！！！
+msg.success.2: 原神のチャンネルが非表示になったぞ！！！
+msg.success.3: 雑談とゲームのチャンネルが表示されたぞ！！！
+msg.success.4: 雑談とゲームのチャンネルが非表示になったぞ！！！
+msg.success.5: たお👻🍑の通知をオンにしたぞ！！！！
+msg.success.6: たお👻🍑の通知をオフにしたぞ！！！！😭
 msg.fail: Fail
 tao.link.button.1: 世界ランク
 tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907

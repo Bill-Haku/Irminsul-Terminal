@@ -35,7 +35,7 @@ class TaoFanRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][2])
             await interaction.user.add_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.5"]
             _log.info(f"Add role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")
@@ -47,7 +47,7 @@ class TaoFanRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][2])
             await interaction.user.remove_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.6"]
             _log.info(f"Remove role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")
@@ -66,7 +66,7 @@ class TaoRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][0])
             await interaction.user.add_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.1"]
             _log.info(f"Add role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")
@@ -79,7 +79,7 @@ class TaoRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][0])
             await interaction.user.remove_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.2"]
             _log.info(f"Remove role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")
@@ -92,7 +92,7 @@ class TaoRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][1])
             await interaction.user.add_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.3"]
             _log.info(f"Add role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")
@@ -105,7 +105,7 @@ class TaoRoleManagerModalView(discord.ui.View):
         try:
             role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][1])
             await interaction.user.remove_roles(role)
-            res = i18n_ja["msg.success"]
+            res = i18n_ja["msg.success.4"]
             _log.info(f"Remove role {role.name} for {interaction.user.name} success")
         except Exception as e:
             _log.info(f"{e}")

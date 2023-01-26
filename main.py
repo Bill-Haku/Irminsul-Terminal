@@ -54,7 +54,9 @@ class IrminsulTerminalBot(commands.Bot):
                                     data = json.load(df)
                                     tcname = data["tcname"]
                                     rname = data["rname"]
-                                textChannel = discord.utils.get(channel.guild.channels, name=tcname)
+                                    tcid = data["tcid"]
+                                # textChannel = discord.utils.get(channel.guild.channels, name=tcname)
+                                textChannel = discord.utils.get(channel.guild.channels, id=tcid)
                                 channelRoleName = rname
                                 channelRole = discord.utils.get(channel.guild.roles, name=channelRoleName)
                                 try:
@@ -196,6 +198,7 @@ async def on_voice_state_update(member, before, after):
             data = json.load(df)
             tcname = data["tcname"]
             rname = data["rname"]
+            tcid = data["tcid"]
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
         channelRoleName = rname
@@ -215,7 +218,8 @@ async def on_voice_state_update(member, before, after):
                 return
             _log.info(f"{channelName} member is 0, delete it")
             channel = discord.utils.get(member.guild.channels, name=channelName)
-            textChannel = discord.utils.get(member.guild.channels, name=tcname)
+            # textChannel = discord.utils.get(member.guild.channels, name=tcname)
+            textChannel = discord.utils.get(member.guild.channels, id=tcid)
             if type(channel) != discord.VoiceChannel or channel is None:
                 _log.error(f"Channel {channelName} is not found!")
                 return

@@ -15,7 +15,7 @@ from IrminsulTerminal import *
 from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 from GuildManager.FirstStepManager import FirstStepManagerModalView
 from GuildManager.CharacterInfoButton import CharInfoModalView
-from GuildManager.GuildRoleManager import TaoRoleManagerModalView, TaoRoleLinkModalView
+from GuildManager.GuildRoleManager import *
 
 
 _log = logging.getLogger('discord')
@@ -197,6 +197,19 @@ async def sendRoleLinkButtons(ctx, guild="tao"):
         embed = discord.Embed(description=i18n_ja["tao.role.link.description"], type="gifv", colour=0xcd5c5c)
         embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034407318663737354/hutao-c1.gif")
         responseView = TaoRoleLinkModalView()
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
+
+
+@bot.command(name="fanrole")
+@commands.is_owner()
+async def sendFanRoleLinkButtons(ctx, guild="tao"):
+    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        embed = discord.Embed(description=i18n_ja["tao.role.fan.description"], type="image", colour=0xcd5c5c)
+        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1068195081682681856/image.png")
+        responseView = TaoFanRoleManagerModalView()
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         pass

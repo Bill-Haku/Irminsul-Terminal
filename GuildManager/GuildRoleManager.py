@@ -26,6 +26,35 @@ class TaoRoleLinkModalView(discord.ui.View):
         self.add_item(button5)
 
 
+class TaoFanRoleManagerModalView(discord.ui.View):
+    def __init__(self) -> None:
+        super(TaoFanRoleManagerModalView, self).__init__(timeout=None)
+
+    @discord.ui.button(label="👻🍑", style=discord.ButtonStyle.green, custom_id="FanRole:Button")
+    async def add_role_fan(self, interaction: discord.Interaction, button: discord.Button):
+        try:
+            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][2])
+            await interaction.user.add_roles(role)
+            res = i18n_ja["msg.success"]
+            _log.info(f"Add role {role.name} for {interaction.user.name} success")
+        except Exception as e:
+            _log.info(f"{e}")
+            res = i18n_ja["msg.fail"]
+        await interaction.response.send_message(res, ephemeral=True)
+
+    @discord.ui.button(label="👻🍑🚫", style=discord.ButtonStyle.red, custom_id="DelFanRole:Button")
+    async def del_role_fan(self, interaction: discord.Interaction, button: discord.Button):
+        try:
+            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][2])
+            await interaction.user.remove_roles(role)
+            res = i18n_ja["msg.success"]
+            _log.info(f"Remove role {role.name} for {interaction.user.name} success")
+        except Exception as e:
+            _log.info(f"{e}")
+            res = i18n_ja["msg.fail"]
+        await interaction.response.send_message(res, ephemeral=True)
+
+
 class TaoRoleManagerModalView(discord.ui.View):
     def __init__(self, botName) -> None:
         super(TaoRoleManagerModalView, self).__init__(timeout=None)

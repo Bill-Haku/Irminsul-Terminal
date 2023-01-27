@@ -72,10 +72,10 @@ class TaoSpoilerRoleManagerModalView(discord.ui.View):
         await interaction.response.send_message(res, ephemeral=True)
 
     @discord.ui.button(label="OFF", style=discord.ButtonStyle.red, custom_id="SpoilerOFFRole:Button")
-    async def add_role_spoiler_ng(self, interaction: discord.Interaction, button: discord.Button):
+    async def del_role_spoiler_ok(self, interaction: discord.Interaction, button: discord.Button):
         try:
-            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][4])
-            await interaction.user.add_roles(role)
+            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][3])
+            await interaction.user.remove_roles(role)
             res = i18n_ja["msg.success.8"]
             _log.info(f"Remove role {role.name} for {interaction.user.name} success")
         except Exception as e:

@@ -34,6 +34,9 @@ class IrminsulTerminalBot(commands.Bot):
         self.add_view(VoiceChannelCreatorModalView(botName=botName))
         self.add_view(FirstStepManagerModalView(botName=botName))
         self.add_view(TaoRoleManagerModalView(botName=botName))
+        self.add_view(TaoFanRoleManagerModalView())
+        self.add_view(TaoSpoilerRoleManagerModalView())
+        self.add_view(TaoRoleLinkModalView())
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -205,11 +208,23 @@ async def sendRoleLinkButtons(ctx, guild="tao"):
 @bot.command(name="fanrole")
 @commands.is_owner()
 async def sendFanRoleLinkButtons(ctx, guild="tao"):
-    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
+    _log.info(f"Recognized command sendFanRolesManager from {ctx.author.name} #{ctx.author.id}")
     if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         embed = discord.Embed(description=i18n_ja["tao.role.fan.description"], type="image", colour=0xcd5c5c)
         embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1068195081682681856/image.png")
         responseView = TaoFanRoleManagerModalView()
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
+
+
+@bot.command(name="spoilerrole")
+@commands.is_owner()
+async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
+    _log.info(f"Recognized command sendSpoilerRoleManager from {ctx.author.name} #{ctx.author.id}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        embed = discord.Embed(description=i18n_ja["tao.role.spoiler.description"], type="rich", colour=0xcd5c5c)
+        responseView = TaoSpoilerRoleManagerModalView()
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         pass

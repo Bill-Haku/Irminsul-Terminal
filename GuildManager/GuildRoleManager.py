@@ -55,6 +55,35 @@ class TaoFanRoleManagerModalView(discord.ui.View):
         await interaction.response.send_message(res, ephemeral=True)
 
 
+class TaoSpoilerRoleManagerModalView(discord.ui.View):
+    def __init__(self) -> None:
+        super(TaoSpoilerRoleManagerModalView, self).__init__(timeout=None)
+
+    @discord.ui.button(label="ON", style=discord.ButtonStyle.green, custom_id="SpoilerONRole:Button")
+    async def add_role_spoiler_ok(self, interaction: discord.Interaction, button: discord.Button):
+        try:
+            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][3])
+            await interaction.user.add_roles(role)
+            res = i18n_ja["msg.success.7"]
+            _log.info(f"Add role {role.name} for {interaction.user.name} success")
+        except Exception as e:
+            _log.info(f"{e}")
+            res = i18n_ja["msg.fail"]
+        await interaction.response.send_message(res, ephemeral=True)
+
+    @discord.ui.button(label="OFF", style=discord.ButtonStyle.red, custom_id="SpoilerOFFRole:Button")
+    async def add_role_spoiler_ng(self, interaction: discord.Interaction, button: discord.Button):
+        try:
+            role = discord.utils.get(interaction.guild.roles, id=config["tao.roles"][4])
+            await interaction.user.add_roles(role)
+            res = i18n_ja["msg.success.8"]
+            _log.info(f"Remove role {role.name} for {interaction.user.name} success")
+        except Exception as e:
+            _log.info(f"{e}")
+            res = i18n_ja["msg.fail"]
+        await interaction.response.send_message(res, ephemeral=True)
+
+
 class TaoRoleManagerModalView(discord.ui.View):
     def __init__(self, botName) -> None:
         super(TaoRoleManagerModalView, self).__init__(timeout=None)

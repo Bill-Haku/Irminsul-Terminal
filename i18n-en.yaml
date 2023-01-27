@@ -89,6 +89,8 @@ msg.success.3: 雑談とゲームのチャンネルが表示されたぞ！！�
 msg.success.4: 雑談とゲームのチャンネルが非表示になったぞ！！！
 msg.success.5: たお👻🍑の通知をオンにしたぞ！！！！
 msg.success.6: たお👻🍑の通知をオフにしたぞ！！！！😭
+msg.success.7: ネタバレのチャンネルが表示されたぞ！！！
+msg.success.8: ネタバレのチャンネルが非表示になったぞ！！！
 msg.fail: Fail
 tao.link.button.1: 世界ランク
 tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907
@@ -102,3 +104,4 @@ tao.link.button.5: 推し設定
 tao.link.button.5.url: https://discord.com/channels/963772478109397012/972163039107358780
 tao.role.link.description: Role settings Links
 tao.role.fan.description: Join Tao's Fan
+tao.role.spoiler.description: "ネタバレを含む原神の雑談部屋で話したい場合は「ON」\n見たくない場合は「OFF」\nを押して欲しいぞ！"

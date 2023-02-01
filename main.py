@@ -62,6 +62,7 @@ class IrminsulTerminalBot(commands.Bot):
                                         rname = data["rname"]
                                         tcid = data["tcid"]
                                 except FileNotFoundError as e:
+                                    _log.exception(f"{vcDataFile} is not found")
                                     continue
                                 # textChannel = discord.utils.get(channel.guild.channels, name=tcname)
                                 textChannel = discord.utils.get(channel.guild.channels, id=tcid)
@@ -253,11 +254,15 @@ async def on_voice_state_update(member, before, after):
         vcDataFile = f"./cache/vc{before.channel.id}.json"
         tcname = f"👂{before.channel.name}"
         rname = f"[{bot.user.name}]{before.channel.name}"
-        with open(vcDataFile, "r") as df:
-            data = json.load(df)
-            tcname = data["tcname"]
-            rname = data["rname"]
-            tcid = data["tcid"]
+        try:
+            with open(vcDataFile, "r") as df:
+                data = json.load(df)
+                tcname = data["tcname"]
+                rname = data["rname"]
+                tcid = data["tcid"]
+        except FileNotFoundError:
+            _log.exception(f"{vcDataFile} is not found")
+            return
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")
         channelRoleName = rname

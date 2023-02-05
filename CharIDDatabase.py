@@ -69,6 +69,8 @@ nahidaNames = ["10000073", "nahida", "纳西妲", "草神", "そうしん", "ソ
 laylaNames = ["10000074", "layla", "莱依拉", "レイラ", "れいら"]
 wandererNames = ["10000075", "wanderer", "balladeer", "scaramouche", "流浪者", "散兵", "伞兵", "マシュ", "ましゅ", "スカラマッシュ", "すからまっしゅ"]
 faruzanNames = ["10000076", "faruzan", "珐露珊", "ファルザン", "ふぁるざん"]
+yaoyaoNames = ["10000077", "yaoyao", "瑶瑶", "ヨォーヨ", "よぉーよ"]
+alhaithanNames = ["10000078", "alhaitham", "艾尔海森", "アルハイゼン", "あるはいぜん"]
 
 locResponse = requests.get("http://ophelper.top/api/players/loc.json")
 locResult = locResponse.json()

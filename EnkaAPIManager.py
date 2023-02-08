@@ -26,7 +26,7 @@ def getEnkaAPIResult(uid):
 
 def getDataFromEnka(uid):
     headers = {"User-Agent": "Project Irminsul Terminal/1.0"}
-    response = requests.get(f"https://enka.network/u/{uid}/__data.json", headers=headers)
+    response = requests.get(f"https://enka.network/api/uid/{uid}/", headers=headers)
     result = response.json()
     # save data into files
     if not os.path.exists("userEnkaData"):

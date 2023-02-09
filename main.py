@@ -16,6 +16,7 @@ from GuildManager.VoiceChannelCreator import VoiceChannelCreatorModalView
 from GuildManager.FirstStepManager import FirstStepManagerModalView
 from GuildManager.CharacterInfoButton import CharInfoModalView
 from GuildManager.GuildRoleManager import *
+from GuildManager.CoOpManager import *
 
 
 _log = logging.getLogger('discord')
@@ -37,6 +38,7 @@ class IrminsulTerminalBot(commands.Bot):
         self.add_view(TaoFanRoleManagerModalView())
         self.add_view(TaoSpoilerRoleManagerModalView())
         self.add_view(TaoRoleLinkModalView())
+        self.add_view(CoOpManagerModalView())
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -230,6 +232,17 @@ async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         pass
 
+
+@bot.command(name="raisecoop")
+@commands.is_owner()
+async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
+    _log.info(f"Recognized command raisecoop from {ctx.author.name} #{ctx.author.id}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        embed = discord.Embed(description=i18n_ja["tao.feature.coop.description"], type="rich", colour=0xcd5c5c)
+        responseView = CoOpManagerModalView()
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
 
 # delete voice channel when member is all gone
 @bot.event

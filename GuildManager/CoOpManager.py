@@ -115,12 +115,14 @@ selectOptions = [selectOption1, selectOption2, selectOption3, selectOption4, sel
 class CoOpManagerModalView(discord.ui.View):
     def __init__(self) -> None:
         super(CoOpManagerModalView, self).__init__(timeout=None)
+        button1 = discord.ui.Button(label=i18n_ja["sys.label.coopRoleLink"],
+                                    url="https://discord.com/channels/963772478109397012/972538693636227112")
+        self.add_item(button1)
 
     @discord.ui.select(cls=discord.ui.Select,
                        options=selectOptions,
                        placeholder=i18n_ja["sys.coop.select.placeholder"],
-                       custom_id="CoOp:Select",
-                       min_values=0)
+                       custom_id="CoOp:Select")
     async def raiseCoopFromSelectedTypes(self, interaction: discord.Interaction, select: discord.ui.Select):
         _log.info(f"{interaction.user.name} selected {select.values[0]} to try raise co-op")
         if interaction.user.guild.id == config["tao"]["id"]:

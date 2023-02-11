@@ -156,6 +156,7 @@ class HakuUserLanguageRoleManagerModalView(discord.ui.View):
     @discord.ui.select(cls=discord.ui.Select,
                        options=selectOptions,
                        placeholder="Choose your language here",
+                       max_values=4,
                        custom_id="Haku_Lang_Role:Select")
     async def assignLangRoles(self, interaction: discord.Interaction, select: discord.ui.Select):
         _log.info(f"{interaction.user.name} selected {select.values[0]}")
@@ -170,31 +171,32 @@ class HakuUserLanguageRoleManagerModalView(discord.ui.View):
                 _log.info(f"remove all roles for {interaction.user.name} success")
             except HTTPException as e:
                 _log.exception(f"remove all roles for {interaction.user.name} met exception")
-            selectItem = select.values[0]
             res = False
-            try:
-                if selectItem == "en":
-                    await interaction.user.add_roles(hakuEnRole)
-                    res = True
-                    _log.info(f"Added role {hakuEnRole.name} for {interaction.user.name} success")
-                elif selectItem == "ja":
-                    await interaction.user.add_roles(hakuJaRole)
-                    res = True
-                    _log.info(f"Added role {hakuJaRole.name} for {interaction.user.name} success")
-                elif selectItem == "zh":
-                    await interaction.user.add_roles(hakuZhRole)
-                    res = True
-                    _log.info(f"Added role {hakuZhRole.name} for {interaction.user.name} success")
-                elif selectItem == "ru":
-                    await interaction.user.add_roles(hakuRuRole)
-                    res = True
-                    _log.info(f"Added role {hakuRuRole.name} for {interaction.user.name} success")
-                else:
+            for selectItem in select.values:
+                try:
+                    if selectItem == "en":
+                        await interaction.user.add_roles(hakuEnRole)
+                        res = True
+                        _log.info(f"Added role {hakuEnRole.name} for {interaction.user.name} success")
+                    elif selectItem == "ja":
+                        await interaction.user.add_roles(hakuJaRole)
+                        res = True
+                        _log.info(f"Added role {hakuJaRole.name} for {interaction.user.name} success")
+                    elif selectItem == "zh":
+                        await interaction.user.add_roles(hakuZhRole)
+                        res = True
+                        _log.info(f"Added role {hakuZhRole.name} for {interaction.user.name} success")
+                    elif selectItem == "ru":
+                        await interaction.user.add_roles(hakuRuRole)
+                        res = True
+                        _log.info(f"Added role {hakuRuRole.name} for {interaction.user.name} success")
+                    else:
+                        res = False
+                        _log.info(f"Unknown select item {selectItem}")
+                except HTTPException as e:
                     res = False
-                    _log.info(f"Unknown select item {selectItem}")
-            except HTTPException as e:
-                res = False
-                _log.exception(f"add role for {interaction.user.name} met exception")
+                    _log.exception(f"add role for {interaction.user.name} met exception")
+
             if res:
                 await interaction.response.send_message("✅", ephemeral=True)
             else:

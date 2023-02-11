@@ -92,12 +92,17 @@ class PrivateManagementButtons(discord.ui.View):
 
     @discord.ui.button(label=i18n_ja["sys.label.coop.button.stop"], style=discord.ButtonStyle.red)
     async def stopThread(self, interaction: discord.Interaction, button: discord.Button):
-        _log.info(f"{interaction.user.name} stop {self.interactionStarted.user.name}'s thread: {self.thread.name}")
-        if interaction.user.id == self.interactionStarted.user.id:
-            await self.thread.edit(locked=True, archived=True)
-            await interaction.response.send_message(content=i18n_ja["sys.label.coop.button.stop.done"], ephemeral=True)
-            await self.publicMessage.edit(content=i18n_ja["sys.label.raise.end"])
-            await self.message.delete()
+        _log.info(f"{interaction.user.name} try to stop {self.interactionStarted.user.name}'s thread: {self.thread.name}")
+        if interaction.user.id == self.interactionStarted.user.id or interaction.user.id == interaction.guild.owner_id:
+            try:
+                await self.thread.edit(locked=True, archived=True)
+                await interaction.response.send_message(content=i18n_ja["sys.label.coop.button.stop.done"],
+                                                        ephemeral=True)
+                await self.publicMessage.edit(content=i18n_ja["sys.label.raise.end"])
+                await self.message.delete()
+            except HTTPException:
+                _log.info(f"{interaction.user.name} end thread {self.thread.name} failed because of HTTPException")
+
             _log.info(f"{interaction.user.name} end thread {self.thread.name} done")
 
     def updateMessage(self, message: discord.Message):

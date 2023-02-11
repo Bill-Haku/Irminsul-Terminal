@@ -18,7 +18,6 @@ from GuildManager.CharacterInfoButton import CharInfoModalView
 from GuildManager.GuildRoleManager import *
 from GuildManager.CoOpManager import *
 
-
 _log = logging.getLogger('discord')
 logHandler = logging.FileHandler(filename='irminsul.log', encoding='utf-8', mode='w')
 _log.addHandler(logHandler)
@@ -195,7 +194,8 @@ async def sendRoleManagerButtons(ctx, guild="tao"):
     _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}, guild = {guild}")
     if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         embed = discord.Embed(description=i18n_ja["tao.role.description"], type="gifv", colour=0xcd5c5c)
-        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034384610844491827/hu-tao-genshin-impact.gif")
+        embed.set_image(
+            url="https://media.discordapp.net/attachments/965396701869375579/1034384610844491827/hu-tao-genshin-impact.gif")
         responseView = TaoRoleManagerModalView(bot.user.name)
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
@@ -217,7 +217,8 @@ async def sendRoleLinkButtons(ctx, guild="tao"):
     _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
     if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         embed = discord.Embed(description=i18n_ja["tao.role.link.description"], type="gifv", colour=0xcd5c5c)
-        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034407318663737354/hutao-c1.gif")
+        embed.set_image(
+            url="https://media.discordapp.net/attachments/965396701869375579/1034407318663737354/hutao-c1.gif")
         responseView = TaoRoleLinkModalView()
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
@@ -259,6 +260,7 @@ async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         pass
+
 
 # delete voice channel when member is all gone
 @bot.event
@@ -329,6 +331,37 @@ async def on_voice_state_update(member, before, after):
                 _log.error(f"Delete voice channel fail because of TypeError")
 
 
+from langdetect import detect
+
+
+@bot.event
+async def on_member_join(member: discord.Member):
+    if member.guild.id == config["haku"]["id"]:
+        welcomeChannel = member.guild.get_channel(config["haku"]["welcomeChannelId"])
+        helloChannel = member.guild.get_channel(config["haku"]["helloChannelId"])
+        languageChannel = member.guild.get_channel(config["haku"]["languageChannelId"])
+        rulesChannel = member.guild.get_channel(config["haku"]["rulesChannelId"])
+        memberNameLang = detect(member.name)
+        _log.info(f"{member.name} joined {member.guild.name} and his name is detected {memberNameLang}")
+        content = f"Welcome to join this server, {member.mention}! \nSet your language in the {languageChannel.mention} " \
+                  f"first and pay attention to the {rulesChannel.mention} please. \nAfter that, jump to other channels " \
+                  f"in {welcomeChannel.mention}!"
+        if memberNameLang == "ja":
+            content += f"\n\nようこそ、GI Pizza Helperのサーバーへ！ {member.mention}さん！\nまず{languageChannel.mention}で言語を設定し、" \
+                       f"{rulesChannel.mention}に注意してください。\nその後、{welcomeChannel.mention}で他のチャンネルに飛びま" \
+                       f"しょう！\n(このメッセージは、あなたのニックネームが日本語であることを検知して送信されています！）"
+        elif memberNameLang == "zh-cn" or memberNameLang == "zh-tw":
+            content += f"\n\n欢迎加入本Discord服务器！\n请在{languageChannel.mention}设置你使用的语言，并且请注意" \
+                       f"这里的{rulesChannel.mention}！\n然后你就可以在{welcomeChannel.mention}前往你想要的对应的频道了！\n（由于" \
+                       f"您的用户名被识别为中文所以您会看到本内容）"
+        elif memberNameLang == "ru":
+            content += f"\n\n{member.mention}, добро пожаловать на сервер! \nСначала выбери свой язык " \
+                       f"в {languageChannel.mention}, а также обрати внимание на {rulesChannel.mention}.\n После " \
+                       f"этого, перейди в любой из каналов в {welcomeChannel.mention}!\n (Это сообщение отправлено," \
+                       f" т.к. никнейм распознан как русский)"
+        await helloChannel.send(content=content)
+
+
+
 _log.info(f"Discord API Version: {discord.__version__}")
 bot.run(config["token"], log_handler=logHandler)
-

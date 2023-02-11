@@ -39,6 +39,7 @@ class IrminsulTerminalBot(commands.Bot):
         self.add_view(TaoSpoilerRoleManagerModalView())
         self.add_view(TaoRoleLinkModalView())
         self.add_view(CoOpManagerModalView())
+        self.add_view(HakuUserLanguageRoleManagerModalView())
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -191,14 +192,23 @@ async def sendFeatureButtons(ctx):
 @bot.command(name="rmanager")
 @commands.is_owner()
 async def sendRoleManagerButtons(ctx, guild="tao"):
-    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}")
+    _log.info(f"Recognized command sendRolesManager from {ctx.author.name} #{ctx.author.id}, guild = {guild}")
     if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
         embed = discord.Embed(description=i18n_ja["tao.role.description"], type="gifv", colour=0xcd5c5c)
         embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1034384610844491827/hu-tao-genshin-impact.gif")
         responseView = TaoRoleManagerModalView(bot.user.name)
         await ctx.send(view=responseView, embed=embed)
     elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
-        pass
+        description = """
+        Welcome to this Discord server. Choose your language below before you start chatting.
+        欢迎来到这个Discord服务器。在开始聊天之前，请选择您的语言。
+        このDiscordサーバーへようこそ。チャットを始める前に、言語を選択してください。
+        Добро пожаловать на этот сервер Discord. Выберите свой язык ниже, прежде чем начать общение.
+        """
+        embed = discord.Embed(title="Language Role Assignment",
+                              description=description)
+        responseView = HakuUserLanguageRoleManagerModalView()
+        await ctx.send(view=responseView, embed=embed)
 
 
 @bot.command(name="rlinks")

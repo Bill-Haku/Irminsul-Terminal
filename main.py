@@ -360,7 +360,17 @@ async def on_member_join(member: discord.Member):
                        f"этого, перейди в любой из каналов в {welcomeChannel.mention}!\n (Это сообщение отправлено," \
                        f" т.к. никнейм распознан как русский)"
         await helloChannel.send(content=content)
-
+    elif member.guild.id == config["tao"]["id"]:
+        _log.info(f"{member.name} joined {member.guild.name}")
+        selfIntroChannel = member.guild.get_channel(config["tao"]["selfIntroChannelId"])
+        welcomeChannel = member.guild.get_channel(config["tao"]["welcomeChannelId"])
+        msg = f"{member.mention}\nよ！旅人！よろしくな！！"
+        embed = discord.Embed(title="新しいメンバーが来たぞ！",
+                              description=f"君は{member.guild.name} -{len(member.guild.members)}人目だぞ！！\n"
+                                          f"{member.name}\n自己紹介は⬇️ここでやってね！！！！\n{selfIntroChannel.mention}",
+                              type="gifv")
+        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1073956670360789032/IMG_0823.gif")
+        await welcomeChannel.send(content=msg, embed=embed)
 
 
 _log.info(f"Discord API Version: {discord.__version__}")

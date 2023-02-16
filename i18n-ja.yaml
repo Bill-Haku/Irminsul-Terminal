@@ -1,4 +1,4 @@
-robot.name: パイモン
+robot.name: Hu Tao
 robot.description: 世界樹端末プロジェクトからのボット
 robot.author: '[Bill Haku](https://twitter.com/Haku_Bill)'
 robot.inviteLink: https://discord.com/api/oauth2/authorize?client_id=964545612831932507&permissions=8&scope=bot
@@ -9,7 +9,7 @@ sys.label.serverCount: 利用中サーバー数
 sys.label.invite: 招待リンク
 sys.label.about: ボットについて
 
-msg.bindUidSuccess: 'UIDを登録完了！: '
+msg.bindUidSuccess: 'UIDの登録完了！: '
 msg.bindUidFail: 'UIDの登録に失敗しちゃった！: '
 msg.error.uidInvalid: UIDは9桁の数字じゃないとダメだよ！
 
@@ -50,14 +50,14 @@ feat.cal.label.hutao.1: スキルを使用し、重撃で蒸発ダメージの�
 feat.cal.label.note: ノート
 feat.cal.hutao.note: "敵: ヒルチャール (Lv.90). \n武器効果は考慮されません。 \n4火魔女と4しめ縄以外の聖遺物効果が考慮されません。"
 
-sys.label.createVC: "通話部屋を作成！"
+sys.label.createVC: "通話部屋を作成する！"
 sys.label.createVC.text: "部屋の名前を書いてねー！："
 sys.label.createVC.button: 通話部屋を作成する！
 feat.createvc.success: の通話部屋を作成したよ！
 feat.createvc.fail: "通話部屋の作成に失敗しちゃったよー："
 feat.createvc.tips: "注意⚠️\n参加者全員が退室し、30秒が経過したら自動で削除されるよ！気をつけてねー！"
 sys.label.createVC.bitRate: "音質（ビットレート）："
-feat.createvc.fail.bitRate: 入力無効！
+feat.createvc.fail.bitRate: 入力が無効だよ！
 sys.label.createVC.userLimit: "参加人数制限：（0は無制限だよー！）"
 
 msg.setLanguageSuccess: 言語を設定したよ！
@@ -82,16 +82,16 @@ tao.role.genshin.add: 原神のチャンネルを表示
 tao.role.genshin.del: 原神のチャンネルを非表示
 tao.role.gossip.add: 雑談&ゲームチャンネルを表示
 tao.role.gossip.del: 雑談&ゲームチャンネルを非表示
-tao.role.description: "表示したいチャンネルがあったら選んでほしぞ！表示されるようになるからな!!!\n緑のボタンをタッチでそのチャンネルが表示されるぞ！！\n赤いボタンは非表示になるぞー！！"
-msg.success.1: 原神のチャンネルが表示されたぞ！！！
-msg.success.2: 原神のチャンネルが非表示になったぞ！！！
-msg.success.3: 雑談とゲームのチャンネルが表示されたぞ！！！
-msg.success.4: 雑談とゲームのチャンネルが非表示になったぞ！！！
-msg.success.5: たお👻🍑の通知をオンにしたぞ！！！！
-msg.success.6: たお👻🍑の通知をオフにしたぞ！！！！😭
-msg.success.7: ネタバレのチャンネルが表示されたぞ！！！
-msg.success.8: ネタバレのチャンネルが非表示になったぞ！！！
-msg.fail: 設定失敗した！
+tao.role.description: "表示したいチャンネルがあったら選んでほし！表示されるようになるからね!!!\n緑のボタンをタッチでそのチャンネルが表示されるよ！！\n赤いボタンは非表示になるよー！！"
+msg.success.1: 原神のチャンネルが表示されたよ！！！
+msg.success.2: 原神のチャンネルが非表示になったよ！！！
+msg.success.3: 雑談とゲームのチャンネルが表示されたよ！！！
+msg.success.4: 雑談とゲームのチャンネルが非表示になったよ！！！
+msg.success.5: たお👻🍑の通知をオンにしたよ！！！！
+msg.success.6: たお👻🍑の通知をオフにしたよ！！！！😭
+msg.success.7: ネタバレのチャンネルが表示されたよ！！！
+msg.success.8: ネタバレのチャンネルが非表示になったよ！！！
+msg.fail: 設定に失敗しちゃったよ😭！
 tao.link.button.1: 世界ランク
 tao.link.button.1.url: https://discord.com/channels/963772478109397012/963794436385570907
 tao.link.button.2: 原神サーバー
@@ -104,11 +104,11 @@ tao.link.button.5: 推し設定
 tao.link.button.5.url: https://discord.com/channels/963772478109397012/972163039107358780
 tao.role.link.description: 原神のチャンネルの他の設定だよー！
 tao.role.fan.description: "たお👻🍑の動画やその他投稿の通知を受け取りたい場合は下の「👻🍑」ボタンを押してね！！\n\nClick the 👻🍑 button below to receive notifications of new videos and other posts made by Tao👻🍑!\n\n如果您想接收有关我👻🍑的视频和其他投稿的通知，请按下面的'👻🍑'按钮!"
-tao.role.spoiler.description: "ネタバレを含む原神の雑談部屋で話したい場合は「ON」\n見たくない場合は「OFF」\nを押して欲しいぞ！"
+tao.role.spoiler.description: "ネタバレを含む原神の雑談部屋で話したい場合は「ON」\n見たくない場合は「OFF」\nを押して欲しい！"
 
 tao.feature.coop.description: "使い方！\n1.ジャンルを選択する！をタップしてマルチのジャンルを選択してね〜！\n2.次に項目ごとに内容を記入してねー！！！\n3.おわりー！！！！！"
 sys.label.coop.button: "マルチ募集を開始する！"
-sys.label.coop.title: "マルチ募集のタイトルを教えてくれよな！"
+sys.label.coop.title: "マルチ募集のタイトルを教えてー！！"
 sys.coop.input.label.1: "タイトル名！"
 sys.coop.input.label.2: "ジャンル！"
 sys.coop.input.label.3: "所要時間・回数"
@@ -117,14 +117,14 @@ sys.coop.input.label.5: "世界ランク"
 sys.coop.input.label.6: "一言"
 sys.coop.input.placeholder.2: "[ジャンル]"
 sys.coop.afterlink.title: "見に行く！"
-sys.coop.embed.title: "のマルチ募集だぞー！"
+sys.coop.embed.title: "のマルチ募集だよー！"
 sys.label.coop.button.stop: "募集を終了する！"
-sys.label.coop.button.stop.done: "募集を終了したぞ！"
+sys.label.coop.button.stop.done: "募集を終了したよ！"
 sys.label.copy: "秘境周回"
 sys.label.materials: "素材集め"
 sys.label.boss: "ボス討伐"
 sys.label.others: "なんでも！！！！"
 sys.label.exploration: "探索"
 sys.coop.select.placeholder: "ジャンルを選択する！"
-sys.label.coopRoleLink: "マルチ通知設定はここだぞ！"
-sys.label.raise.end: "この募集は終了したぞ！"
+sys.label.coopRoleLink: "マルチ通知設定はここだよ！"
+sys.label.raise.end: "この募集は終了したよ！"

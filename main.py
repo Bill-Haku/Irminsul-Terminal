@@ -365,7 +365,7 @@ async def on_member_join(member: discord.Member):
         selfIntroChannel = member.guild.get_channel(config["tao"]["selfIntroChannelId"])
         welcomeChannel = member.guild.get_channel(config["tao"]["welcomeChannelId"])
         msg = f"{member.mention}\n{len(member.guild.members)}人目だよ！"
-        embed = discord.Embed(title="新しいメンバーが来たぞ！",
+        embed = discord.Embed(title="新しいメンバーが来たよ！",
                               description=f"君は{member.guild.name} - {len(member.guild.members)}人目だぞ！！\n"
                                           f"{member.name}\n自己紹介は⬇️ここでやってね！！！！\n{selfIntroChannel.mention}",
                               type="gifv")

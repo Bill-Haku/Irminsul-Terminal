@@ -88,7 +88,7 @@ class IrminsulTerminalBot(commands.Bot):
                     elif channel.id == config["tao"]["coopRaiseChannelId"]:
                         async for message in channel.history(limit=30):
                             now = datetime.datetime.now().astimezone()
-                            if (now - message.created_at).seconds > 3600 * 6 and message.id != 1073807334465355828:
+                            if (now - message.created_at).seconds > 3600 * 6 and message.id != config["tao"]["coopMsgId"]:
                                 _log.info(f"found message {message.id} created 12 hours ago, delete it")
                                 await message.delete()
                 await asyncio.sleep(60)
@@ -292,7 +292,7 @@ async def on_voice_state_update(member, before, after):
                 rname = data["rname"]
                 tcid = data["tcid"]
         except FileNotFoundError:
-            _log.exception(f"{vcDataFile} is not found")
+            _log.exception(f"{vcDataFile} for {before.channel.name} is not found")
             return
         channelName = before.channel.name
         _log.info(f"{member.name} exited channel {channelName}")

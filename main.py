@@ -88,7 +88,8 @@ class IrminsulTerminalBot(commands.Bot):
                     elif channel.id == config["tao"]["coopRaiseChannelId"]:
                         async for message in channel.history(limit=30):
                             now = datetime.datetime.now().astimezone()
-                            if (now - message.created_at).seconds > 3600 * 6 and message.id != config["tao"]["coopMsgId"]:
+                            if (now - message.created_at).seconds > 3600 * 6 and message.id != config["tao"][
+                                "coopMsgId"]:
                                 _log.info(f"found message {message.id} created 12 hours ago, delete it")
                                 await message.delete()
                 await asyncio.sleep(60)
@@ -250,6 +251,36 @@ async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
         pass
 
 
+@bot.command(name="profiles")
+@commands.is_owner()
+async def sendProfiles(ctx, name="none"):
+    _log.info(f"Recognized command profiles {name} from {ctx.author.name} #{ctx.author.id}")
+    if name == "tao":
+        taoName = "たお👻🍑"
+        embedYoutube = discord.Embed(title="୨ YouTube ୧",
+                                     description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://youtube.com/@taotao_hoyo\n\n"
+                                                 "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
+                                     colour=0xff3426)
+        embedYoutube.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612172628058"
+                                   "/IMG_2220.png")
+        embedYoutube.set_author(name=taoName, url="https://youtube.com/@taotao_hoyo")
+        embedTikTok = discord.Embed(title="୨ TikTok ୧",
+                                    description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://www.tiktok.com/@taotao_hoyo\n\n"
+                                                "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
+                                    colour=0xc058f4)
+        embedTikTok.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612386533467"
+                                  "/IMG_2223.png")
+        embedTikTok.set_author(name=taoName, url="https://www.tiktok.com/@taotao_hoyo")
+        embedTwitter = discord.Embed(title="୨ Twitter ୧",
+                                     description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://twitter.com/taotao_hoyo\n\n"
+                                                 "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
+                                     colour=0x01c7fc)
+        embedTwitter.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612613017681"
+                                   "/IMG_2221.png")
+        embedTwitter.set_author(name=taoName, url="https://twitter.com/taotao_hoyo")
+        await ctx.send(embeds=[embedYoutube, embedTikTok, embedTwitter])
+
+
 @bot.command(name="raisecoop")
 @commands.is_owner()
 async def sendSpoilerRoleLinkButtons(ctx, guild="tao"):
@@ -369,7 +400,8 @@ async def on_member_join(member: discord.Member):
                               description=f"君は{member.guild.name} - {len(member.guild.members)}人目だよ！！\n"
                                           f"{member.name}\n自己紹介は⬇️ここでやってね！！！！\n{selfIntroChannel.mention}",
                               type="gifv")
-        embed.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1073956670360789032/IMG_0823.gif")
+        embed.set_image(
+            url="https://media.discordapp.net/attachments/965396701869375579/1073956670360789032/IMG_0823.gif")
         await welcomeChannel.send(content=msg, embed=embed)
 
 

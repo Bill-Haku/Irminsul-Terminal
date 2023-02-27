@@ -96,14 +96,29 @@ class PrivateManagementButtons(discord.ui.View):
         if interaction.user.id == self.interactionStarted.user.id or interaction.user.id == interaction.guild.owner_id:
             try:
                 await self.thread.edit(locked=True, archived=True)
+                _log.info(f"{interaction.user.name} archive thread {self.thread.name} done (1/4)")
+            except HTTPException:
+                _log.info(f"{interaction.user.name} archive thread {self.thread.name} failed because of HTTPException")
+            try:
+                await self.publicMessage.edit(content=i18n_ja["sys.label.raise.end"])
+                _log.info(f"{interaction.user.name} edit public message done (2/4)")
+            except HTTPException:
+                _log.info(f"{interaction.user.name} edit public message {self.publicMessage.id} failed because of "
+                          f"HTTPException")
+            try:
+                await self.message.delete()
+                _log.info(f"{interaction.user.name} delete message done (3/4)")
+            except HTTPException:
+                _log.info(f"{interaction.user.name} delete message {self.message.id} failed because of HTTPException")
+            try:
                 await interaction.response.send_message(content=i18n_ja["sys.label.coop.button.stop.done"],
                                                         ephemeral=True)
-                await self.publicMessage.edit(content=i18n_ja["sys.label.raise.end"])
-                await self.message.delete()
+                _log.info(f"{interaction.user.name} send ephemeral message done (4/4)")
             except HTTPException:
-                _log.info(f"{interaction.user.name} end thread {self.thread.name} failed because of HTTPException")
+                _log.info(f"{interaction.user.name} send ephemeral message failed because of HTTPException")
 
-            _log.info(f"{interaction.user.name} end thread {self.thread.name} done")
+        else:
+            _log.info(f"stop thread failed because {interaction.user.name} is not permitted")
 
     def updateMessage(self, message: discord.Message):
         self.message = message

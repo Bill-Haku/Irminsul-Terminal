@@ -261,22 +261,19 @@ async def sendProfiles(ctx, name="none"):
                                      description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://youtube.com/@taotao_hoyo\n\n"
                                                  "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
                                      colour=0xff3426)
-        embedYoutube.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612172628058"
-                                   "/IMG_2220.png")
+        embedYoutube.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1080046282569158767/IMG_2357.png")
         embedYoutube.set_author(name=taoName, url="https://youtube.com/@taotao_hoyo")
         embedTikTok = discord.Embed(title="୨ TikTok ୧",
                                     description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://www.tiktok.com/@taotao_hoyo\n\n"
                                                 "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
                                     colour=0xc058f4)
-        embedTikTok.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612386533467"
-                                  "/IMG_2223.png")
+        embedTikTok.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1080046282757906492/IMG_2356.png")
         embedTikTok.set_author(name=taoName, url="https://www.tiktok.com/@taotao_hoyo")
         embedTwitter = discord.Embed(title="୨ Twitter ୧",
                                      description="✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦\n\nhttps://twitter.com/taotao_hoyo\n\n"
                                                  "✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦∴∵∴✦",
                                      colour=0x01c7fc)
-        embedTwitter.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1077940612613017681"
-                                   "/IMG_2221.png")
+        embedTwitter.set_image(url="https://media.discordapp.net/attachments/965396701869375579/1080046282938273822/IMG_2354.png")
         embedTwitter.set_author(name=taoName, url="https://twitter.com/taotao_hoyo")
         await ctx.send(embeds=[embedYoutube, embedTikTok, embedTwitter])
 

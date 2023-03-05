@@ -17,6 +17,7 @@ from GuildManager.FirstStepManager import FirstStepManagerModalView
 from GuildManager.CharacterInfoButton import CharInfoModalView
 from GuildManager.GuildRoleManager import *
 from GuildManager.CoOpManager import *
+from GuildManager.RuleSender import *
 
 _log = logging.getLogger('discord')
 logHandler = logging.FileHandler(filename='irminsul.log', encoding='utf-8', mode='w')
@@ -39,6 +40,7 @@ class IrminsulTerminalBot(commands.Bot):
         self.add_view(TaoRoleLinkModalView())
         self.add_view(CoOpManagerModalView())
         self.add_view(HakuUserLanguageRoleManagerModalView())
+        self.add_view(TaoRuleSenderModalView())
 
     async def on_ready(self):
         _log.info(f"Bot is ready. Version: {config['version']}")
@@ -210,6 +212,22 @@ async def sendRoleManagerButtons(ctx, guild="tao"):
                               description=description)
         responseView = HakuUserLanguageRoleManagerModalView()
         await ctx.send(view=responseView, embed=embed)
+
+
+@bot.command(name="rulesender")
+@commands.is_owner()
+async def sendRuleSelector(ctx, guild="tao"):
+    _log.info(f"Recognized command rulesender from {ctx.author.name} #{ctx.author.id}, guild = {guild}")
+    if guild == "tao" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        description = """言語を選択してね！
+選択した言語で書かれたルールが出てくるよ！<:HuTaoHeart2:1075823539493544107> 
+Choose your language!
+You'll see the rules written in the language you've chosen!<:HuTaoHeart2:1075823539493544107>"""
+        embed = discord.Embed(description=description, colour=0xcd5c5c)
+        responseView = TaoRuleSenderModalView()
+        await ctx.send(view=responseView, embed=embed)
+    elif guild == "haku" and ctx.author.guild.id in config["enabledVCAdministratorGuilds"]:
+        pass
 
 
 @bot.command(name="rlinks")

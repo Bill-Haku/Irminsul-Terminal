@@ -152,3 +152,4 @@ userEnkaData/
 
 deploy.sh
 cache/
+.DS_Store

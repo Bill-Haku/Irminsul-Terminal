@@ -217,6 +217,53 @@ def charFullName(charID, language):
     return locResult[f"{language}"][f"{nameTextMapHash}"]
 
 
+def charElement(charID, language):
+    charResponse = requests.get("http://ophelper.top/api/players/characters.json")
+    charResult = charResponse.json()
+    element = charResult[f"{charID}"]["Element"]
+    locData = {
+        "Ice": {
+            "en": "Ice",
+            "zh-CN": "冰",
+            "ja": "氷",
+        },
+        "Fire": {
+            "en": "Fire",
+            "zh-CN": "火",
+            "ja": "火",
+        },
+        "Water": {
+            "en": "Water",
+            "zh-CN": "水",
+            "ja": "水",
+        },
+        "Wind": {
+            "en": "Wind",
+            "zh-CN": "风",
+            "ja": "風",
+        },
+        "Electric": {
+            "en": "Electric",
+            "zh-CN": "雷",
+            "ja": "雷",
+        },
+        "Rock": {
+            "en": "Rock",
+            "zh-CN": "岩",
+            "ja": "岩",
+        },
+        "Grass": {
+            "en": "Grass",
+            "zh-CN": "草",
+            "ja": "草",
+        },
+    }
+
+    if language == "zh":
+        language = "zh-CN"
+    return locData[f"{element}"][f"{language}"]
+
+
 def textMapHash2Text(nameTextMapHash, language):
 
     if language == "zh":

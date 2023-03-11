@@ -1,4 +1,6 @@
 import asyncio
+import base64
+import io
 
 import discord
 import os
@@ -11,6 +13,7 @@ from EnkaDataHandler.Calculator import *
 from botpy.ext.cog_yaml import read
 from discord.ui import *
 from discord import *
+from ArtifacterImageGenerator.Connector import EnkaData2ArtifactImageGeneratorData
 
 config = read(os.path.join(os.path.dirname(__file__), "config.yaml"))
 i18n_en = read(os.path.join(os.path.dirname(__file__), "i18n-en.yaml"))
@@ -135,6 +138,7 @@ class IrminsulTerminal:
                 buttonBoard = discord.ui.Button(label=i18n["sys.label.lookUpBoard"], style=ButtonStyle.red)
                 buttonArtifacts = discord.ui.Button(label=i18n["sys.label.lookUpArtifacts"], style=ButtonStyle.green)
                 buttonCalculator = discord.ui.Button(label=i18n["sys.label.cal"], style=ButtonStyle.gray)
+                buttonImageGenerate = discord.ui.Button(label=i18n["sys.label.imageGenerate"], style=ButtonStyle.blurple)
 
                 async def on_button_artifacts(interaction: discord.Interaction):
                     await interaction.response.defer()
@@ -213,15 +217,43 @@ class IrminsulTerminal:
                         _log.error(e.with_traceback())
                         await interaction.followup.send(e, ephemeral=isPrivate)
 
+                async def on_button_image(interaction: discord.Interaction):
+                    await interaction.response.defer()
+                    _log.info(f"Generate Image of {interaction.user.id}'s {charID}")
+                    # get the user's all data
+                    enkaData = EnkaAPIManager.getEnkaAPIResult(uid)
+                    # check if character in avatarInfoList
+                    avatarInfoList = enkaData["avatarInfoList"]
+                    inAvatarInfoList = False
+                    for avatar in avatarInfoList:
+                        if avatar["avatarId"] == charID:
+                            inAvatarInfoList = True
+                            charData = avatar
+                            break
+                    if not inAvatarInfoList:
+                        # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
+                        await interaction.followup.send(i18n["msg.error.avatarNotInList"], ephemeral=isPrivate)
+                        return
+                    imgBase64 = EnkaData2ArtifactImageGeneratorData(enkaData=enkaData, characterId=charID)
+                    file = discord.File(io.BytesIO(base64.b64decode(imgBase64)), filename=f"{interaction.user.id}-{charID}.png")
+                    await asyncio.sleep(delay=1)
+                    try:
+                        await interaction.followup.send(file=file, ephemeral=isPrivate)
+                    except Exception as e:
+                        _log.error(e.with_traceback())
+                        await interaction.followup.send(e, ephemeral=isPrivate)
+
 
                 buttonBoard.callback = on_button_Board
                 buttonArtifacts.callback = on_button_artifacts
                 buttonCalculator.callback = on_button_cal
+                buttonImageGenerate.callback = on_button_image
 
                 charFullName = CharIDDatabase.charFullName(charID, language=self.language)
                 title = i18n["sys.label.lookUpChar"] + f" {charFullName} ({charID})"
                 view.add_item(buttonBoard)
                 view.add_item(buttonArtifacts)
+                view.add_item(buttonImageGenerate)
                 if charID in calAvailableCharIdList:
                     view.add_item(buttonCalculator)
                 return title, view

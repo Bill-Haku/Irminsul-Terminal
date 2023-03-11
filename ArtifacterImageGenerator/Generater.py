@@ -333,10 +333,10 @@ def generation(data):
         basev = CharacterBase[state]
         return f"+{format(plusv,',')}",f"{format(basev,',')}",D.textlength(f"+{format(plusv,',')}",font=config_font(12)),D.textlength(f"{format(basev,',')}",font=config_font(12))
     
-    disper = ['会心率','会心ダメージ','攻撃パーセンテージ','防御パーセンテージ','HPパーセンテージ','水元素ダメージ','物理ダメージ','風元素ダメージ','岩元素ダメージ','炎元素ダメージ','与える治癒効果','与える治療効果','雷元素ダメージ','氷元素ダメージ','草元素ダメージ','与える治癒効果','元素チャージ効率']
+    disper = ['会心率','会心ダメージ','攻撃パーセンテージ','防御パーセンテージ','HPパーセンテージ','水元素ダメージ','物理ダメージ','風元素ダメージ','岩元素ダメージ','火元素ダメージ','与える治癒効果','与える治療効果','雷元素ダメージ','氷元素ダメージ','草元素ダメージ','与える治癒効果','元素チャージ効率']
     StateOP = ('HP','攻撃力',"防御力","元素熟知","会心率","会心ダメージ","元素チャージ効率")
     for k,v in CharacterStatus.items():
-        if k in ['氷元素ダメージ','水元素ダメージ','岩元素ダメージ','草元素ダメージ','風元素ダメージ','炎元素ダメージ','物理ダメージ','与える治癒効果','雷元素ダメージ'] and v == 0:
+        if k in ['氷元素ダメージ','水元素ダメージ','岩元素ダメージ','草元素ダメージ','風元素ダメージ','火元素ダメージ','物理ダメージ','与える治癒効果','雷元素ダメージ'] and v == 0:
             k = f'{element}元素ダメージ'
         try:
             i = StateOP.index(k)
@@ -488,9 +488,9 @@ def generation(data):
                 else:
                     D.text((375+i*373-SubSize,811+50*a),format(SubVal,","),font=config_font(25),fill=(255,255,255))
             
-            if details['Level'] == 20 and details['rarelity'] == 5:
-                nobi = D.textlength("+".join(map(str,psb[a])),font=config_font(11))
-                D.text((375+i*373-nobi,840+50*a),"+".join(map(str,psb[a])),fill=(255, 255, 255, 160),font=config_font(11))
+            # if details['Level'] == 20 and details['rarelity'] == 5:
+            #     nobi = D.textlength("+".join(map(str,psb[a])),font=config_font(11))
+            #     D.text((375+i*373-nobi,840+50*a),"+".join(map(str,psb[a])),fill=(255, 255, 255, 160),font=config_font(11))
         
         Score = float(ScoreData[parts])
         ATFScorelen = D.textlength(str(Score),config_font(36))
@@ -564,8 +564,8 @@ def generation(data):
             
             Base.paste(badge,(1843-i*45,533),mask=badge_mask)
             
-    Base.show()
-    Base.save(f'{cwd}/Tests/Image.png')
+    # Base.show()
+    # Base.save(f'{cwd}/Tests/Image.png')
 
     return pil_to_base64(Base,format='png')
 
@@ -578,4 +578,4 @@ def pil_to_base64(img, format="jpeg"):
     return img_str
 
 
-generation(read_json('data.json'))
+# generation(read_json('data.json'))

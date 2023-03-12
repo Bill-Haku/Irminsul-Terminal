@@ -217,7 +217,7 @@ def generation(data, language):
     cwd = os.path.abspath(os.path.dirname(__file__))
     config_font = lambda size : ImageFont.truetype(f'{cwd}/Assets/ja-jp.ttf',size)
     
-    Base = Image.open(f'{cwd}/Base/{element}.png')
+    Base = Image.open(f'{cwd}/Base/{element}{language}.png')
     
     
     #キャラクター

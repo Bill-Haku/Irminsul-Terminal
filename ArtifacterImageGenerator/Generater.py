@@ -10,6 +10,7 @@ import base64
 from PIL import ImageFile 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
+
 def culculate_op(data:dict):
 
     cwd = os.path.dirname(os.path.abspath(__file__))
@@ -65,15 +66,6 @@ def culculate_op(data:dict):
                     idx = keymap.index(ctg)
                     res[idx] = p
                     return res
-
-
-    
-
-            
-
-        
-        
-
 
     #重複するものが複数の場合
     if len(is_dup) == 2:
@@ -488,9 +480,9 @@ def generation(data):
                 else:
                     D.text((375+i*373-SubSize,811+50*a),format(SubVal,","),font=config_font(25),fill=(255,255,255))
             
-            # if details['Level'] == 20 and details['rarelity'] == 5:
-            #     nobi = D.textlength("+".join(map(str,psb[a])),font=config_font(11))
-            #     D.text((375+i*373-nobi,840+50*a),"+".join(map(str,psb[a])),fill=(255, 255, 255, 160),font=config_font(11))
+            if details['Level'] == 20 and details['rarelity'] == 5:
+                nobi = D.textlength("+".join(map(str,psb[a])),font=config_font(11))
+                D.text((375+i*373-nobi,840+50*a),"+".join(map(str,psb[a])),fill=(255, 255, 255, 160),font=config_font(11))
         
         Score = float(ScoreData[parts])
         ATFScorelen = D.textlength(str(Score),config_font(36))

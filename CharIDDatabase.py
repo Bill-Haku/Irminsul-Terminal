@@ -276,3 +276,108 @@ def textMapHash2Text(nameTextMapHash, language):
         res = nameTextMapHash
     return res
 
+
+def artifactPropNameTranslator(name, language, short=False):
+    dict = {
+        "FIGHT_PROP_BASE_ATTACK": {
+            "en": "ATK",
+            "zh-CN": "攻击力",
+            "ja": "攻撃力"
+        },
+        "FIGHT_PROP_HP": {
+            "en": "HP",
+            "zh-CN": "生命值",
+            "ja": "HP"
+        },
+        "FIGHT_PROP_ATTACK": {
+            "en": "ATK",
+            "zh-CN": "攻击力",
+            "ja": "攻撃力"
+        },
+        "FIGHT_PROP_DEFENSE": {
+            "en": "DEF",
+            "zh-CN": "防御力",
+            "ja": "防御力"
+        },
+        "FIGHT_PROP_HP_PERCENT": {
+            "en": "HP%",
+            "zh-CN": "生命值%",
+            "ja": "HPパーセンテージ"
+        },
+        "FIGHT_PROP_ATTACK_PERCENT": {
+            "en": "ATK Percentage",
+            "zh-CN": "攻击力百分比",
+            "ja": "攻撃パーセンテージ"
+        },
+        "FIGHT_PROP_DEFENSE_PERCENT": {
+            "en": "DEF Percentage",
+            "zh-CN": "防御力百分比",
+            "ja": "防御パーセンテージ"
+        },
+        "FIGHT_PROP_CRITICAL": {
+            "en": "CRIT Rate",
+            "zh-CN": "暴击率",
+            "ja": "会心率"
+        },
+        "FIGHT_PROP_CRITICAL_HURT": {
+            "en": "CRIT DMG",
+            "zh-CN": "暴击伤害",
+            "ja": "会心ダメージ"
+        },
+        "FIGHT_PROP_CHARGE_EFFICIENCY": {
+            "en": "Energy Recharge",
+            "zh-CN": "元素充能效率",
+            "ja": "元素チャージ効率"
+        },
+        "FIGHT_PROP_HEAL_ADD": {
+            "en": "Healing Bonus",
+            "zh-CN": "治疗加成",
+            "ja": "回復ボーナス"
+        },
+        "FIGHT_PROP_ELEMENT_MASTERY": {
+            "en": "Elemental Mastery",
+            "zh-CN": "元素精通",
+            "ja": "元素熟知"
+        },
+        "FIGHT_PROP_PHYSICAL_ADD_HURT": {
+            "en": "Physical DMG",
+            "zh-CN": "物理伤害加成",
+            "ja": "物理ダメージ"
+        },
+        "FIGHT_PROP_FIRE_ADD_HURT": {
+            "en": "Pyro DMG",
+            "zh-CN": "火元素伤害加成",
+            "ja": "火元素ダメージ"
+        },
+        "FIGHT_PROP_ELEC_ADD_HURT": {
+            "en": "Electro DMG",
+            "zh-CN": "雷元素伤害加成",
+            "ja": "雷元素ダメージ"
+        },
+        "FIGHT_PROP_WATER_ADD_HURT": {
+            "en": "Hydro DMG",
+            "zh-CN": "水元素伤害加成",
+            "ja": "水元素ダメージ"
+        },
+        "FIGHT_PROP_WIND_ADD_HURT": {
+            "en": "Anemo DMG",
+            "zh-CN": "风元素伤害加成",
+            "ja": "風元素ダメージ"
+        },
+        "FIGHT_PROP_ICE_ADD_HURT": {
+            "en": "Cryo DMG",
+            "zh-CN": "冰元素伤害加成",
+            "ja": "氷元素ダメージ"
+        },
+        "FIGHT_PROP_ROCK_ADD_HURT": {
+            "en": "Geo DMG",
+            "zh-CN": "岩元素伤害加成",
+            "ja": "岩元素ダメージ"
+        },
+        "FIGHT_PROP_GRASS_ADD_HURT": {
+            "en": "Dendro DMG",
+            "zh-CN": "草元素伤害加成",
+            "ja": "草元素ダメージ"
+        }
+    }
+    return dict[name][language]

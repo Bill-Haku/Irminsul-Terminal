@@ -53,14 +53,14 @@ def dataConverter(avatarData, fullData, language):
                 artifactFlower.update({"Level": item["reliquary"]["level"] - 1})
                 artifactFlower.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactFlower.update({"main": {
-                    "option": CharIDDatabase.textMapHash2Text(item["flat"]["reliquaryMainstat"]["mainPropId"],
+                    "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
                                                               language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactFlower.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactFlower["sub"].append({
-                        "option": CharIDDatabase.textMapHash2Text(subStats["appendPropId"],
+                        "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
                                                                   language="ja"),
                         "value": subStats["statValue"]
                     })
@@ -70,14 +70,14 @@ def dataConverter(avatarData, fullData, language):
                 artifactWing.update({"Level": item["reliquary"]["level"] - 1})
                 artifactWing.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactWing.update({"main": {
-                    "option": CharIDDatabase.textMapHash2Text(item["flat"]["reliquaryMainstat"]["mainPropId"],
+                    "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
                                                               language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactWing.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactWing["sub"].append({
-                        "option": CharIDDatabase.textMapHash2Text(subStats["appendPropId"],
+                        "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
                                                                   language="ja"),
                         "value": subStats["statValue"]
                     })
@@ -87,14 +87,14 @@ def dataConverter(avatarData, fullData, language):
                 artifactClock.update({"Level": item["reliquary"]["level"] - 1})
                 artifactClock.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactClock.update({"main": {
-                    "option": CharIDDatabase.textMapHash2Text(item["flat"]["reliquaryMainstat"]["mainPropId"],
+                    "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
                                                               language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactClock.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactClock["sub"].append({
-                        "option": CharIDDatabase.textMapHash2Text(subStats["appendPropId"],
+                        "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
                                                                   language="ja"),
                         "value": subStats["statValue"]
                     })
@@ -104,14 +104,14 @@ def dataConverter(avatarData, fullData, language):
                 artifactCup.update({"Level": item["reliquary"]["level"] - 1})
                 artifactCup.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactCup.update({"main": {
-                    "option": CharIDDatabase.textMapHash2Text(item["flat"]["reliquaryMainstat"]["mainPropId"],
+                    "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
                                                               language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactCup.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactCup["sub"].append({
-                        "option": CharIDDatabase.textMapHash2Text(subStats["appendPropId"],
+                        "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
                                                                   language="ja"),
                         "value": subStats["statValue"]
                     })
@@ -121,14 +121,14 @@ def dataConverter(avatarData, fullData, language):
                 artifactCrown.update({"Level": item["reliquary"]["level"] - 1})
                 artifactCrown.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactCrown.update({"main": {
-                    "option": CharIDDatabase.textMapHash2Text(item["flat"]["reliquaryMainstat"]["mainPropId"],
+                    "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
                                                               language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactCrown.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactCrown["sub"].append({
-                        "option": CharIDDatabase.textMapHash2Text(subStats["appendPropId"],
+                        "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
                                                                   language="ja"),
                         "value": subStats["statValue"]
                     })

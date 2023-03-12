@@ -389,11 +389,11 @@ def generation(data):
     blen = D.textlength(f'{ScoreCVBasis}換算',font=config_font(24))
     D.text((1867-blen,585),f'{ScoreCVBasis}換算',font=config_font(24))
     
-    if ScoreTotal >= 220:
+    if ScoreTotal >= 175:
         ScoreEv =Image.open(f'{cwd}/artifactGrades/SS.png')
-    elif ScoreTotal >= 200:
+    elif ScoreTotal >= 160:
         ScoreEv =Image.open(f'{cwd}/artifactGrades/S.png')
-    elif ScoreTotal >= 180:
+    elif ScoreTotal >= 140:
         ScoreEv =Image.open(f'{cwd}/artifactGrades/A.png')
     else:
         ScoreEv =Image.open(f'{cwd}/artifactGrades/B.png')
@@ -491,34 +491,34 @@ def generation(data):
         
         PointRefer = {
             "total": {
-                "SS": 220,
-                "S": 200,
-                "A": 180
+                "SS": 175,
+                "S": 160,
+                "A": 140
             },
             "flower": {
-                "SS": 50,
-                "S": 45,
-                "A": 40
-            },
-            "wing": {
-                "SS": 50,
-                "S": 45,
-                "A": 40
-            },
-            "clock": {
-                "SS": 45,
-                "S": 40,
-                "A": 35
-            },
-            "cup": {
-                "SS": 45,
-                "S": 40,
-                "A": 37
-            },
-            "crown": {
                 "SS": 40,
                 "S": 35,
                 "A": 30
+            },
+            "wing": {
+                "SS": 40,
+                "S": 35,
+                "A": 30
+            },
+            "clock": {
+                "SS": 40,
+                "S": 35,
+                "A": 30
+            },
+            "cup": {
+                "SS": 35,
+                "S": 30,
+                "A": 25
+            },
+            "crown": {
+                "SS": 25,
+                "S": 20,
+                "A": 15
             }
         }
         

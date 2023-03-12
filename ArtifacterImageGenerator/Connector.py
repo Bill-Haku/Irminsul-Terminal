@@ -45,6 +45,21 @@ def dataConverter(avatarData, fullData, language):
     artifactClock = {}
     artifactCup = {}
     artifactCrown = {}
+    artifactScore = {
+        "State": "",
+        "total": 0.0,
+        "flower": 0.0,
+        "wing": 0.0,
+        "clock": 0.0,
+        "cup": 0.0,
+        "crown": 0.0
+    }
+    artifactClockItem = None
+    for item in avatarData["equipList"]:
+        if "reliquary" in item:
+            if item["flat"]["equipType"] == "EQUIP_SHOES":
+                artifactClockItem = item
+
     for item in avatarData["equipList"]:
         if "reliquary" in item:
             if item["flat"]["equipType"] == "EQUIP_BRACER":
@@ -54,16 +69,23 @@ def dataConverter(avatarData, fullData, language):
                 artifactFlower.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactFlower.update({"main": {
                     "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
-                                                              language="ja"),
+                                                                        language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactFlower.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactFlower["sub"].append({
                         "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
-                                                                  language="ja"),
+                                                                            language="ja"),
                         "value": subStats["statValue"]
                     })
+                    if subStats["appendPropId"] == "FIGHT_PROP_CRITICAL":
+                        artifactScore["flower"] += subStats["statValue"] * 2
+                    elif subStats["appendPropId"] == "FIGHT_PROP_CRITICAL_HURT":
+                        artifactScore["flower"] += subStats["statValue"]
+                    if artifactClockItem is not None:
+                        if artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"] == subStats["appendPropId"]:
+                            artifactScore["flower"] += subStats["statValue"] * 0.8
             elif item["flat"]["equipType"] == "EQUIP_NECKLACE":
                 artifactWing.update({"type": CharIDDatabase.textMapHash2Text(item["flat"]["setNameTextMapHash"],
                                                                              language="ja")})
@@ -71,16 +93,23 @@ def dataConverter(avatarData, fullData, language):
                 artifactWing.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactWing.update({"main": {
                     "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
-                                                              language="ja"),
+                                                                        language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactWing.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactWing["sub"].append({
                         "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
-                                                                  language="ja"),
+                                                                            language="ja"),
                         "value": subStats["statValue"]
                     })
+                    if subStats["appendPropId"] == "FIGHT_PROP_CRITICAL":
+                        artifactScore["wing"] += subStats["statValue"] * 2
+                    elif subStats["appendPropId"] == "FIGHT_PROP_CRITICAL_HURT":
+                        artifactScore["wing"] += subStats["statValue"]
+                    if artifactClockItem is not None:
+                        if artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"] == subStats["appendPropId"]:
+                            artifactScore["wing"] += subStats["statValue"] * 0.8
             elif item["flat"]["equipType"] == "EQUIP_SHOES":
                 artifactClock.update({"type": CharIDDatabase.textMapHash2Text(item["flat"]["setNameTextMapHash"],
                                                                               language="ja")})
@@ -88,16 +117,23 @@ def dataConverter(avatarData, fullData, language):
                 artifactClock.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactClock.update({"main": {
                     "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
-                                                              language="ja"),
+                                                                        language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactClock.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactClock["sub"].append({
                         "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
-                                                                  language="ja"),
+                                                                            language="ja"),
                         "value": subStats["statValue"]
                     })
+                    if subStats["appendPropId"] == "FIGHT_PROP_CRITICAL":
+                        artifactScore["clock"] += subStats["statValue"] * 2
+                    elif subStats["appendPropId"] == "FIGHT_PROP_CRITICAL_HURT":
+                        artifactScore["clock"] += subStats["statValue"]
+                    if artifactClockItem is not None:
+                        if artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"] == subStats["appendPropId"]:
+                            artifactScore["clock"] += subStats["statValue"] * 0.8
             elif item["flat"]["equipType"] == "EQUIP_RING":
                 artifactCup.update({"type": CharIDDatabase.textMapHash2Text(item["flat"]["setNameTextMapHash"],
                                                                             language="ja")})
@@ -105,16 +141,23 @@ def dataConverter(avatarData, fullData, language):
                 artifactCup.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactCup.update({"main": {
                     "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
-                                                              language="ja"),
+                                                                        language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactCup.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactCup["sub"].append({
                         "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
-                                                                  language="ja"),
+                                                                            language="ja"),
                         "value": subStats["statValue"]
                     })
+                    if subStats["appendPropId"] == "FIGHT_PROP_CRITICAL":
+                        artifactScore["cup"] += subStats["statValue"] * 2
+                    elif subStats["appendPropId"] == "FIGHT_PROP_CRITICAL_HURT":
+                        artifactScore["cup"] += subStats["statValue"]
+                    if artifactClockItem is not None:
+                        if artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"] == subStats["appendPropId"]:
+                            artifactScore["cup"] += subStats["statValue"] * 0.8
             elif item["flat"]["equipType"] == "EQUIP_DRESS":
                 artifactCrown.update({"type": CharIDDatabase.textMapHash2Text(item["flat"]["setNameTextMapHash"],
                                                                               language="ja")})
@@ -122,19 +165,36 @@ def dataConverter(avatarData, fullData, language):
                 artifactCrown.update({"rarelity": item["flat"]["rankLevel"]})
                 artifactCrown.update({"main": {
                     "option": CharIDDatabase.artifactPropNameTranslator(item["flat"]["reliquaryMainstat"]["mainPropId"],
-                                                              language="ja"),
+                                                                        language="ja"),
                     "value": item["flat"]["reliquaryMainstat"]["statValue"]
                 }})
                 artifactCrown.update({"sub": []})
                 for subStats in item["flat"]["reliquarySubstats"]:
                     artifactCrown["sub"].append({
                         "option": CharIDDatabase.artifactPropNameTranslator(subStats["appendPropId"],
-                                                                  language="ja"),
+                                                                            language="ja"),
                         "value": subStats["statValue"]
                     })
+                    if subStats["appendPropId"] == "FIGHT_PROP_CRITICAL":
+                        artifactScore["crown"] += subStats["statValue"] * 2
+                    elif subStats["appendPropId"] == "FIGHT_PROP_CRITICAL_HURT":
+                        artifactScore["crown"] += subStats["statValue"]
+                    if artifactClockItem is not None:
+                        if artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"] == subStats["appendPropId"]:
+                            artifactScore["crown"] += subStats["statValue"] * 0.8
         if "weapon" in item:
             weaponItem = item
 
+    artifactScore["flower"] = round(artifactScore["flower"], 1)
+    artifactScore["wing"] = round(artifactScore["wing"], 1)
+    artifactScore["clock"] = round(artifactScore["clock"], 1)
+    artifactScore["cup"] = round(artifactScore["cup"], 1)
+    artifactScore["crown"] = round(artifactScore["crown"], 1)
+    artifactScore["total"] = artifactScore["flower"] + artifactScore["wing"] + artifactScore["clock"] + \
+                             artifactScore["cup"] + artifactScore["crown"]
+    artifactScore["total"] = round(artifactScore["total"], 1)
+    artifactScore["State"] = CharIDDatabase.artifactPropNameTranslator(artifactClockItem["flat"]["reliquaryMainstat"]["mainPropId"],
+                                                                       language="ja")
     # const
     if "talentIdList" in avatarData:
         const = len(avatarData["talentIdList"])
@@ -185,13 +245,6 @@ def dataConverter(avatarData, fullData, language):
             }
         },
         "Score": {
-            "State": "Not Available",
-            "total": 0,
-            "flower": 0,
-            "wing": 0,
-            "clock": 0,
-            "cup": 0,
-            "crown": 0
         },
         "Artifacts": {
             "flower": artifactFlower,
@@ -204,6 +257,7 @@ def dataConverter(avatarData, fullData, language):
     }
     data["Character"]["Status"].update(elementalDmg)
     data["Character"]["Talent"].update(talentInfo)
+    data["Score"].update(artifactScore)
 
     return data
 

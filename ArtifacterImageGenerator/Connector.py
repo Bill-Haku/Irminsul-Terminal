@@ -211,7 +211,7 @@ def dataConverter(avatarData, fullData, language):
         "uid": fullData["uid"],
         "input": "",
         "Character": {
-            "Name": CharIDDatabase.charFullName(avatarData["avatarId"], language=language),
+            "Name": CharIDDatabase.charFullName(charID=avatarData["avatarId"], language="ja"),
             "Const": const,
             "Level": avatarData["propMap"]["4001"]["val"],
             "Love": avatarData["fetterInfo"]["expLevel"],
@@ -233,7 +233,7 @@ def dataConverter(avatarData, fullData, language):
             }
         },
         "Weapon": {
-            "name": CharIDDatabase.textMapHash2Text(weaponItem["flat"]["nameTextMapHash"], language=language),
+            "name": CharIDDatabase.textMapHash2Text(weaponItem["flat"]["nameTextMapHash"], language="ja"),
             "Level": weaponItem["weapon"]["level"],
             "totu": weaponTotu,
             "rarelity": weaponItem["flat"]["rankLevel"],
@@ -262,12 +262,12 @@ def dataConverter(avatarData, fullData, language):
     return data
 
 
-def EnkaData2ArtifactImageGeneratorData(enkaData, characterId):
+def EnkaData2ArtifactImageGeneratorData(enkaData, characterId, language):
     imgStr = ""
     for avatarInfos in enkaData["avatarInfoList"]:
         if avatarInfos["avatarId"] == characterId:
             # found the character, transform it into ArtifactImageGenerator format
-            data = dataConverter(avatarData=avatarInfos, fullData=enkaData, language="ja")
-            imgStr = Generater.generation(data)
+            data = dataConverter(avatarData=avatarInfos, fullData=enkaData, language=language)
+            imgStr = Generater.generation(data, language=language)
             break
     return imgStr

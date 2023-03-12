@@ -234,7 +234,9 @@ class IrminsulTerminal:
                         # await interaction.response.send_message(i18n["msg.error.avatarNotInList"])
                         await interaction.followup.send(i18n["msg.error.avatarNotInList"], ephemeral=isPrivate)
                         return
-                    imgBase64 = EnkaData2ArtifactImageGeneratorData(enkaData=enkaData, characterId=charID)
+                    _, userLanguage = IrminsulDatabase.lookUpLanguage(interaction.user.id)
+                    imgBase64 = EnkaData2ArtifactImageGeneratorData(enkaData=enkaData, characterId=charID,
+                                                                    language=userLanguage)
                     file = discord.File(io.BytesIO(base64.b64decode(imgBase64)), filename=f"{interaction.user.id}-{charID}.png")
                     await asyncio.sleep(delay=1)
                     try:

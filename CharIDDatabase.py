@@ -72,8 +72,9 @@ faruzanNames = ["10000076", "faruzan", "珐露珊", "ファルザン", "ふぁ�
 yaoyaoNames = ["10000077", "yaoyao", "瑶瑶", "ヨォーヨ", "よぉーよ"]
 alhaithanNames = ["10000078", "alhaitham", "艾尔海森", "アルハイゼン", "あるはいぜん"]
 
-locResponse = requests.get("http://ophelper.top/api/players/loc.json")
+locResponse = requests.get("https://ophelper.top/api/players/loc.json")
 locResult = locResponse.json()
+
 
 def charName2IDConverter(name):
     name = name.lower()
@@ -214,7 +215,7 @@ def charFullName(charID, language):
 
     if language == "zh":
         language = "zh-CN"
-    return locResult[f"{language}"][f"{nameTextMapHash}"]
+    return locResult[language][f"{nameTextMapHash}"]
 
 
 def charElement(charID, language):

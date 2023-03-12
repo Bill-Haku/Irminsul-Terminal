@@ -6,6 +6,7 @@ import os
 import itertools
 from collections import Counter
 import base64
+from ArtifacterImageGenerator.Translator import translator
 
 from PIL import ImageFile 
 ImageFile.LOAD_TRUNCATED_IMAGES = True
@@ -178,7 +179,7 @@ def read_json(path):
         data = json.load(f)
     return data
 
-def generation(data):
+def generation(data, language):
     #config 
     element = data.get('元素')
     
@@ -304,7 +305,7 @@ def generation(data):
     Base = Image.alpha_composite(Base,CPaste)
     D = ImageDraw.Draw(Base)
     
-    D.text((30,20),CharacterName,font=config_font(48))
+    D.text((30,20), translator(CharacterName, language),font=config_font(48))
     levellength = D.textlength("Lv."+str(CharacterLevel),font=config_font(25))
     friendshiplength = D.textlength(str(FriendShip),font=config_font(25))
     D.text((35,75),"Lv."+str(CharacterLevel),font=config_font(25))
@@ -334,7 +335,7 @@ def generation(data):
             i = StateOP.index(k)
         except:
             i = 7
-            D.text((844,67+i*70),k,font=config_font(26))
+            D.text((844,67+i*70),translator(k, language),font=config_font(26))
             opicon = Image.open(f'{cwd}/emotes/{k}.png').resize((40,40))
             oppaste = Image.new('RGBA',Base.size,(255,255,255,0))
             opmask = opicon.copy()
@@ -351,11 +352,11 @@ def generation(data):
             
         if k in ['HP','防御力','攻撃力']:
             HPpls,HPbase,HPsize,HPbsize = genbasetext(k)
-            D.text((1360-HPsize,97+i*70),HPpls,fill=(0,255,0,180),font=config_font(12))
-            D.text((1360-HPsize-HPbsize-1,97+i*70),HPbase,font=config_font(12),fill=(255,255,255,180))
+            D.text((1360-HPsize,97+i*70),translator(HPpls, language),fill=(0,255,0,180),font=config_font(12))
+            D.text((1360-HPsize-HPbsize-1,97+i*70),translator(HPbase, language),font=config_font(12),fill=(255,255,255,180))
     
         
-    D.text((1582,47),WeaponName,font=config_font(26))
+    D.text((1582,47),translator(WeaponName, language),font=config_font(26))
     wlebellen = D.textlength(f'Lv.{WeaponLevel}',font=config_font(24))
     D.rounded_rectangle((1582,80,1582+wlebellen+4,108),radius=1,fill='black')
     D.text((1584,82),f'Lv.{WeaponLevel}',font=config_font(24))
@@ -364,7 +365,7 @@ def generation(data):
     BaseAtk = Image.open(f'{cwd}/emotes/基礎攻撃力.png').resize((23,23))
     BaseAtkmask = BaseAtk.copy()
     Base.paste(BaseAtk,(1600,120),mask=BaseAtkmask)
-    D.text((1623,120),f'基礎攻撃力  {WeaponBaseATK}',font=config_font(23))
+    D.text((1623,120),translator("基礎攻撃力", language) + f'  {WeaponBaseATK}',font=config_font(23))
     
     optionmap = {
         "攻撃パーセンテージ":"攻撃%",
@@ -376,8 +377,9 @@ def generation(data):
         BaseAtk = Image.open(f'{cwd}/emotes/{WeaponSubOPKey}.png').resize((23,23))
         BaseAtkmask = BaseAtk.copy()
         Base.paste(BaseAtk,(1600,155),mask=BaseAtkmask)
-        
-        D.text((1623,155),f'{optionmap.get(WeaponSubOPKey) or WeaponSubOPKey}  {str(WeaponSubOPValue)+"%" if WeaponSubOPKey in disper else format(WeaponSubOPValue,",")}',font=config_font(23))
+
+        thisTextTitle = translator(optionmap.get(WeaponSubOPKey) or WeaponSubOPKey, language)
+        D.text((1623,155),f'{thisTextTitle}  {str(WeaponSubOPValue)+"%" if WeaponSubOPKey in disper else format(WeaponSubOPValue,",")}',font=config_font(23))
     
         
     
@@ -386,8 +388,10 @@ def generation(data):
     
     ScoreLen = D.textlength(f'{ScoreTotal}',config_font(75))
     D.text((1652-ScoreLen//2,420),str(ScoreTotal),font=config_font(75))
-    blen = D.textlength(f'{ScoreCVBasis}換算',font=config_font(24))
-    D.text((1867-blen,585),f'{ScoreCVBasis}換算',font=config_font(24))
+    kansan = translator("換算", language)
+    fullKansan = translator(ScoreCVBasis, language) + kansan
+    blen = D.textlength(fullKansan, font=config_font(24))
+    D.text((1867-blen, 585), fullKansan, font=config_font(24))
     
     if ScoreTotal >= 175:
         ScoreEv =Image.open(f'{cwd}/artifactGrades/SS.png')
@@ -410,7 +414,7 @@ def generation(data):
         
         if not details:
             continue
-        atftype.append(details['type'])
+        atftype.append(translator(details['type'], language))
         PreviewPaste = Image.new('RGBA',Base.size,(255,255,255,0))
         Preview = Image.open(f'{cwd}/Artifact/{details["type"]}/{parts}.png').resize((256,256))
         enhancer = ImageEnhance.Brightness(Preview)
@@ -430,9 +434,10 @@ def generation(data):
         D = ImageDraw.Draw(Base)
         
         mainop = details['main']['option']
-        
-        mainoplen = D.textlength(optionmap.get(mainop) or mainop,font=config_font(29))
-        D.text((375+i*373-int(mainoplen),655),optionmap.get(mainop) or mainop,font=config_font(29))
+
+        mainopText = translator(optionmap.get(mainop) or mainop, language)
+        mainoplen = D.textlength(mainopText, font=config_font(29))
+        D.text((375+i*373-int(mainoplen),655),mainopText,font=config_font(29))
         MainIcon = Image.open(f'{cwd}/emotes/{mainop}.png').convert("RGBA").resize((35,35))
         MainMask = MainIcon.copy()
         Base.paste(MainIcon,(340+i*373-int(mainoplen),655),mask=MainMask)
@@ -463,10 +468,11 @@ def generation(data):
         for a,sub in enumerate(details['sub']):
             SubOP = sub['option']
             SubVal = sub['value']
+            subOPText = translator(optionmap.get(SubOP) or SubOP, language)
             if SubOP in ['HP','攻撃力','防御力']:
-                D.text((79+373*i,811+50*a),optionmap.get(SubOP) or SubOP,font=config_font(25),fill=(255,255,255,190))
+                D.text((79+373*i,811+50*a),subOPText,font=config_font(25),fill=(255,255,255,190))
             else:
-                D.text((79+373*i,811+50*a),optionmap.get(SubOP) or SubOP,font=config_font(25))
+                D.text((79+373*i,811+50*a),subOPText,font=config_font(25))
             SubIcon = Image.open(f'{cwd}/emotes/{SubOP}.png').resize((30,30))
             SubMask = SubIcon.copy()
             Base.paste(SubIcon,(44+373*i,811+50*a),mask=SubMask)

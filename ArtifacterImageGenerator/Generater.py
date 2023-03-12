@@ -321,7 +321,7 @@ def generation(data):
     
     def genbasetext(state):
         sumv = CharacterStatus[state]
-        plusv = sumv - CharacterBase[state]
+        plusv = round(sumv - CharacterBase[state], 2)
         basev = CharacterBase[state]
         return f"+{format(plusv,',')}",f"{format(basev,',')}",D.textlength(f"+{format(plusv,',')}",font=config_font(12)),D.textlength(f"{format(basev,',')}",font=config_font(12))
     
